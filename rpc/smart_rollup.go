@@ -7,8 +7,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/micheline"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
 )
 
 // Ensure SmartRollup types implement the TypedOperation interface.
@@ -24,13 +24,13 @@ var (
 )
 
 type SmartRollupResult struct {
-	Address          *mavryk.Address               `json:"address,omitempty"`            // v016, smart_rollup_originate
-	Size             *mavryk.Z                     `json:"size,omitempty"`               // v016, smart_rollup_originate
-	InboxLevel       int64                         `json:"inbox_level,omitempty"`        // v016, smart_rollup_cement
-	StakedHash       *mavryk.SmartRollupCommitHash `json:"staked_hash,omitempty"`        // v016, smart_rollup_publish
-	PublishedAtLevel int64                         `json:"published_at_level,omitempty"` // v016, smart_rollup_publish
-	GameStatus       *GameStatus                   `json:"game_status,omitempty"`        // v016, smart_rollup_refute, smart_rollup_timeout
-	Commitment       *mavryk.SmartRollupCommitHash `json:"commitment_hash,omitempty"`    // v017, smart_rollup_cement
+	Address          *mavryk.Address               `json:"address,omitempty"`            // smart_rollup_originate
+	Size             *mavryk.Z                     `json:"size,omitempty"`               // smart_rollup_originate
+	InboxLevel       int64                         `json:"inbox_level,omitempty"`        // smart_rollup_cement
+	StakedHash       *mavryk.SmartRollupCommitHash `json:"staked_hash,omitempty"`        // smart_rollup_publish
+	PublishedAtLevel int64                         `json:"published_at_level,omitempty"` // smart_rollup_publish
+	GameStatus       *GameStatus                   `json:"game_status,omitempty"`        // smart_rollup_refute, smart_rollup_timeout
+	Commitment       *mavryk.SmartRollupCommitHash `json:"commitment_hash,omitempty"`    // smart_rollup_cement
 }
 
 type SmartRollupOriginate struct {
@@ -49,7 +49,7 @@ type SmartRollupAddMessages struct {
 type SmartRollupCement struct {
 	Manager
 	Rollup     mavryk.Address                `json:"rollup"`
-	Commitment *mavryk.SmartRollupCommitHash `json:"commitment,omitempty"` // deprecated in v17
+	Commitment *mavryk.SmartRollupCommitHash `json:"commitment,omitempty"` // deprecated in v000
 }
 
 type SmartRollupCommitment struct {

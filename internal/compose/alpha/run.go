@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/mavryk-network/mvgo/internal/compose"
+	"github.com/mavryk-network/gomavryk/internal/compose"
 )
 
 // 1 load yaml file

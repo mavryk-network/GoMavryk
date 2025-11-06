@@ -11,8 +11,8 @@ import (
 
 	"github.com/echa/bson"
 
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/micheline"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
 )
 
 // lacking the algorithm to compute KT1 addresses from content,
@@ -190,7 +190,7 @@ func (b *bootstrap) DecodeContracts() ([]*X1, error) {
 			continue
 		}
 
-		// patch initial storage (convert strings to bytes) to circumvent tezos
+		// patch initial storage (convert strings to bytes) to circumvent mavryk
 		// origination bug
 		// - replace edpk strings with byte sequences
 		// - replace delegate addesses with binary pkh 00 TT AAAA...

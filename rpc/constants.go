@@ -9,11 +9,11 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
-// Constants represents only a limited subset of Tezos chain configuration params
-// which are required by MvGo. Users must define custom structs to read other
+// Constants represents only a limited subset of Mavryk chain configuration params
+// which are required by GoMavryk. Users must define custom structs to read other
 // constants as needed.
 type Constants struct {
 	PreservedCycles              int64    `json:"preserved_cycles"`
@@ -41,7 +41,7 @@ type Constants struct {
 }
 
 // GetConstants returns chain configuration constants at block id
-// https://protocol.mavryk.org/tezos/api/rpc.html#get-block-id-context-constants
+// https://protocol.mavryk.org/mavryk/api/rpc.html#get-block-id-context-constants
 func (c *Client) GetConstants(ctx context.Context, id BlockID) (con Constants, err error) {
 	u := fmt.Sprintf("chains/main/blocks/%s/context/constants", id)
 	err = c.Get(ctx, u, &con)
@@ -50,7 +50,7 @@ func (c *Client) GetConstants(ctx context.Context, id BlockID) (con Constants, e
 
 // GetCustomConstants returns chain configuration constants at block id
 // marshaled into a user-defined structure.
-// https://protocol.mavryk.org/tezos/api/rpc.html#get-block-id-context-constants
+// https://protocol.mavryk.org/mavryk/api/rpc.html#get-block-id-context-constants
 func (c *Client) GetCustomConstants(ctx context.Context, id BlockID, resp any) error {
 	u := fmt.Sprintf("chains/main/blocks/%s/context/constants", id)
 	return c.Get(ctx, u, resp)
@@ -101,7 +101,7 @@ func (c Constants) MapToChainParams() *mavryk.Params {
 		MinimalBlockDelay:            time.Duration(c.MinimalBlockDelay) * time.Second,
 	}
 
-	// Paris blocks per snapshot
+	// Boreas blocks per snapshot
 	if p.BlocksPerSnapshot == 0 {
 		p.BlocksPerSnapshot = c.BlocksPerCycle
 	}

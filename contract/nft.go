@@ -6,8 +6,8 @@ package contract
 import (
 	"fmt"
 
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/micheline"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
 )
 
 type NftLedgerSchema byte

@@ -4,7 +4,7 @@
 package mavryk
 
 import (
-	"github.com/mavryk-network/mvgo/hash"
+	"github.com/mavryk-network/gomavryk/hash"
 )
 
 type AddressSet struct {

@@ -6,8 +6,8 @@ package signer
 import (
 	"context"
 
-	"github.com/mavryk-network/mvgo/codec"
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/codec"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
 type Signer interface {

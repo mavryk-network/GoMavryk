@@ -1,6 +1,6 @@
-## Observe the Tezos Mempool
+## Observe the Mavryk Mempool
 
-Use MvGo to watch the mempool for new operations.
+Use GoMavryk to watch the mempool for new operations.
 
 ### Usage
 
@@ -14,7 +14,7 @@ Commands
 
 Arguments
   -node string
-      Tezos node URL (default "https://rpc.tzpro.io")
+      Mavryk node URL (default "https://rpc.tzpro.io")
   -ttl int
       Operation TTL (default 120)
   -v  be verbose

@@ -9,8 +9,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/micheline"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
 )
 
 type MetadataMode string
@@ -101,33 +101,31 @@ func (m OperationMetadata) Address() mavryk.Address {
 type OperationResult struct {
 	Status               mavryk.OpStatus  `json:"status"`
 	BalanceUpdates       BalanceUpdates   `json:"balance_updates"`
-	ConsumedGas          int64            `json:"consumed_gas,string"`      // deprecated in v015
-	ConsumedMilliGas     int64            `json:"consumed_milligas,string"` // v007+
+	ConsumedGas          int64            `json:"consumed_gas,string"`      // deprecated in v000
+	ConsumedMilliGas     int64            `json:"consumed_milligas,string"`
 	Errors               []OperationError `json:"errors,omitempty"`
 	Allocated            bool             `json:"allocated_destination_contract"` // tx only
 	Storage              *micheline.Prim  `json:"storage,omitempty"`              // tx, orig
 	OriginatedContracts  []mavryk.Address `json:"originated_contracts"`           // orig only
 	StorageSize          int64            `json:"storage_size,string"`            // tx, orig, const
 	PaidStorageSizeDiff  int64            `json:"paid_storage_size_diff,string"`  // tx, orig
-	BigmapDiff           json.RawMessage  `json:"big_map_diff,omitempty"`         // tx, orig, <v013
-	LazyStorageDiff      json.RawMessage  `json:"lazy_storage_diff,omitempty"`    // v008+ tx, orig
+	BigmapDiff           json.RawMessage  `json:"big_map_diff,omitempty"`         // tx, orig
+	LazyStorageDiff      json.RawMessage  `json:"lazy_storage_diff,omitempty"`    // tx, orig
 	GlobalAddress        mavryk.ExprHash  `json:"global_address"`                 // const
-	TicketUpdatesCorrect []TicketUpdate   `json:"ticket_updates"`                 // v015
-	TicketReceipts       []TicketUpdate   `json:"ticket_receipt"`                 // v015, name on internal
+	TicketUpdatesCorrect []TicketUpdate   `json:"ticket_updates"`
+	TicketReceipts       []TicketUpdate   `json:"ticket_receipt"`                 // name on internal
 
-	// v013 tx rollup
+	// v001 tx rollup
 	TxRollupResult
 
-	// v016 smart rollup
+	// v001 smart rollup
 	SmartRollupResult
 
-	// v019 DAL
+	// v002 DAL
 	DalResult
 }
 
-// Always use this helper to retrieve Ticket updates. This is because due to
-// lack of quality control Tezos Lima protocol ended up with 2 distinct names
-// for ticket updates in external call receipts versus internal call receipts.
+// Always use this helper to retrieve Ticket updates.
 func (r OperationResult) TicketUpdates() []TicketUpdate {
 	if len(r.TicketUpdatesCorrect) > 0 {
 		return r.TicketUpdatesCorrect
@@ -354,18 +352,6 @@ func (e *OperationList) UnmarshalJSON(data []byte) error {
 			op = &TransferTicket{}
 		case mavryk.OpTypeUpdateConsensusKey:
 			op = &UpdateConsensusKey{}
-
-			// DEPRECATED: tx rollup operations, kept for testnet backward compatibility
-		case mavryk.OpTypeTxRollupOrigination,
-			mavryk.OpTypeTxRollupSubmitBatch,
-			mavryk.OpTypeTxRollupCommit,
-			mavryk.OpTypeTxRollupReturnBond,
-			mavryk.OpTypeTxRollupFinalizeCommitment,
-			mavryk.OpTypeTxRollupRemoveCommitment,
-			mavryk.OpTypeTxRollupRejection,
-			mavryk.OpTypeTxRollupDispatchTickets:
-			op = &TxRollup{}
-
 		case mavryk.OpTypeSmartRollupOriginate:
 			op = &SmartRollupOriginate{}
 		case mavryk.OpTypeSmartRollupAddMessages:
@@ -430,7 +416,7 @@ func (c *Client) GetBlockOperationListHashes(ctx context.Context, id BlockID, l 
 	return hashes, nil
 }
 
-// GetBlockOperation returns information about a single validated Tezos operation group
+// GetBlockOperation returns information about a single validated Mavryk operation group
 // (i.e. a single operation or a batch of operations) at list l and position n
 // https://protocol.mavryk.org/active/rpc.html#get-block-id-operations-list-offset-operation-offset
 func (c *Client) GetBlockOperation(ctx context.Context, id BlockID, l, n int) (*Operation, error) {
@@ -445,7 +431,7 @@ func (c *Client) GetBlockOperation(ctx context.Context, id BlockID, l, n int) (*
 	return &op, nil
 }
 
-// GetBlockOperationList returns information about all validated Tezos operation group
+// GetBlockOperationList returns information about all validated Mavryk operation group
 // inside operation list l (i.e. validation pass) [0..3].
 // https://protocol.mavryk.org/active/rpc.html#get-block-id-operations-list-offset
 func (c *Client) GetBlockOperationList(ctx context.Context, id BlockID, l int) ([]Operation, error) {
@@ -460,7 +446,7 @@ func (c *Client) GetBlockOperationList(ctx context.Context, id BlockID, l int) (
 	return ops, nil
 }
 
-// GetBlockOperations returns information about all validated Tezos operation groups
+// GetBlockOperations returns information about all validated Mavryk operation groups
 // from all operation lists in block.
 // https://protocol.mavryk.org/active/rpc.html#get-block-id-operations
 func (c *Client) GetBlockOperations(ctx context.Context, id BlockID) ([][]Operation, error) {

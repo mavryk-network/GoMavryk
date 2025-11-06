@@ -4,9 +4,9 @@
 package task
 
 import (
-	"github.com/mavryk-network/mvgo/internal/compose"
-	"github.com/mavryk-network/mvgo/internal/compose/alpha"
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/internal/compose"
+	"github.com/mavryk-network/gomavryk/internal/compose/alpha"
+	"github.com/mavryk-network/gomavryk/mavryk"
 
 	"github.com/pkg/errors"
 )

@@ -3,7 +3,7 @@
 
 package rpc
 
-import "github.com/mavryk-network/mvgo/mavryk"
+import "github.com/mavryk-network/gomavryk/mavryk"
 
 // Ensure Ballot implements the TypedOperation interface.
 var _ TypedOperation = (*Ballot)(nil)

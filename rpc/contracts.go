@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/micheline"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
 )
 
 // UnparsingMode defines the way types and values are represented in Micheline script
@@ -35,7 +35,7 @@ func (m UnparsingMode) String() string {
 // Contracts holds a list of addresses
 type Contracts []mavryk.Address
 
-// Contracts holds info about a Tezos account
+// Contracts holds info about a Mavryk account
 type ContractInfo struct {
 	Balance        int64          `json:"balance,string"`
 	Delegate       mavryk.Address `json:"delegate"`

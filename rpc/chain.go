@@ -6,7 +6,7 @@ package rpc
 import (
 	"context"
 
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
 // GetChainId returns the chain id (i.e. network id).
@@ -34,8 +34,8 @@ func (c *Client) GetStatus(ctx context.Context) (Status, error) {
 type NodeVersion struct {
 	Major int `json:"major"`
 	Minor int `json:"minor"`
-	// AdditionalInfo string `json:"additional_info"` // v015
-	// AdditionalInfo map[string]any `json:"additional_info"` // v016+
+	// AdditionalInfo string `json:"additional_info"` // v001
+	// AdditionalInfo map[string]any `json:"additional_info"` // v001+
 }
 
 type NetworkVersion struct {

@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/mavryk-network/mvgo/codec"
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/micheline"
+	"github.com/mavryk-network/gomavryk/codec"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
 )
 
 // Ensure Client implements the RpcClient interface
@@ -104,7 +104,6 @@ type RpcClient interface {
 	GetRollSnapshotInfoCycle(ctx context.Context, id BlockID, cycle int64) (*RollSnapshotInfo, error)
 	GetStakingSnapshotInfoCycle(ctx context.Context, id BlockID, cycle int64) (*StakingSnapshotInfo, error)
 	GetSnapshotIndexCycle(ctx context.Context, id BlockID, cycle int64) (*SnapshotIndex, error)
-	ListSnapshotRollOwners(ctx context.Context, id BlockID, cycle, index int64) (*SnapshotOwners, error)
 	Complete(ctx context.Context, o *codec.Op, key mavryk.Key) error
 	Simulate(ctx context.Context, o *codec.Op, opts *CallOptions) (*Receipt, error)
 	Validate(ctx context.Context, o *codec.Op) error

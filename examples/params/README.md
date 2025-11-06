@@ -1,6 +1,6 @@
 ## Know your block
 
-Use MvGo to compute static information about a given block height. Since mainnet has switched from 4096 blocks/cycle to 8192 it has become necessary to have a good baseline set of functions to keep track of such info, in particular, since some protocols contain off-by-1 bugs.
+Use GoMavryk to compute static information about a given block height. Since mainnet has switched from 4096 blocks/cycle to 8192 it has become necessary to have a good baseline set of functions to keep track of such info, in particular, since some protocols contain off-by-1 bugs.
 
 ### Usage
 
@@ -19,9 +19,9 @@ Params Test
 
 ```sh
 $ go run . 2244609
-Using protocol Psithaca on Mainnet
+Using protocol PtAtLas on Mainnet
 Height ......................  2244609
-Protocol ....................  Psithaca2MLRFYargivpo7YvUr7wUDqyxrdhC5CQq78mRvimz6A
+Protocol ....................  PtAtLasdzXg4XxeVNtWheo13nG4wHXP22qYMqFcT3fyBpWkFero
 Period ......................  proposal 69
 StartCycle ..................  468
 StartBlockOffset ............  2244608
@@ -43,6 +43,5 @@ IsVoteStart .................  true
 IsVoteEnd ...................  false
 VoteStartHeight .............  2244609
 VoteEndHeight ...............  2285568
-IsPreBabylonHeight ..........  false
 ```
 

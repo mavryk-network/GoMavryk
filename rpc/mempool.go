@@ -12,7 +12,7 @@ import (
 type Mempool struct {
 	Applied       []*Operation `json:"applied"`
 	Refused       []*Operation `json:"refused"`
-	Outdated      []*Operation `json:"outdated"` // v012+
+	Outdated      []*Operation `json:"outdated"`
 	BranchRefused []*Operation `json:"branch_refused"`
 	BranchDelayed []*Operation `json:"branch_delayed"`
 	Unprocessed   []*Operation `json:"unprocessed"`

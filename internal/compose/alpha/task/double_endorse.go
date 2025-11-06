@@ -7,12 +7,12 @@ import (
 	"crypto/rand"
 	"fmt"
 
-	"github.com/mavryk-network/mvgo/codec"
-	"github.com/mavryk-network/mvgo/internal/compose"
-	"github.com/mavryk-network/mvgo/internal/compose/alpha"
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/rpc"
-	"github.com/mavryk-network/mvgo/signer"
+	"github.com/mavryk-network/gomavryk/codec"
+	"github.com/mavryk-network/gomavryk/internal/compose"
+	"github.com/mavryk-network/gomavryk/internal/compose/alpha"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/rpc"
+	"github.com/mavryk-network/gomavryk/signer"
 
 	"github.com/pkg/errors"
 )

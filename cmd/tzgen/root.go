@@ -15,8 +15,8 @@ import (
 	"os"
 
 	"github.com/iancoleman/strcase"
-	"github.com/mavryk-network/mvgo/internal/generate"
-	"github.com/mavryk-network/mvgo/internal/parse"
+	"github.com/mavryk-network/gomavryk/internal/generate"
+	"github.com/mavryk-network/gomavryk/internal/parse"
 	"github.com/pkg/errors"
 	"gopkg.in/yaml.v3"
 )

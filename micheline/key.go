@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/mavryk"
 	"golang.org/x/crypto/blake2b"
 )
 

@@ -4,7 +4,7 @@
 package mavryk
 
 const (
-	Name   = "Tezos"
+	Name   = "Mavryk"
 	Symbol = "XTZ"
 
 	// base58 prefixes for 4 byte hash magics

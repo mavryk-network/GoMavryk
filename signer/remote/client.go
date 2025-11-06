@@ -7,10 +7,10 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/mavryk-network/mvgo/codec"
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/rpc"
-	"github.com/mavryk-network/mvgo/signer"
+	"github.com/mavryk-network/gomavryk/codec"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/rpc"
+	"github.com/mavryk-network/gomavryk/signer"
 )
 
 var _ signer.Signer = (*RemoteSigner)(nil)
@@ -75,7 +75,7 @@ func (s RemoteSigner) GetKey(ctx context.Context, address mavryk.Address) (mavry
 // with zero branch hash. This prevents unintended signature of message bytes that
 // represent a valid transaction.
 //
-// Note that most remote signers for Tezos do not support signing of operation kinds other
+// Note that most remote signers for Mavryk do not support signing of operation kinds other
 // than baking related operations.
 func (s RemoteSigner) SignMessage(ctx context.Context, address mavryk.Address, msg string) (mavryk.Signature, error) {
 	op := codec.NewOp().
@@ -89,7 +89,7 @@ func (s RemoteSigner) SignMessage(ctx context.Context, address mavryk.Address, m
 // SignOperation signs operation op for address using the configured remote signer's
 // REST API. For endorsements this call requires branch_id to be present.
 //
-// Note that most remote signers for Tezos do not support signing of operation kinds other
+// Note that most remote signers for Mavryk do not support signing of operation kinds other
 // than baking related operations.
 func (s RemoteSigner) SignOperation(ctx context.Context, address mavryk.Address, op *codec.Op) (mavryk.Signature, error) {
 	type response struct {

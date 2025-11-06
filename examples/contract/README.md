@@ -1,6 +1,6 @@
 ## Work with smart contract and tokens
 
-Use MvGo to work with smart contracts and tokens. This examples shows you how to
+Use GoMavryk to work with smart contracts and tokens. This examples shows you how to
 
 - get contract entrypoints
 - execute on-chain views to read data
@@ -24,7 +24,7 @@ Usage: contract [flags] <cmd> [sub-args]
 
 Flags
   -node string
-        Tezos node URL (default "https://rpc.tzpro.io")
+        Mavryk node URL (default "https://rpc.tzpro.io")
   -v    be verbose
 
 Query Commands

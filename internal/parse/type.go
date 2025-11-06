@@ -1,8 +1,8 @@
 package parse
 
 import (
-	"github.com/mavryk-network/mvgo/contract/ast"
-	m "github.com/mavryk-network/mvgo/micheline"
+	"github.com/mavryk-network/gomavryk/contract/ast"
+	m "github.com/mavryk-network/gomavryk/micheline"
 )
 
 func (p *parser) buildTypeStructs(t *m.Typedef) (*ast.Struct, error) {

@@ -1,34 +1,34 @@
-# TzCompose - Tezos Automation Framework
+# MvCompose - Mavryk Automation Framework
 
-TzCompose is a tool for defining and running complex transaction sequences on Tezos. With TzCompose, you use a YAML file to configure pipelines from different kinds of tasks and then run a single command to execute these pipelines.
+MvCompose is a tool for defining and running complex transaction sequences on Mavryk. With MvCompose, you use a YAML file to configure pipelines from different kinds of tasks and then run a single command to execute these pipelines.
 
-TzCompose works on all Tezos networks and makes it easy to clone contracts and transaction sequences between them.
+MvCompose works on all Mavryk networks and makes it easy to clone contracts and transaction sequences between them.
 
-Developers can use TzCompose for
+Developers can use MvCompose for
 
 - smart contract deployment and maintenance
 - traffic generation for protocol and application testing
 - automating test-case setups
 - cloning contract deployments and setup logic between networks
 
-## Using TzCompose
+## Using MvCompose
 
 ```sh
-go run github.com/mavryk-network/mvgo/cmd/tzcompose [cmd] [flags]
+go run github.com/mavryk-network/gomavryk/cmd/mvcompose [cmd] [flags]
 
 Env
-  TZCOMPOSE_BASE_KEY  private key for base account
-  TZCOMPOSE_API_KEY   API key for RPC and index calls (optional)
+  MVCOMPOSE_BASE_KEY  private key for base account
+  MVCOMPOSE_API_KEY   API key for RPC and index calls (optional)
 
 Flags
   -f file
-      configuration file or path (default "tzcompose.yaml")
+      configuration file or path (default "mvcompose.yaml")
   -file file
-      configuration file or path (default "tzcompose.yaml")
+      configuration file or path (default "mvcompose.yaml")
   -resume
       continue pipeline execution
   -rpc string
-      Tezos node RPC url (default "https://rpc.tzpro.io")
+      Mavryk node RPC url (default "https://rpc.tzpro.io")
   -h  print help and exit
   -v  be verbose (default true)
   -vv
@@ -37,7 +37,7 @@ Flags
       trace mode
 ```
 
-TzCompose can execute configurations from a single file `-f file.yaml`, a single directory `-f ./examples/fa` or all subdirectories `-f ./examples/...` in which cases all yaml files will be read in filesystem order.
+MvCompose can execute configurations from a single file `-f file.yaml`, a single directory `-f ./examples/fa` or all subdirectories `-f ./examples/...` in which cases all yaml files will be read in filesystem order.
 
 ### Available Commands
 
@@ -47,10 +47,10 @@ TzCompose can execute configurations from a single file `-f file.yaml`, a single
 - `run`: execute compose file(s) sending signed transactions to a blockchain node
 - `version`: print version and exit
 
-TzCompose relies on the Tezos Node RPC and (for clone) on the TzIndex API. Both are publicly available via https://tzpro.io with a free subscription. Export your API key as
+MvCompose relies on the Mavryk Node RPC and (for clone) on the TzIndex API. Both are publicly available via https://tzpro.io with a free subscription. Export your API key as
 
 ```sh
-export TZCOMPOSE_API_KEY=<your-api-key>
+export MVCOMPOSE_API_KEY=<your-api-key>
 ```
 
 ### Available Tasks
@@ -74,7 +74,7 @@ export TZCOMPOSE_API_KEY=<your-api-key>
 
 ### Configuration
 
-TzCompose YAML files contain different sections to define accounts, variables and pipelines. Pipelines can be composed from different `tasks` which will generate transactions when executed. A compose file may contain multiple pipelines and each pipeline virtually unlimited tasks.
+MvCompose YAML files contain different sections to define accounts, variables and pipelines. Pipelines can be composed from different `tasks` which will generate transactions when executed. A compose file may contain multiple pipelines and each pipeline virtually unlimited tasks.
 
 ```yaml
 # Available engines: alpha
@@ -102,31 +102,31 @@ pipelines:
 
 ## How it works
 
-TzCompose reads config files and runs pipeline tasks in order of appearance. Each task emits a transaction that is signed and broadcast to the network. If successful, the next task is processed. Task configurations may contain static content, reference variables and import data files which makes it easy to orchestrate complex scenarios.
+MvCompose reads config files and runs pipeline tasks in order of appearance. Each task emits a transaction that is signed and broadcast to the network. If successful, the next task is processed. Task configurations may contain static content, reference variables and import data files which makes it easy to orchestrate complex scenarios.
 
-TzCompose automates wallet/key management and guarantees deterministic account addresses. That way, running the same pipeline on a different network will lead to the same result. (contract addresses are one unfortunate exception).
+MvCompose automates wallet/key management and guarantees deterministic account addresses. That way, running the same pipeline on a different network will lead to the same result. (contract addresses are one unfortunate exception).
 
-TzCompose also stores pipeline state and can resume execution from where it stopped.
+MvCompose also stores pipeline state and can resume execution from where it stopped.
 
 ### Wallets
 
-TzCompose requires a single funded `base` account to sign and send transactions. Configure the base account by exporting its private key as `TZCOMPOSE_BASE_KEY` environment variable.
+MvCompose requires a single funded `base` account to sign and send transactions. Configure the base account by exporting its private key as `MVCOMPOSE_BASE_KEY` environment variable.
 
-On Flextes sandbox extract the private key with
+On MavBox extract the private key with
 
 ```sh
-export TZCOMPOSE_BASE_KEY=`docker exec tezos_sandbox flextesa key-of-name alice | cut -f4 -d, | cut -f2 -d:`
+export MVCOMPOSE_BASE_KEY=`docker exec mavryk_sandbox mavbox key-of-name alice | cut -f4 -d, | cut -f2 -d:`
 ```
 
 All other wallet keys are deterministically derived from this `base` key using BIP32. Child keys are identified by their numeric id. You can assign alias names to them in the `accounts` section of a compose file. All child accounts use Ed25519 keys (mv1 addresses).
 
-> TzCompose does not allow you to specify wallet keys in configuration files. This is a deliberate design choice to prevent accidental leakage of key material into code repositories.
+> MvCompose does not allow you to specify wallet keys in configuration files. This is a deliberate design choice to prevent accidental leakage of key material into code repositories.
 
 Keep in mind that when you reuse the same child ids in different compose files, these accounts may have state and history from executing other compose files. Usually this is not a problem, but it may be in certain test scenarios when the account is already a baker or is expected to be empty.
 
 ### Variables
 
-TzCompose lets you define variables for common strings and addresses. You can use variables as source, destination and in task arguments. TzCompose defines a few default variables
+MvCompose lets you define variables for common strings and addresses. You can use variables as source, destination and in task arguments. MvCompose defines a few default variables
 
 * `$base` - base account address
 * `$now` - current wall clock time in UTC (you can also add durations like `$now+5m`)
@@ -135,12 +135,12 @@ TzCompose lets you define variables for common strings and addresses. You can us
 
 ### Cloning Contracts
 
-In some cases it is desirable to clone existing contracts and their setup procedure across networks. TzCompose implements a `clone` command which downloads contract code, initial storage and transaction history from an indexer and writes a deployable pipeline into a fresh compose config file.
+In some cases it is desirable to clone existing contracts and their setup procedure across networks. MvCompose implements a `clone` command which downloads contract code, initial storage and transaction history from an indexer and writes a deployable pipeline into a fresh compose config file.
 
-TzCompose offers different clone modes which define how and where script, storage and params are stored:
+MvCompose offers different clone modes which define how and where script, storage and params are stored:
 
 * `file` stores Micheline data as JSON data in separate files and references them inside the config file
-* `url` stores a Tezos RPC URL in inside the config file and fetches data on demand
+* `url` stores a Mavryk RPC URL in inside the config file and fetches data on demand
 * `bin` embeds Micheline data as hex string into the config file
 * `json` embeds Micheline data as JSON string into the config file
 
@@ -153,14 +153,14 @@ Without args you can [patch](#patching-micheline) Micheline encoded data to edit
 
 **Clone Example**
 
-Here we clone the Tether contract and 2 transactions following its origination which generates a `tzcompose.yaml` file along with several files containing contract source and call paramaters.
+Here we clone the Tether contract and 2 transactions following its origination which generates a `mvcompose.yaml` file along with several files containing contract source and call paramaters.
 
 ```sh
 # clone Tether FA2 contract from mainnet
-tzcompose clone -contract KT1XnTn74bUtxHfDtBmm2bGZAQfhPbvKWR8o -name tether -n 2
+mvcompose clone -contract KT1XnTn74bUtxHfDtBmm2bGZAQfhPbvKWR8o -name tether -n 2
 ```
 
-Then open `tzcompose.yaml` and edit its admin accounts. For brevity we show relevant lines only, the original file is longer:
+Then open `mvcompose.yaml` and edit its admin accounts. For brevity we show relevant lines only, the original file is longer:
 ```yaml
 pipelines:
   tether:
@@ -180,7 +180,7 @@ pipelines:
 
 ### Micheline Arguments
 
-Initial storage and contract call parameters must be Micheline encoded, but it's a pain to read and write this format. TzCompose allows you to either use pre-encoded files, binary blobs or YAML key/value arguments.
+Initial storage and contract call parameters must be Micheline encoded, but it's a pain to read and write this format. MvCompose allows you to either use pre-encoded files, binary blobs or YAML key/value arguments.
 
 When using arguments keep in mind that all fields are required, even if their value is empty or default. If args are too complex and you have to work with pre-encoded data you can still use [patch](#patching-micheline) for replacing contents as described below.
 
@@ -239,7 +239,7 @@ args:
 
 ### Specifying Data Sources
 
-TzCompose can read Micheline data from different sources. Compilers typically store code and storage in JSON files, but when cloning we may want to embed everything into a the config file to make it self-sufficient or even pull data from a URL when running the pipeline.
+MvCompose can read Micheline data from different sources. Compilers typically store code and storage in JSON files, but when cloning we may want to embed everything into a the config file to make it self-sufficient or even pull data from a URL when running the pipeline.
 
 Below is a list of available options which work for scripts and call params:
 
@@ -283,7 +283,7 @@ Below is a list of available options which work for scripts and call params:
 
 ### Referencing Files
 
-To increase flexibility when working with different Michelson compilers TzCompose provides a few ways to load data from files:
+To increase flexibility when working with different Michelson compilers MvCompose provides a few ways to load data from files:
 
 ```yaml
 - task: deploy
@@ -339,7 +339,7 @@ In case you only have storage or parameters in files or binary blobs you may wan
 
 ### Error Handling
 
-Per default, tzcompose will stop executing all pipelines when the first error occurs. This may be a configuration, network communication or transaction state error. Sometimes it is useful to skip non-critical expected errors such as re-activating an already active baker. Since tzcompose does not know what is critical to your pipeline and what not, you can use the `on-error` argument to specify how an error is handled.
+Per default, mvcompose will stop executing all pipelines when the first error occurs. This may be a configuration, network communication or transaction state error. Sometimes it is useful to skip non-critical expected errors such as re-activating an already active baker. Since mvcompose does not know what is critical to your pipeline and what not, you can use the `on-error` argument to specify how an error is handled.
 
 ```yaml
 - task: transfer
@@ -371,7 +371,7 @@ contents:
 
 ### Call
 
-Call is a generic way to send smart contract calls. Calls require a destination contract, an entrypoint and call arguments. Entrypoint and argument types must match the contract interface. TzCompose checks before signing a transaction whether the entrypoint exists and arguments are valid.
+Call is a generic way to send smart contract calls. Calls require a destination contract, an entrypoint and call arguments. Entrypoint and argument types must match the contract interface. MvCompose checks before signing a transaction whether the entrypoint exists and arguments are valid.
 
 ```yaml
 # Spec
@@ -388,7 +388,7 @@ params:
 
 ### Delegate
 
-Delegate delegates `source`'s full spendable balance to the selected `destination` baker. On Tezos this balance remains liquid.
+Delegate delegates `source`'s full spendable balance to the selected `destination` baker. On Mavryk this balance remains liquid.
 
 ```yaml
 # Spec
@@ -438,7 +438,7 @@ script:
 
 Produces a fake double-endorsement which slashes the baker in `destination` and awards denunciation rewards to the baker who includes this operation. The destination must be registered as baker and a private key must be available for signing. The slashed baker must have endorsements rights and this task waits until a block with such rights is baked.
 
-To successfully execute this task you need to sufficiently fund and register the baker and then wait a few cycles for rights to activate. Note that on sandboxes the $alice key is not the sandbox baker. To lookup the actual baker key, docker exec into the sandbox and search for the `secret_keys` file in the Tezos client dir.
+To successfully execute this task you need to sufficiently fund and register the baker and then wait a few cycles for rights to activate. Note that on sandboxes the $alice key is not the sandbox baker. To lookup the actual baker key, docker exec into the sandbox and search for the `secret_keys` file in the Mavryk client dir.
 
 ```yaml
 # Spec
@@ -450,7 +450,7 @@ destination: $var # <- this baker is slashed
 
 Produces a fake double-bake which slashes the baker in `destination` and awards denunciation rewards to the baker who includes this operation. The destination must be registered as baker and a private key must be available for signing. The slashed baker must have at least one round zero baking rights. The task waits until a block with such right is baked and then sends a double baking evidence with two fake (random) payload hashes.
 
-To successfully execute this task you need to sufficiently fund and register the baker and then wait a few cycles for rights to activate. Note that on sandboxes the $alice key is not the sandbox baker. To lookup the actual baker key, docker exec into the sandbox and search for the `secret_keys` file in the Tezos client dir.
+To successfully execute this task you need to sufficiently fund and register the baker and then wait a few cycles for rights to activate. Note that on sandboxes the $alice key is not the sandbox baker. To lookup the actual baker key, docker exec into the sandbox and search for the `secret_keys` file in the Mavryk client dir.
 
 ```yaml
 # Spec
@@ -551,7 +551,7 @@ source: $var
 ### Wait
 
 Wait stops pipeline execution for a defined amount of blocks, time or cycles. It is useful to wait for protocol events (at cycle and) or allow for some traffic getting generated by a
-second tzcompose instance. Wait is not able to syncronize between pipelines though.
+second mvcompose instance. Wait is not able to syncronize between pipelines though.
 
 ```yaml
 # Spec

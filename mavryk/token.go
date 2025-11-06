@@ -7,7 +7,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/mavryk-network/mvgo/base58"
+	"github.com/mavryk-network/gomavryk/base58"
 )
 
 var (
@@ -19,7 +19,7 @@ var (
 	ZeroToken = NewToken(ZeroContract, Zero)
 )
 
-// Token represents a specialized Tezos token address that consists of
+// Token represents a specialized Mavryk token address that consists of
 // a smart contract KT1 address and a token id represented as big integer number.
 type Token struct {
 	Hash [20]byte // type is always KT1
@@ -69,21 +69,21 @@ func (t *Token) UnmarshalText(data []byte) error {
 		if err == base58.ErrChecksum {
 			return ErrChecksumMismatch
 		}
-		return fmt.Errorf("tezos: invalid token address: %w", err)
+		return fmt.Errorf("mavryk: invalid token address: %w", err)
 	}
 	hashLen := HashTypePkhNocurve.Len
 	if len(dec) != hashLen {
-		return fmt.Errorf("tezos: invalid token address length %d", len(dec))
+		return fmt.Errorf("mavryk: invalid token address length %d", len(dec))
 	}
 	if !bytes.Equal(ver, NOCURVE_PUBLIC_KEY_HASH_ID) {
-		return fmt.Errorf("tezos: invalid token address type %x", ver)
+		return fmt.Errorf("mavryk: invalid token address type %x", ver)
 	}
 	copy(t.Hash[:], dec)
 	if idx < len(data) {
 		// token id is optional
 		if err := t.Id.UnmarshalText(data[idx+1:]); err != nil {
 			t.Id.SetInt64(0)
-			return fmt.Errorf("tezos: invalid token id: %w", err)
+			return fmt.Errorf("mavryk: invalid token id: %w", err)
 		}
 	} else {
 		t.Id.SetInt64(0)
@@ -110,12 +110,12 @@ func (t Token) MarshalBinary() ([]byte, error) {
 func (t *Token) UnmarshalBinary(data []byte) error {
 	l, exp := len(data), HashTypePkhNocurve.Len
 	if l < exp {
-		return fmt.Errorf("tezos: short binary token address len %d", l)
+		return fmt.Errorf("mavryk: short binary token address len %d", l)
 	}
 	copy(t.Hash[:], data)
 	if l > exp {
 		if err := t.Id.UnmarshalBinary(data[exp:]); err != nil {
-			return fmt.Errorf("tezos: invalid binary token id: %w", err)
+			return fmt.Errorf("mavryk: invalid binary token id: %w", err)
 		}
 	}
 	return nil

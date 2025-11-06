@@ -10,10 +10,10 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/mavryk-network/mvgo/codec"
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/micheline"
-	"github.com/mavryk-network/mvgo/rpc"
+	"github.com/mavryk-network/gomavryk/codec"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
+	"github.com/mavryk-network/gomavryk/rpc"
 )
 
 // Represents a generic FA2 (tzip12) token

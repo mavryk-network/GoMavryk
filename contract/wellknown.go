@@ -10,7 +10,7 @@ var wellKnown = map[string]*TokenMetadata{
 		Decimals: 8,
 	},
 	"KT1VYsVfmobT7rsMVivvZ4J8i3bPiqz12NaH": {
-		Name:     "Wrapped Tezos",
+		Name:     "Wrapped Mavryk",
 		Symbol:   "wXTZ",
 		Decimals: 6,
 	},

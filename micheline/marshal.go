@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
 type PrimMarshaler interface {

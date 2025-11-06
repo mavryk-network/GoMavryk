@@ -15,9 +15,9 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/micheline"
-	"github.com/mavryk-network/mvgo/rpc"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
+	"github.com/mavryk-network/gomavryk/rpc"
 
 	"github.com/echa/log"
 )
@@ -33,7 +33,7 @@ func init() {
 	flags.Usage = func() {}
 	flags.BoolVar(&verbose, "v", false, "Be verbose")
 	flags.BoolVar(&debug, "d", false, "Enable debug mode")
-	flags.StringVar(&node, "node", "https://rpc.tzpro.io", "Tezos node url")
+	flags.StringVar(&node, "node", "https://rpc.tzpro.io", "Mavryk node url")
 }
 
 func main() {

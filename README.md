@@ -1,59 +1,62 @@
-## Blockwatch MvGo - Mavryk Go SDK
+## Blockwatch GoMavryk - Mavryk Go SDK
 
-MvGo is [Blockwatch](https://blockwatch.cc)'s low-level Tezos Go SDK for reliable, high-performance applications. This SDK is free to use in commercial and non-commercial projects with a permissive license. Blockwatch is committed to keeping interfaces stable, providing long-term support, and updating MvGo on a regular basis to stay compliant with the most recent Tezos network protocol.
+Note: This repository is a maintained fork of Blockwatch's TzGo SDK. See `NOTICE`
+and `LICENSE.md` for attribution and licensing details.
 
-MvGo's main focus is on **correctness**, **stability**, and **compliance** with Tezos mainnet. It supports binary and JSON encodings for all Tezos types including Micheline smart contract data and all transaction formats. It's an ideal fit for high-performance applications that read from and write to the Tezos blockchain.
+GoMavryk is [Blockwatch](https://blockwatch.cc)'s low-level Mavryk Go SDK for reliable, high-performance applications. This SDK is free to use in commercial and non-commercial projects with a permissive license. Blockwatch is committed to keeping interfaces stable, providing long-term support, and updating GoMavryk on a regular basis to stay compliant with the most recent Mavryk network protocol.
 
-Current Mavryk protocol support in MvGo
+GoMavryk's main focus is on **correctness**, **stability**, and **compliance** with Mavryk mainnet. It supports binary and JSON encodings for all Mavryk types including Micheline smart contract data and all transaction formats. It's an ideal fit for high-performance applications that read from and write to the Mavryk blockchain.
+
+Current Mavryk protocol support in GoMavryk
 
 - Boreas v002
 - Atlas v001
 
 ### SDK features
 
-MvGo contains a full set of features to read, monitor, decode, translate, analyze and debug data from the Tezos blockchain, in particular from Tezos smart contracts:
+GoMavryk contains a full set of features to read, monitor, decode, translate, analyze and debug data from the Mavryk blockchain, in particular from Mavryk smart contracts:
 
-- a low-level **Types library** `mvgo/mavryk` to handle hashes, addresses, keys, signatures other types found on-chain
-- a powerful **Micheline library** `mvgo/micheline` to decode and translate data found in smart contract calls, storage, and bigmaps
-- an **RPC library** `mvgo/rpc` for accessing the Tezos Node RPC
-- a **Codec library** `mvgo/codec` to construct and serialize operations
-- a **Contract library** `mvgo/contract` for smart contract calls and tokens
-- a **Signer library** `mvgo/signer` to sign transactions local or remote
+- a low-level **Types library** `gomavryk/mavryk` to handle hashes, addresses, keys, signatures other types found on-chain
+- a powerful **Micheline library** `gomavryk/micheline` to decode and translate data found in smart contract calls, storage, and bigmaps
+- an **RPC library** `gomavryk/rpc` for accessing the Mavryk Node RPC
+- a **Codec library** `gomavryk/codec` to construct and serialize operations
+- a **Contract library** `gomavryk/contract` for smart contract calls and tokens
+- a **Signer library** `gomavryk/signer` to sign transactions local or remote
 - helpers like an efficient base58 en/decoder, hash maps, etc
-- a **Code generator** [TzGen](https://github.com/blockwatch-cc/mvgo/tree/master/cmd/tzgen) to produce pure Go clients for smart contract interfaces
-- an **Automation Tool** [TzCompose](https://github.com/blockwatch-cc/mvgo/tree/master/cmd/tzcompose) to setup test cases and deploy complex contract ecosystems
+- a **Code generator** [TzGen](https://github.com/blockwatch-cc/gomavryk/tree/master/cmd/tzgen) to produce pure Go clients for smart contract interfaces
+- an **Automation Tool** [MvCompose](https://github.com/blockwatch-cc/gomavryk/tree/master/cmd/mvcompose) to setup test cases and deploy complex contract ecosystems
 
-### MvGo Compatibility
+### GoMavryk Compatibility
 
-MvGo's RPC package attempts to be compatible with all protocols so that reading historic block data is always supported. Binary transaction encoding and signing support is limited to the most recent protocol.
+GoMavryk's RPC package attempts to be compatible with all protocols so that reading historic block data is always supported. Binary transaction encoding and signing support is limited to the most recent protocol.
 
-We attempt to upgrade MvGo whenever new protocols are proposed and will add new protocol features as soon as practically feasible and as demand for such features exists. For example, we don't fully Sapling and BLS signatures yet, but may add support in the future.
+We attempt to upgrade GoMavryk whenever new protocols are proposed and will add new protocol features as soon as practically feasible and as demand for such features exists. For example, we don't fully Sapling and BLS signatures yet, but may add support in the future.
 
 ### Usage
 
 ```sh
-go get -u github.com/mavryk-network/mvgo
+go get -u github.com/mavryk-network/gomavryk
 ```
 
 Then import, using
 
 ```go
 import (
-	"github.com/mavryk-network/mvgo/codec"
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/micheline"
-	"github.com/mavryk-network/mvgo/rpc"
-	"github.com/mavryk-network/mvgo/wallet"
+	"github.com/mavryk-network/gomavryk/codec"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
+	"github.com/mavryk-network/gomavryk/rpc"
+	"github.com/mavryk-network/gomavryk/wallet"
 )
 ```
 
 ### Micheline Support
 
-Tezos uses [Micheline](https://protocol.mavryk.org/shell/micheline.html) for encoding smart contract data and code. The positive is that Micheline is strongly typed, the downside is that it's complex and has a few ambiguities that make it hard to use. MvGo contains a library that lets you decode, analyze and construct compliant Micheline data structures from Go.
+Mavryk uses [Micheline](https://protocol.mavryk.org/shell/micheline.html) for encoding smart contract data and code. The positive is that Micheline is strongly typed, the downside is that it's complex and has a few ambiguities that make it hard to use. GoMavryk contains a library that lets you decode, analyze and construct compliant Micheline data structures from Go.
 
-Micheline uses basic **primitives** for encoding types and values. These primitives can be expressed in JSON and binary format and MvGo can translate between them efficiently. Micheline also supports type **annotations** which are used by high-level languages to express complex data types like records and their field names.
+Micheline uses basic **primitives** for encoding types and values. These primitives can be expressed in JSON and binary format and GoMavryk can translate between them efficiently. Micheline also supports type **annotations** which are used by high-level languages to express complex data types like records and their field names.
 
-MvGo defines a basic `Prim` data type to work with Micheline primitives directly:
+GoMavryk defines a basic `Prim` data type to work with Micheline primitives directly:
 
 ```go
 type Prim struct {
@@ -68,25 +71,25 @@ type Prim struct {
 }
 ```
 
-Since Micheline value encoding is quite verbose and can be ambiguous, MvGo supports **unfolding** of raw Micheline using the following MvGo wrapper types and their helper functions like `Map()`, `GetInt64()`, `GetAddress()`:
+Since Micheline value encoding is quite verbose and can be ambiguous, GoMavryk supports **unfolding** of raw Micheline using the following GoMavryk wrapper types and their helper functions like `Map()`, `GetInt64()`, `GetAddress()`:
 
-- `Type` is a MvGo wrapper for simple or complex primitives which contain annotated type info
-- `Value` is a MvGo wrapper for simple or complex primitives representing Micheline values in combination with their Type
-- `Key` is a MvGo wrapper for special comparable values that are used as maps or bigmap keys
+- `Type` is a GoMavryk wrapper for simple or complex primitives which contain annotated type info
+- `Value` is a GoMavryk wrapper for simple or complex primitives representing Micheline values in combination with their Type
+- `Key` is a GoMavryk wrapper for special comparable values that are used as maps or bigmap keys
 
-Sometimes Micheline values have been packed into byte sequences with the Michelson PACK instruction and it is desirable to unpack them before processing (e.g. to retrieve UFT8 strings or nested records). MvGo supports `Unpack()` and `UnpackAll()` functions on primitives and values and also detects the internal type of packed data which is necessary for unfolding.
+Sometimes Micheline values have been packed into byte sequences with the Michelson PACK instruction and it is desirable to unpack them before processing (e.g. to retrieve UFT8 strings or nested records). GoMavryk supports `Unpack()` and `UnpackAll()` functions on primitives and values and also detects the internal type of packed data which is necessary for unfolding.
 
 
 ### Examples
 
-Below are a few examples showing how to use MvGo to easily access Tezos data in your application.
+Below are a few examples showing how to use GoMavryk to easily access Mavryk data in your application.
 
 #### Parsing an address
 
 To parse/decode an address and output its components you can do the following:
 
 ```go
-import "github.com/mavryk-network/mvgo/mavryk"
+import "github.com/mavryk-network/gomavryk/mavryk"
 
 // parse and panic if invalid
 addr := mavryk.MustParseAddress("tz3RDC3Jdn4j15J7bBHZd29EUee9gVB1CxD9")
@@ -103,14 +106,14 @@ fmt.Printf("Address bytes = %x\n", addr.Hash)
 
 ```
 
-See [examples/addr.go](https://github.com/blockwatch-cc/mvgo/blob/master/examples/addr/main.go) for more.
+See [examples/addr.go](https://github.com/blockwatch-cc/gomavryk/blob/master/examples/addr/main.go) for more.
 
 #### Monitoring for new blocks
 
-A Tezos node can notify applications when new blocks are attached to the chain. The Tezos RPC calls this monitor and technically it's a long-poll implementation. Here's how to use this feature in MvGo:
+A Mavryk node can notify applications when new blocks are attached to the chain. The Mavryk RPC calls this monitor and technically it's a long-poll implementation. Here's how to use this feature in GoMavryk:
 
 ```go
-import "github.com/mavryk-network/mvgo/rpc"
+import "github.com/mavryk-network/gomavryk/rpc"
 
 // init SDK client
 c, _ := rpc.NewClient("https://rpc.tzstats.com", nil)
@@ -144,9 +147,9 @@ for {
 
 ```go
 import (
-	"github.com/mavryk-network/mvgo/micheline"
-	"github.com/mavryk-network/mvgo/rpc"
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
+	"github.com/mavryk-network/gomavryk/rpc"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
 // we use the Baker Registry on mainnet as example
@@ -169,9 +172,9 @@ fmt.Println(string(buf))
 
 ```go
 import (
-	"github.com/mavryk-network/mvgo/micheline"
-	"github.com/mavryk-network/mvgo/rpc"
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
+	"github.com/mavryk-network/gomavryk/rpc"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
 // init RPC client
@@ -193,7 +196,7 @@ val := micheline.NewValue(ep.Type(), param)
 from, ok := val.GetAddress("transfer.from")
 ```
 
-#### Use MvGo's Value API
+#### Use GoMavryk's Value API
 
 Micheline type and value trees are verbose and can be ambiguous due to comb-pair optimizations. If you don't know or don't care about what that even means, you may want to use the `Value` API which helps you translate Micheline into human readable form.
 
@@ -258,8 +261,8 @@ err := val.Unmarshal(&transfer)
 import (
 	"context"
 
-	"github.com/mavryk-network/mvgo/rpc"
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/rpc"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
 // we use the hic et nunc NFT market on mainnet as example
@@ -310,7 +313,7 @@ for _, key := range bigkeys {
 
 #### Custom RPC client configuration
 
-MvGo's `rpc.NewClient()` function takes an optional Go `http.Client` as parameter which you can configure before or after passing it to the library. The example below shows how to set custom timeouts and disable TLS certificate checks (not recommended in production, but useful if you use self-signed certificates during testing).
+GoMavryk's `rpc.NewClient()` function takes an optional Go `http.Client` as parameter which you can configure before or after passing it to the library. The example below shows how to set custom timeouts and disable TLS certificate checks (not recommended in production, but useful if you use self-signed certificates during testing).
 
 
 ```go
@@ -320,7 +323,7 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/mavryk-network/mvgo/rpc"
+	"github.com/mavryk-network/gomavryk/rpc"
 )
 
 

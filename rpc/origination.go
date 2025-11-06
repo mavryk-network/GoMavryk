@@ -4,8 +4,8 @@
 package rpc
 
 import (
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/micheline"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
 )
 
 // Ensure Origination implements the TypedOperation interface.
@@ -17,8 +17,8 @@ type Origination struct {
 	ManagerPubkey  mavryk.Address    `json:"manager_pubkey"` // proto v1 & >= v4
 	ManagerPubkey2 mavryk.Address    `json:"managerPubkey"`  // proto v2, v3
 	Balance        int64             `json:"balance,string"`
-	Spendable      *bool             `json:"spendable"`   // true when missing before v5 Babylon
-	Delegatable    *bool             `json:"delegatable"` // true when missing before v5 Babylon
+	Spendable      *bool             `json:"spendable"`   // true when missing before v001
+	Delegatable    *bool             `json:"delegatable"` // true when missing before v001
 	Delegate       *mavryk.Address   `json:"delegate"`
 	Script         *micheline.Script `json:"script"`
 }

@@ -1,5 +1,15 @@
 # Changelog
 
+Fork notice: This repository is a maintained fork of Blockwatch's TzGo SDK. The
+historical changelog below is preserved from upstream for context. New changes in this
+fork will be tracked starting with the section below.
+
+## v1.19.2-gomavryk
+- Rebrand and housekeeping for fork (module/docs naming)
+- License compliance: add NOTICE with upstream attribution
+
+---
+
 ## v1.19.2
 * Update Parisnet hash
 * Update protocol history of ghostnet
@@ -52,8 +62,8 @@
 * codec: add staking operation codecs
 * codec: fix block encoding
 * codec: support block signing and block hash calculation
-* tzcompose: add oxford staking tasks
-* tzcompose: add double bake task
+* mvcompose: add oxford staking tasks
+* mvcompose: add double bake task
 
 ## v1.17.4
 
@@ -62,7 +72,7 @@
 
 ## v1.17.3
 
-* cmd: add tzcompose alpha release
+* cmd: add mvcompose alpha release
 * rpc: dedicated logger instance per client
 * rpc observer: return full BlockHeaderLogEntry in callback
 * rpc observer: multiple subscriptions for the same op hash
@@ -100,7 +110,7 @@
 * add storage limit safety margin (100 byte)
 * fix some Micheline translation bugs for nested list/comb-pair ambiguities
 * fix decoding for some single-value entrypoints
-* support MVGO_API_KEY env variable
+* support TZGO_API_KEY env variable
 
 ## v1.16.6
 
@@ -134,14 +144,14 @@
 
 Refactoring and Mumbai support
 
-BREAKING: Note that due to a new internal address encoding data written by binary marshalers from earlier versions of MvGo is incompatible.
+BREAKING: Note that due to a new internal address encoding data written by binary marshalers from earlier versions of TzGo is incompatible.
 
-* Changed memory layout and interface for all hash types and `mavryk.Address` to save 24 bytes per address/hash that was previously required for a byte slice header
+* Changed memory layout and interface for all hash types and `tezos.Address` to save 24 bytes per address/hash that was previously required for a byte slice header
   - hashes and addresses directly comparable now and can thus be used as Golang Map keys
   - renamed `Address.Bytes()` to `Encode()`
   - renamed `Address.Bytes22()` to `EncodePadded()`
   - use `Address.Decode(buf []byte)` instead of `UnmarshalBinary()` for reading binary encoded addresses
-* Simplified `mavryk.Params` removing unused fields and protocol deployment handling
+* Simplified `tezos.Params` removing unused fields and protocol deployment handling
 * Added smart rollup support to rpc and codec packages
 * Added binary encoders for new operations since Lima
   - `drain_delegate`
@@ -252,7 +262,7 @@ Other changes
 * Add noview token type
 * Add fa2 balance helper
 * Make call args chainable
-* Add mumav prim helper
+* Add mutez prim helper
 * Support address add/list for remote signer
 * Fix merging params
 * Fix min fee, add min-fee helper
@@ -347,7 +357,7 @@ Other changes
 
 ## v1.11-rc0
 
-This is the first release of MvGo that allows sending transactions. All types and interfaces are engineered to be easily composable. We start with essential low level types/functions for public and private key handling, operation encoding/signing/broadcast and mempool/block monitoring. This feature set is already fully sufficient to build end-user applications including the possibility to send smart contract calls, but may at times be less convenient. To simplify complex use cases we will introduce higher order functionality in the next release candidate.
+This is the first release of TzGo that allows sending transactions. All types and interfaces are engineered to be easily composable. We start with essential low level types/functions for public and private key handling, operation encoding/signing/broadcast and mempool/block monitoring. This feature set is already fully sufficient to build end-user applications including the possibility to send smart contract calls, but may at times be less convenient. To simplify complex use cases we will introduce higher order functionality in the next release candidate.
 
 **Package `tezos`**
 
@@ -366,7 +376,7 @@ This is the first release of MvGo that allows sending transactions. All types an
 - New: calls accept interface type `BlockID` which can be
     - `BlockAlias` (genesis or head)
     - `BlockLevel` an int64
-    - `mavryk.BlockHash` for named blocks
+    - `tezos.BlockHash` for named blocks
     - `BlockOffset` for offsets from a BlockID
 - New: `MempoolMonitor` to monitor new mempool transactions
 - Refactored `Mempool` type to return the same Operation type like block calls

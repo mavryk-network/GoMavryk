@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/mavryk-network/mvgo/micheline"
-	"github.com/mavryk-network/mvgo/rpc"
+	"github.com/mavryk-network/gomavryk/micheline"
+	"github.com/mavryk-network/gomavryk/rpc"
 	"github.com/pkg/errors"
 )
 
-// Bigmap is a handle to a Tezos bigmap.
+// Bigmap is a handle to a Mavryk bigmap.
 //
 // It has two type parameters, K and V, which are determined when a contract
 // script is parsed.

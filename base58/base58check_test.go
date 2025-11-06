@@ -8,7 +8,7 @@ package base58_test
 import (
 	"testing"
 
-	"github.com/mavryk-network/mvgo/base58"
+	"github.com/mavryk-network/gomavryk/base58"
 )
 
 var checkEncodingStringTests = []struct {

@@ -12,9 +12,9 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/micheline"
-	"github.com/mavryk-network/mvgo/rpc"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
+	"github.com/mavryk-network/gomavryk/rpc"
 
 	"github.com/echa/log"
 )
@@ -28,7 +28,7 @@ var (
 func init() {
 	flags.Usage = func() {}
 	flags.BoolVar(&verbose, "v", false, "be verbose")
-	flags.StringVar(&node, "node", "https://rpc.tzpro.io", "Tezos node URL")
+	flags.StringVar(&node, "node", "https://rpc.tzpro.io", "Mavryk node URL")
 }
 
 func main() {

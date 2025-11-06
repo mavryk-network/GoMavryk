@@ -7,7 +7,7 @@
 // PACK prefixes with 0x05!
 // So that when contracts checking signatures (multisigs etc) do the current
 // best practice, PACK; ...; CHECK_SIGNATURE, the 0x05 byte distinguishes the
-// message from blocks, endorsements, transactions, or tezos-signer authorization
+// message from blocks, endorsements, transactions, or mavryk-signer authorization
 // requests (0x01-0x04)
 
 package micheline
@@ -26,7 +26,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
 var (
@@ -489,7 +489,7 @@ func (p Prim) CanUnfold(typ Type) bool {
 		return true
 	}
 
-	// Note: due to Tezos encoding issues, comb pairs in block receipts
+	// Note: due to Mavryk encoding issues, comb pairs in block receipts
 	// are naked sequences (they lack an enclosing pair wrapper), this means
 	// we have to distinquish them from other container types who also use
 	// a sequence as container, such as lists, sets, maps, lambdas

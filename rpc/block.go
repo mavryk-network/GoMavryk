@@ -10,10 +10,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
-// Block holds information about a Tezos block
+// Block holds information about a Mavryk block
 type Block struct {
 	Protocol   mavryk.ProtocolHash `json:"protocol"`
 	ChainId    mavryk.ChainIdHash  `json:"chain_id"`
@@ -55,8 +55,6 @@ func (b Block) GetLevelInfo() LevelInfo {
 	return LevelInfo{}
 }
 
-// only works for mainnet when before Edo or for all nets after Edo
-// due to fixed constants used
 func (b Block) GetVotingInfo() VotingPeriodInfo {
 	if b.Metadata.VotingPeriodInfo != nil {
 		return *b.Metadata.VotingPeriodInfo
@@ -106,7 +104,7 @@ type InvalidBlock struct {
 	Error Errors           `json:"error"`
 }
 
-// BlockHeader is a part of the Tezos block data
+// BlockHeader is a part of the Mavryk block data
 type BlockHeader struct {
 	Level                     int64                 `json:"level"`
 	Proto                     int                   `json:"proto"`
@@ -151,7 +149,7 @@ func (h BlockHeader) AiVote() mavryk.FeatureVote {
 // ProtocolData exports protocol-specific extra header fields as binary encoded data.
 // Used to produce compliant block monitor data streams.
 //
-// octez-codec describe 018-Proxford.block_header.protocol_data binary schema
+// mavkit-codec describe 001-PtAtLas.block_header.protocol_data binary schema
 // +---------------------------------------+----------+-------------------------------------+
 // | Name                                  | Size     | Contents                            |
 // +=======================================+==========+=====================================+
@@ -211,7 +209,7 @@ type LevelInfo struct {
 	CyclePosition      int64 `json:"cycle_position"`
 	ExpectedCommitment bool  `json:"expected_commitment"`
 
-	// <v008
+	// <v001
 	VotingPeriod         int64 `json:"voting_period"`
 	VotingPeriodPosition int64 `json:"voting_period_position"`
 }
@@ -228,7 +226,7 @@ type VotingPeriodInfo struct {
 	VotingPeriod VotingPeriod `json:"voting_period"`
 }
 
-// BlockMetadata is a part of the Tezos block data
+// BlockMetadata is a part of the Mavryk block data
 type BlockMetadata struct {
 	Protocol               mavryk.ProtocolHash    `json:"protocol"`
 	NextProtocol           mavryk.ProtocolHash    `json:"next_protocol"`
@@ -243,23 +241,19 @@ type BlockMetadata struct {
 	Deactivated            []mavryk.Address       `json:"deactivated"`
 	BalanceUpdates         BalanceUpdates         `json:"balance_updates"`
 
-	// <v008
+	// <v001
 	Level            *LevelInfo               `json:"level"`
 	VotingPeriodKind *mavryk.VotingPeriodKind `json:"voting_period_kind"`
 
-	// v008+
+	// v001+
 	LevelInfo        *LevelInfo        `json:"level_info"`
 	VotingPeriodInfo *VotingPeriodInfo `json:"voting_period_info"`
-
-	// v010+
 	ImplicitOperationsResults []ImplicitResult `json:"implicit_operations_results"`
 	LiquidityBakingEscapeEma  int64            `json:"liquidity_baking_escape_ema"`
-
-	// v015+
 	ProposerConsensusKey mavryk.Address `json:"proposer_consensus_key"`
 	BakerConsensusKey    mavryk.Address `json:"baker_consensus_key"`
 
-	// v019+
+	// v002+
 	DalAttestation mavryk.Z `json:"dal_attestation"`
 }
 
@@ -273,7 +267,7 @@ func (m *BlockMetadata) GetLevel() int64 {
 	return m.Level.Level
 }
 
-// GetBlock returns information about a Tezos block
+// GetBlock returns information about a Mavryk block
 // https://protocol.mavryk.org/mainnet/api/rpc.html#get-block-id
 func (c *Client) GetBlock(ctx context.Context, id BlockID) (*Block, error) {
 	var block Block
@@ -287,7 +281,7 @@ func (c *Client) GetBlock(ctx context.Context, id BlockID) (*Block, error) {
 	return &block, nil
 }
 
-// GetBlockHeight returns information about a Tezos block
+// GetBlockHeight returns information about a Mavryk block
 // https://protocol.mavryk.org/mainnet/api/rpc.html#get-block-id
 func (c *Client) GetBlockHeight(ctx context.Context, height int64) (*Block, error) {
 	return c.GetBlock(ctx, BlockLevel(height))

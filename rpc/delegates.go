@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
 // Delegate holds information about an active delegate
@@ -18,7 +18,7 @@ type Delegate struct {
 	Height   int64          `json:"-"`
 	Block    string         `json:"-"`
 
-	// tezos data
+	// mavryk data
 	Deactivated          bool             `json:"deactivated"`
 	Balance              int64            `json:"balance,string"`
 	DelegatedContracts   []mavryk.Address `json:"delegated_contracts"`
@@ -28,18 +28,14 @@ type Delegate struct {
 	StakingBalance       int64            `json:"staking_balance,string"`
 	DelegatedBalance     int64            `json:"delegated_balance,string"`
 	VotingPower          Int64orString    `json:"voting_power"`
-
-	// v012+
 	FullBalance           int64 `json:"full_balance,string"`
 	FrozenDeposits        int64 `json:"frozen_deposits,string"`
 	CurrentFrozenDeposits int64 `json:"current_frozen_deposits,string"`
 	FrozenDepositsLimit   int64 `json:"frozen_deposits_limit,string"`
-
-	// v015+
 	ActiveConsensusKey   mavryk.Address `json:"active_consensus_key"`
 	PendingConsensusKeys []CycleKey     `json:"pending_consensus_keys"`
 
-	// v019+
+	// v002+
 	MinDelegated struct {
 		Amount int64     `json:"amount,string"`
 		Level  LevelInfo `json:"level"`

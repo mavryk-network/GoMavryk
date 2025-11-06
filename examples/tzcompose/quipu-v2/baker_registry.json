@@ -390,5 +390,5 @@
     "name": "ligo",
     "version": "0.45.0"
   },
-  "networkType": "tezos"
+  "networkType": "mavryk"
 }

@@ -1,6 +1,6 @@
-## Read Tezos addresses and public keys
+## Read Mavryk addresses and public keys
 
-This example shows how Tezos addresses and keys can be detected and decoded.
+This example shows how Mavryk addresses and keys can be detected and decoded.
 
 ### Code Example
 

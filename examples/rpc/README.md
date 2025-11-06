@@ -1,6 +1,6 @@
-## Pull data from the Tezos RPC
+## Pull data from the Mavryk RPC
 
-Use MvGo to flexibly fetch all kinds of data from the Tezos RPC. A few basic and advanced examples are shown here.
+Use GoMavryk to flexibly fetch all kinds of data from the Mavryk RPC. A few basic and advanced examples are shown here.
 
 ### Usage
 
@@ -18,7 +18,7 @@ Commands
 Global arguments
   -d  Enable debug mode
   -node string
-      Tezos node url (default "https://rpc.tzpro.io")
+      Mavryk node url (default "https://rpc.tzpro.io")
   -v  Be verbose
 ```
 

@@ -1,0 +1,19 @@
+GoMavryk Fork Attribution
+
+This repository is a fork of Blockwatch's TzGo SDK.
+
+Upstream project:
+- Name: GoMavryk (formerly tzgo)
+- Copyright: 2020-2024 Blockwatch Data Inc.
+- License: MIT
+
+This fork preserves the original MIT license in LICENSE.md. All upstream
+copyright notices and permission notices are retained.
+
+Modifications and additions in this fork are:
+- Copyright (c) 2025 Mavryk Dynamics
+
+See LICENSE.md for terms. If you contribute to this fork, you agree that your
+contributions are licensed under the MIT License and that appropriate upstream
+attribution is retained.
+

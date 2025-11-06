@@ -4,12 +4,12 @@
 package task
 
 import (
-	"github.com/mavryk-network/mvgo/codec"
-	"github.com/mavryk-network/mvgo/internal/compose"
-	"github.com/mavryk-network/mvgo/internal/compose/alpha"
-	"github.com/mavryk-network/mvgo/micheline"
-	"github.com/mavryk-network/mvgo/rpc"
-	"github.com/mavryk-network/mvgo/signer"
+	"github.com/mavryk-network/gomavryk/codec"
+	"github.com/mavryk-network/gomavryk/internal/compose"
+	"github.com/mavryk-network/gomavryk/internal/compose/alpha"
+	"github.com/mavryk-network/gomavryk/micheline"
+	"github.com/mavryk-network/gomavryk/rpc"
+	"github.com/mavryk-network/gomavryk/signer"
 
 	"github.com/pkg/errors"
 )

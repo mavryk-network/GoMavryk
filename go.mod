@@ -1,4 +1,4 @@
-module github.com/mavryk-network/mvgo
+module github.com/mavryk-network/gomavryk
 
 go 1.19
 

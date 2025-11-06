@@ -6,7 +6,7 @@ package rpc
 import (
 	"encoding/json"
 
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
 // Ensure TxRollup implements the TypedOperation interface.
@@ -36,22 +36,14 @@ type TxRollup struct {
 }
 
 type TxRollupResult struct {
-	OriginatedRollup mavryk.Address `json:"originated_rollup"` // v013 tx_rollup_originate
-	Level            int64          `json:"level"`             // v013 ?? here or in metadata??
+	OriginatedRollup mavryk.Address `json:"originated_rollup"` // tx_rollup_originate
+	Level            int64          `json:"level"`             // ?? here or in metadata??
 }
 
 func (r *TxRollup) UnmarshalJSON(data []byte) error {
 	type alias *TxRollup
 	if err := json.Unmarshal(data, alias(r)); err != nil {
 		return err
-	}
-	switch r.Kind() {
-	case mavryk.OpTypeTxRollupSubmitBatch:
-		return json.Unmarshal(data, &r.Batch)
-	case mavryk.OpTypeTxRollupRejection:
-		return json.Unmarshal(data, &r.Reject)
-	case mavryk.OpTypeTxRollupDispatchTickets:
-		return json.Unmarshal(data, &r.Dispatch)
 	}
 	return nil
 }

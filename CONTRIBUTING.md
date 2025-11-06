@@ -1,6 +1,6 @@
-# Contributing to mvGO
+# Contributing to GoMavryk
 
-We welcome all contributions to mvGO, be it extensions, bug fixes, documentation, or examples. This document outlines some of the conventions we put in place to keep the work on mvGO tidy and fun.
+We welcome all contributions to GoMavryk, be it extensions, bug fixes, documentation, or examples. This document outlines some of the conventions we put in place to keep the work on GoMavryk tidy and fun.
 
 Before you start, please **read** and **sign** our Contributor License Agreement and send it to license@blockwatch.cc:
 
@@ -8,8 +8,6 @@ Before you start, please **read** and **sign** our Contributor License Agreement
 - use the [Corporate CLA](https://github.com/blockwatch-cc/CLA/blob/master/CCLA.pdf) if you work for a company
 
 The CLA is meant to protect you and us from legal trouble.
-
-If you need any help or mentoring getting started or making a PR, please ask on [Discord](https://discord.gg/D5e98Hw).
 
 
 ## Contribution flow

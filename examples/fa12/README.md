@@ -1,6 +1,6 @@
 ## Decode FA 1.2 Transfers
 
-Use MvGo to extract FA1.2 token transfer parameters from an operation receipt. 
+Use GoMavryk to extract FA1.2 token transfer parameters from an operation receipt. 
 
 ### Usage
 
@@ -11,7 +11,7 @@ Usage: fa12 [args] <block> <pos>
 
 Arguments
   -node string
-      Tezos node URL (default "https://rpc.tzpro.io")
+      Mavryk node URL (default "https://rpc.tzpro.io")
   -v  be verbose
 ```
 

@@ -3,7 +3,7 @@
 
 package micheline
 
-import "github.com/mavryk-network/mvgo/mavryk"
+import "github.com/mavryk-network/gomavryk/mavryk"
 
 type ConstantDict map[string]Prim
 

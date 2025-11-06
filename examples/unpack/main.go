@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/mavryk-network/mvgo/micheline"
-	m "github.com/mavryk-network/mvgo/micheline"
+	"github.com/mavryk-network/gomavryk/micheline"
+	m "github.com/mavryk-network/gomavryk/micheline"
 )
 
 func main() {

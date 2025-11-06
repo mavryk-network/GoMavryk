@@ -15,7 +15,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
 var (

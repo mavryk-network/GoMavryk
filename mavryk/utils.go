@@ -78,7 +78,7 @@ func (h HexBytes) MarshalBinary() ([]byte, error) {
 	return h, nil
 }
 
-// Ratio represents a numeric ratio used in Ithaca constants
+// Ratio represents a numeric ratio used in Atlas constants
 type Ratio struct {
 	Num int `json:"numerator"`
 	Den int `json:"denominator"`

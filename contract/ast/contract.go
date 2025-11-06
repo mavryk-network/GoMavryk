@@ -8,7 +8,7 @@ type Contract struct {
 	Micheline string
 	// Callable Entrypoints of the Contract.
 	Entrypoints []*Entrypoint
-	// Getters are TZIP-4 views (which should not be confused with Hangzhou views).
+	// Getters are TZIP-4 views.
 	// Although they are entrypoints, they require to be handled differently from
 	// regular entrypoints.
 	Getters []*Getter

@@ -3,8 +3,8 @@ package mavryk_test
 import (
 	"testing"
 
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/rpc"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/rpc"
 )
 
 type (
@@ -212,9 +212,9 @@ func (p paramResult) IsVoteEnd() bool {
 var paramResults = map[int64]paramResult{
 	0:       {0, -1, 0},            // genesis
 	1:       {0, -1, 8},            // bootstrap
-	5070849: {703, -1, 8 + 2},      // v018 start
+	5070849: {703, -1, 8 + 2},      // v001 start
 	5726208: {742, 15, 16 + 4 + 1}, // --> end
-	5726209: {743, 15, 8 + 2},      // v019 start
+	5726209: {743, 15, 8 + 2},      // v002 start
 }
 
 var paramBlocks = []BlockMetadata{

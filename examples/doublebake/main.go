@@ -14,7 +14,7 @@
 // - wait one block
 // - send the 2 signed endorsements in as double_endorsement_evidence
 //
-// To specify the baker key set env var MVGO_PRIVATE_KEY
+// To specify the baker key set env var GOMAVRYK_PRIVATE_KEY
 
 package main
 
@@ -31,10 +31,10 @@ import (
 	"time"
 
 	"github.com/echa/log"
-	"github.com/mavryk-network/mvgo/codec"
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/rpc"
-	"github.com/mavryk-network/mvgo/signer"
+	"github.com/mavryk-network/gomavryk/codec"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/rpc"
+	"github.com/mavryk-network/gomavryk/signer"
 	"golang.org/x/crypto/blake2b"
 )
 
@@ -46,7 +46,7 @@ var (
 )
 
 func init() {
-	if k := os.Getenv("MVGO_PRIVATE_KEY"); k != "" {
+	if k := os.Getenv("GOMAVRYK_PRIVATE_KEY"); k != "" {
 		sk = mavryk.MustParsePrivateKey(k)
 	}
 	flags.Usage = func() {}

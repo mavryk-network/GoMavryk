@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
 // WIP: interface may change

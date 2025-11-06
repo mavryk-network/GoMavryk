@@ -92,7 +92,6 @@ func walkTree(m map[string]interface{}, label string, typ Type, stack *Stack, lv
 		// does not work
 		//
 		// Conflicting cases
-		// Jakartanet: oorcMSVaYBH3rcsDJ3n8EvpU4e8h38WFjJJfYUu2wXyDN4N7NMX
 		// Mainnet: KT1K4jn23GonEmZot3pMGth7unnzZ6EaMVjY
 		// Mainnet: ooxcyrwLVfC7kcJvLvYTGXKsAvdrotzKci95au8tBwdjhMMjFTU
 		// Mainnet: ooQuRnwv2Bo1VVPMxmFvUZrDB7t34H3eCty2DAZW2Ps6LLyWoH6
@@ -154,11 +153,9 @@ func walkTree(m map[string]interface{}, label string, typ Type, stack *Stack, lv
 		if typ.OpCode == T_BIG_MAP && (len(val.Args) == 0 || !val.Args[0].IsElt()) {
 			switch val.Type {
 			case PrimInt:
-				// Babylon bigmaps contain a reference here
 				m[label] = val.Int.Int64()
 			case PrimSequence:
 				if len(val.Args) == 0 {
-					// pre-babylon there's only an empty sequence
 					// FIXME: we could insert the bigmap id, but this is unknown at ths point
 					m[label] = nil
 				} else {

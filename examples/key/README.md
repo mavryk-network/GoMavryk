@@ -1,6 +1,6 @@
-## Create and use private keys in Tezos
+## Create and use private keys in Mavryk
 
-Use MvGo to generate and use private keys for joy and pleasure.
+Use GoMavryk to generate and use private keys for joy and pleasure.
 
 ### Usage
 
@@ -21,7 +21,7 @@ Commands
                                          use `generic` to create a generic signature
   verify <pk> <sig> <msg>              verify signature `sig` using pubkey `pk` against blake2b hash of message `msg`
   -password string
-      password for encrypted keys (may also use env TEZOS_KEY_PASSPHRASE)
+      password for encrypted keys (may also use env MAVRYK_KEY_PASSPHRASE)
   -v  be verbose
   ```
 

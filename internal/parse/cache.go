@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"hash/fnv"
 
-	"github.com/mavryk-network/mvgo/contract/ast"
+	"github.com/mavryk-network/gomavryk/contract/ast"
 )
 
 type Cache struct {

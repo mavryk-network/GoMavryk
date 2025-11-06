@@ -7,7 +7,7 @@ import (
 	"log"
 	"text/template"
 
-	"github.com/mavryk-network/mvgo/contract/ast"
+	"github.com/mavryk-network/gomavryk/contract/ast"
 
 	"github.com/pkg/errors"
 )

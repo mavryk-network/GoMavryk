@@ -7,7 +7,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
 type StakingParameters struct {

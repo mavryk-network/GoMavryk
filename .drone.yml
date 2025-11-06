@@ -1,5 +1,5 @@
 kind: pipeline
-name: MvGo Pipeline
+name: GoMavryk Pipeline
 platform:
   os: linux
   arch: amd64

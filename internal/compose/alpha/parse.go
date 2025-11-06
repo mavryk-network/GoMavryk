@@ -12,10 +12,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mavryk-network/mvgo/contract/bind"
-	"github.com/mavryk-network/mvgo/internal/compose"
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/micheline"
+	"github.com/mavryk-network/gomavryk/contract/bind"
+	"github.com/mavryk-network/gomavryk/internal/compose"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
 
 	"github.com/pkg/errors"
 )

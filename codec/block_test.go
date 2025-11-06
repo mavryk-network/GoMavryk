@@ -7,7 +7,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
 func TestBlock(t *testing.T) {

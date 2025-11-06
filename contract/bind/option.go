@@ -3,7 +3,7 @@ package bind
 import (
 	"fmt"
 
-	"github.com/mavryk-network/mvgo/micheline"
+	"github.com/mavryk-network/gomavryk/micheline"
 
 	"github.com/pkg/errors"
 )

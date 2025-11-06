@@ -115,10 +115,6 @@ func walkTree(m map[string]interface{}, label string, typ Type, stack *Stack, lv
 		// this is to compensate for CanUnfold() and another case where list/pair unfold
 		// does not work
 		//
-		// Conflicting cases
-		// TestParamsValues/Jakartanet/oorcMSVaYBH3rcsDJ3n8EvpU4e8h38WFjJJfYUu2wXyDN4N7NMX
-		// TestStorageValues/Mainnet/KT1K4jn23GonEmZot3pMGth7unnzZ6EaMVjY
-		//
 		if len(typ.Args) > 0 && !typ.Args[0].IsList() && len(val.Args) > 1 && !val.LooksLikeContainer() && val.Args[0].IsSequence() && !val.Args[0].IsConvertedComb() {
 			Trace(func(log LogFn) {
 				log("L%0d: %s NESTED LIST args[%d(+%d)]=%s", lvl, label, stack.Len(), len(val.Args), val.Dump())
@@ -176,11 +172,9 @@ func walkTree(m map[string]interface{}, label string, typ Type, stack *Stack, lv
 		if typ.OpCode == T_BIG_MAP && (len(val.Args) == 0 || !val.Args[0].IsElt()) {
 			switch val.Type {
 			case PrimInt:
-				// Babylon bigmaps contain a reference here
 				m[label] = val.Int.Int64()
 			case PrimSequence:
 				if len(val.Args) == 0 {
-					// pre-babylon there's only an empty sequence
 					// FIXME: we could insert the bigmap id, but this is unknown at ths point
 					m[label] = nil
 				} else {

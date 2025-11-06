@@ -111,42 +111,35 @@ const (
 	I_RENAME           // 58
 
 	// Types
-	T_BOOL      // 59
-	T_CONTRACT  // 5A
-	T_INT       // 5B
-	T_KEY       // 5C
-	T_KEY_HASH  // 5D
-	T_LAMBDA    // 5E
-	T_LIST      // 5F
-	T_MAP       // 60
-	T_BIG_MAP   // 61
-	T_NAT       // 62
-	T_OPTION    // 63
-	T_OR        // 64
-	T_PAIR      // 65
-	T_SET       // 66
-	T_SIGNATURE // 67
-	T_STRING    // 68
-	T_BYTES     // 69
-	T_MUMAV     // 6A
-	T_TIMESTAMP // 6B
-	T_UNIT      // 6C
-	T_OPERATION // 6D
-	T_ADDRESS   // 6E
-
-	// v002 addition
-	I_SLICE // 6F
-
-	// v005 addition
-	// https://blog.nomadic-labs.com/michelson-updates-in-005.html
-	I_DIG           // 70
-	I_DUG           // 71
-	I_EMPTY_BIG_MAP // 72
-	I_APPLY         // 73
-	T_CHAIN_ID      // 74
-	I_CHAIN_ID      // 75
-
-	// v008 additions
+	T_BOOL      			// 59
+	T_CONTRACT  			// 5A
+	T_INT       			// 5B
+	T_KEY       			// 5C
+	T_KEY_HASH  			// 5D
+	T_LAMBDA    			// 5E
+	T_LIST      			// 5F
+	T_MAP       			// 60
+	T_BIG_MAP   			// 61
+	T_NAT       			// 62
+	T_OPTION    			// 63
+	T_OR        			// 64
+	T_PAIR      			// 65
+	T_SET       			// 66
+	T_SIGNATURE 			// 67
+	T_STRING    			// 68
+	T_BYTES     			// 69
+	T_MUMAV     			// 6A
+	T_TIMESTAMP 			// 6B
+	T_UNIT      			// 6C
+	T_OPERATION 			// 6D
+	T_ADDRESS   			// 6E
+	I_SLICE 				// 6F
+	I_DIG           		// 70
+	I_DUG           		// 71
+	I_EMPTY_BIG_MAP 		// 72
+	I_APPLY         		// 73
+	T_CHAIN_ID      		// 74
+	I_CHAIN_ID      		// 75
 	I_LEVEL                 // 76
 	I_SELF_ADDRESS          // 77
 	T_NEVER                 // 78
@@ -161,45 +154,31 @@ const (
 	T_BLS12_381_G2          // 81
 	T_BLS12_381_FR          // 82
 	T_SAPLING_STATE         // 83
-	_T_SAPLING_TRANSACTION  // 84, deprecated in v013
 	I_SAPLING_EMPTY_STATE   // 85
 	I_SAPLING_VERIFY_UPDATE // 86
 	T_TICKET                // 87
-	_I_TICKET               // 88, deprecated in v015
 	I_READ_TICKET           // 89
 	I_SPLIT_TICKET          // 8A
 	I_JOIN_TICKETS          // 8B
 	I_GET_AND_UPDATE        // 8C
+	T_CHEST      			// 8D
+	T_CHEST_KEY  			// 8E
+	I_OPEN_CHEST 			// 8F
+	I_VIEW       			// 90
+	K_VIEW       			// 91
+	H_CONSTANT   			// 92
+	I_SUB_MUMAV 			// 93
+	T_TX_ROLLUP_L2_ADDRESS 	// 94
+	I_MIN_BLOCK_TIME       	// 95
+	T_SAPLING_TRANSACTION  	// 96
+	I_EMIT 					// 97
+	D_LAMBDA_REC 			// 98
+	I_LAMBDA_REC 			// 99
+	I_TICKET     			// 9A
+	I_BYTES 				// 9B
+	I_NAT   				// 9C
 
-	// v011 additions
-	T_CHEST      // 8D
-	T_CHEST_KEY  // 8E
-	I_OPEN_CHEST // 8F
-	I_VIEW       // 90
-	K_VIEW       // 91
-	H_CONSTANT   // 92
-
-	// v012 additions
-	I_SUB_MUMAV // 93
-
-	// v013 additions
-	T_TX_ROLLUP_L2_ADDRESS // 94
-	I_MIN_BLOCK_TIME       // 95
-	T_SAPLING_TRANSACTION  // 96
-
-	// v014 additions
-	I_EMIT // 97
-
-	// v015 additions
-	D_LAMBDA_REC // 98
-	I_LAMBDA_REC // 99
-	I_TICKET     // 9A
-
-	// v016 additions
-	I_BYTES // 9B
-	I_NAT   // 9C
-
-	// v19 additions
+	// v002 additions
 	D_TICKET
 )
 
@@ -341,11 +320,9 @@ var (
 		T_BLS12_381_G2:          "bls12_381_g2",
 		T_BLS12_381_FR:          "bls12_381_fr",
 		T_SAPLING_STATE:         "sapling_state",
-		_T_SAPLING_TRANSACTION:  "sapling_transaction_deprecated",
 		I_SAPLING_EMPTY_STATE:   "SAPLING_EMPTY_STATE",
 		I_SAPLING_VERIFY_UPDATE: "SAPLING_VERIFY_UPDATE",
 		T_TICKET:                "ticket",
-		_I_TICKET:               "TICKET_DEPRECATED",
 		I_READ_TICKET:           "READ_TICKET",
 		I_SPLIT_TICKET:          "SPLIT_TICKET",
 		I_JOIN_TICKETS:          "JOIN_TICKETS",

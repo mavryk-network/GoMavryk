@@ -4,8 +4,8 @@
 package rpc
 
 import (
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/micheline"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
 )
 
 // Ensure Transaction implements the TypedOperation interface.
@@ -72,7 +72,7 @@ type InternalResult struct {
 	Type          micheline.Prim        `json:"type"`                  // event
 	Payload       micheline.Prim        `json:"payload"`               // event
 	Tag           string                `json:"tag"`                   // event
-	TicketUpdates []TicketUpdate        `json:"ticket_receipt"`        // v015
+	TicketUpdates []TicketUpdate        `json:"ticket_receipt"`
 }
 
 func (r InternalResult) Costs() mavryk.Costs {
@@ -110,7 +110,6 @@ func (r InternalResult) Costs() mavryk.Costs {
 	return cost
 }
 
-// found in block metadata from v010+
 type ImplicitResult struct {
 	Kind                mavryk.OpType     `json:"kind"`
 	BalanceUpdates      BalanceUpdates    `json:"balance_updates"`

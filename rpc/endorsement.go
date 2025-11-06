@@ -3,7 +3,7 @@
 
 package rpc
 
-import "github.com/mavryk-network/mvgo/mavryk"
+import "github.com/mavryk-network/gomavryk/mavryk"
 
 // Ensure Endorsement implements the TypedOperation interface.
 var _ TypedOperation = (*Endorsement)(nil)
@@ -11,12 +11,12 @@ var _ TypedOperation = (*Endorsement)(nil)
 // Endorsement represents an endorsement operation
 type Endorsement struct {
 	Generic
-	Level          int64               `json:"level"`                 // <= v008, v012+
-	Endorsement    *InlinedEndorsement `json:"endorsement,omitempty"` // v009+
-	Slot           int                 `json:"slot"`                  // v009+
-	Round          int                 `json:"round"`                 // v012+
-	PayloadHash    mavryk.PayloadHash  `json:"block_payload_hash"`    // v012+
-	DalAttestation mavryk.Z            `json:"dal_attestation"`       // v019+
+	Level          int64               `json:"level"`                 // <= v001+
+	Endorsement    *InlinedEndorsement `json:"endorsement,omitempty"` // v001+
+	Slot           int                 `json:"slot"`                  // v001+
+	Round          int                 `json:"round"`                 // v001+
+	PayloadHash    mavryk.PayloadHash  `json:"block_payload_hash"`    // v001+
+	DalAttestation mavryk.Z            `json:"dal_attestation"`       // v002+
 }
 
 func (e Endorsement) GetLevel() int64 {

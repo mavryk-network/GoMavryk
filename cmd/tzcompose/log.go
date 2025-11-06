@@ -5,7 +5,7 @@ package main
 
 import (
 	logpkg "github.com/echa/log"
-	"github.com/mavryk-network/mvgo/rpc"
+	"github.com/mavryk-network/gomavryk/rpc"
 )
 
 var (

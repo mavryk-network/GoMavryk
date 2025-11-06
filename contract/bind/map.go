@@ -7,16 +7,16 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/micheline"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
 
 	"github.com/pkg/errors"
 )
 
-// Map is a map type used to interact with Tezos smart contracts.
+// Map is a map type used to interact with Mavryk smart contracts.
 //
 // Go's map type cannot be used in this context, because the "comparable"
-// types are different in Go and in Tezos specification.
+// types are different in Go and in Mavryk specification.
 type Map[K, V any] struct {
 	m        map[hashType]MapEntry[K, V]
 	hashFunc func(any) hashType

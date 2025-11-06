@@ -10,15 +10,15 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/mavryk-network/mvgo/contract"
-	"github.com/mavryk-network/mvgo/contract/bind"
-	"github.com/mavryk-network/mvgo/mavryk"
-	"github.com/mavryk-network/mvgo/micheline"
-	"github.com/mavryk-network/mvgo/rpc"
+	"github.com/mavryk-network/gomavryk/contract"
+	"github.com/mavryk-network/gomavryk/contract/bind"
+	"github.com/mavryk-network/gomavryk/mavryk"
+	"github.com/mavryk-network/gomavryk/micheline"
+	"github.com/mavryk-network/gomavryk/rpc"
 	"github.com/pkg/errors"
 )
 
-// Fa2Nft is a generated binding to a Tezos smart contract.
+// Fa2Nft is a generated binding to a Mavryk smart contract.
 type Fa2Nft struct {
 	bind.Contract
 	builder Fa2NftBuilder
@@ -26,7 +26,7 @@ type Fa2Nft struct {
 	script  *micheline.Script
 }
 
-// Fa2NftSession is a generated binding to a Tezos smart contract, that will
+// Fa2NftSession is a generated binding to a Mavryk smart contract, that will
 // use Opts for every call.
 type Fa2NftSession struct {
 	*Fa2Nft

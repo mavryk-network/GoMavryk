@@ -55,7 +55,7 @@ var (
 		WithChainId(Atlasnet).
 		WithDeployment(Deployments[Atlasnet].AtProtocol(ProtoV001))
 
-	// BoreasnetParams defines the blockchain configuration for Paris testnet.
+	// BoreasnetParams defines the blockchain configuration for Boreas testnet.
 	// To produce compliant transactions, use these defaults in op.WithParams().
 	BoreasnetParams = (&Params{
 		MinimalBlockDelay:            5 * time.Second,
@@ -283,7 +283,7 @@ func (p *Params) IsCycleEnd(height int64) bool {
 }
 
 func (p *Params) IsSnapshotBlock(height int64) bool {
-	// no more snapshots in Paris
+	// no more snapshots in Boreas
 	if p.Version > 18 && p.IsCycleEnd(height) {
 		return true
 	}
@@ -309,7 +309,7 @@ func (p *Params) SnapshotBlock(cycle int64, index int) int64 {
 }
 
 func (p *Params) SnapshotIndex(height int64) int {
-	// no more snapshots in Paris
+	// no more snapshots in Boreas
 	if p.Version > 18 {
 		return 15
 	}

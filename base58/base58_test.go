@@ -10,7 +10,7 @@ import (
 	"encoding/hex"
 	"testing"
 
-	"github.com/mavryk-network/mvgo/base58"
+	"github.com/mavryk-network/gomavryk/base58"
 )
 
 var stringTests = []struct {

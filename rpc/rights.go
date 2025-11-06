@@ -11,15 +11,15 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
-// BakingRight holds information about the right to bake a specific Tezos block.
+// BakingRight holds information about the right to bake a specific Mavryk block.
 type BakingRight struct {
 	Delegate      mavryk.Address `json:"delegate"`
 	Level         int64          `json:"level"`
-	Priority      int            `json:"priority"` // until v011
-	Round         int            `json:"round"`    // v012+
+	Priority      int            `json:"priority"` // until v001
+	Round         int            `json:"round"`    // v001+
 	EstimatedTime time.Time      `json:"estimated_time"`
 }
 
@@ -27,15 +27,15 @@ func (r BakingRight) Address() mavryk.Address {
 	return r.Delegate
 }
 
-// EndorsingRight holds information about the right to endorse a specific Tezos block.
+// EndorsingRight holds information about the right to endorse a specific Mavryk block.
 type EndorsingRight struct {
 	Delegate         mavryk.Address `json:"delegate"`
 	Level            int64          `json:"level"`
 	EstimatedTime    time.Time      `json:"estimated_time"`
-	Slots            []int          `json:"slots,omitempty"`   // until v011
-	FirstSlot        int            `json:"first_slot"`        // v012+
-	EndorsingPower   int            `json:"endorsing_power"`   // v012+
-	AttestationPower int            `json:"attestation_power"` // v019+
+	Slots            []int          `json:"slots,omitempty"`   // v001
+	FirstSlot        int            `json:"first_slot"`        // v001+
+	EndorsingPower   int            `json:"endorsing_power"`   // v001+
+	AttestationPower int            `json:"attestation_power"` // v002+
 }
 
 func (r EndorsingRight) Address() mavryk.Address {
@@ -58,7 +58,6 @@ type StakeInfo struct {
 	Baker       mavryk.Address `json:"baker"`
 }
 
-// v012+
 type StakingSnapshotInfo struct {
 	Nonces           []string    `json:"nonces"`
 	RandomSeed       string      `json:"random_seed"`
@@ -130,19 +129,8 @@ type SnapshotOwners struct {
 }
 
 // ListBakingRights returns information about baking rights at block id.
-// Use max to set a max block priority (before Ithaca) or a max round (after Ithaca).
 func (c *Client) ListBakingRights(ctx context.Context, id BlockID, max int) ([]BakingRight, error) {
-	p, err := c.GetParams(ctx, id)
-	if err != nil {
-		return nil, err
-	}
-	maxSelector := "max_priority=%d"
-	if p.Version >= 12 {
-		maxSelector = "max_round=%d"
-	}
-	if p.Version < 6 {
-		max++
-	}
+	maxSelector := "max_round=%d"
 	rights := make([]BakingRight, 0)
 	u := fmt.Sprintf("chains/main/blocks/%s/helpers/baking_rights?all=true&"+maxSelector, id, max)
 	if err := c.Get(ctx, u, &rights); err != nil {
@@ -153,20 +141,9 @@ func (c *Client) ListBakingRights(ctx context.Context, id BlockID, max int) ([]B
 
 // ListBakingRightsCycle returns information about baking rights for an entire cycle
 // as seen from block id. Note block and cycle must be no further than preserved cycles
-// away from each other. Use max to set a max block priority (before Ithaca) or a max
-// round (after Ithaca).
+// away from each other. Use max to set a max round.
 func (c *Client) ListBakingRightsCycle(ctx context.Context, id BlockID, cycle int64, max int) ([]BakingRight, error) {
-	p, err := c.GetParams(ctx, id)
-	if err != nil {
-		return nil, err
-	}
-	maxSelector := "max_priority=%d"
-	if p.Version >= 12 {
-		maxSelector = "max_round=%d"
-	}
-	if p.Version < 6 {
-		max++
-	}
+	maxSelector := "max_round=%d"
 	rights := make([]BakingRight, 0)
 	u := fmt.Sprintf("chains/main/blocks/%s/helpers/baking_rights?all=true&cycle=%d&"+maxSelector, id, cycle, max)
 	if err := c.Get(ctx, u, &rights); err != nil {
@@ -327,7 +304,7 @@ func (c *Client) GetSnapshotIndexCycle(ctx context.Context, id BlockID, cycle in
 		idx.Cycle = cycle
 		idx.Base = p.SnapshotBaseCycle(cycle)
 		idx.Index = 15
-	case p.Version >= 12:
+	default:
 		idx.Cycle = cycle
 		idx.Base = p.SnapshotBaseCycle(cycle)
 		idx.Index = -1
@@ -339,31 +316,6 @@ func (c *Client) GetSnapshotIndexCycle(ctx context.Context, id BlockID, cycle in
 		} else {
 			c.Log.Warnf("No snapshot for cycle %d", cycle)
 		}
-	default:
-		// pre-Ithaca we can at most look PRESERVED_CYCLES into the future since
-		// the snapshot happened 2 cycles back from the block we're looking from.
-		var info RollSnapshotInfo
-		u := fmt.Sprintf("chains/main/blocks/%s/context/raw/json/cycle/%d", id, cycle)
-		if err := c.Get(ctx, u, &info); err != nil {
-			return nil, err
-		}
-		if info.RandomSeed == "" {
-			return nil, fmt.Errorf("missing snapshot for cycle %d at block %s", cycle, id)
-		}
-		idx.Cycle = cycle
-		idx.Base = p.SnapshotBaseCycle(cycle)
-		idx.Index = info.RollSnapshot
 	}
 	return idx, nil
-}
-
-// ListSnapshotRollOwners returns information about a roll snapshot ownership.
-// Response is a nested array `[[roll_id, pubkey]]`. Deprecated in Ithaca.
-func (c *Client) ListSnapshotRollOwners(ctx context.Context, id BlockID, cycle, index int64) (*SnapshotOwners, error) {
-	owners := &SnapshotOwners{Cycle: cycle, Index: index}
-	u := fmt.Sprintf("chains/main/blocks/%s/context/raw/json/rolls/owner/snapshot/%d/%d?depth=1", id, cycle, index)
-	if err := c.Get(ctx, u, &owners.Rolls); err != nil {
-		return nil, err
-	}
-	return owners, nil
 }

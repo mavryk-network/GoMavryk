@@ -3,7 +3,7 @@
 
 package rpc
 
-import "github.com/mavryk-network/mvgo/mavryk"
+import "github.com/mavryk-network/gomavryk/mavryk"
 
 // BalanceUpdate is a variable structure depending on the Kind field
 type BalanceUpdate struct {
@@ -17,7 +17,7 @@ type BalanceUpdate struct {
 	Delegate  mavryk.Address `json:"delegate"`  // freezer and burn only
 	Committer mavryk.Address `json:"committer"` // committer only
 
-	// Ithaca only
+	// Atlas only
 	IsParticipationBurn bool `json:"participation"` // burn only
 	IsRevelationBurn    bool `json:"revelation"`    // burn only
 
@@ -65,7 +65,6 @@ type BalanceUpdate struct {
 // - `block fees` designates the container account used to collect manager operation fees while block's operations are being applied. Other categories may be added in the future.
 //
 // # Freezer categories
-// - `legacy_deposits`, `legacy_fees`, or `legacy_rewards` represent the accounts of frozen deposits, frozen fees or frozen rewards up to protocol HANGZHOU.
 // - `deposits` represents the account of frozen deposits in subsequent protocols (replacing the legacy container account `legacy_deposits` above).
 // - `unstaked_deposits` represent tez for which unstaking has been requested.
 

@@ -11,7 +11,7 @@ var (
 	ErrNoVersion      = errors.New("missing engine version")
 	ErrInvalidVersion = errors.New("unsupported engine version")
 	ErrNoPipeline     = errors.New("missing pipeline definition")
-	ErrNoBaseKey      = errors.New("missing base account key, set with TZCOMPOSE_BASE_KEY")
+	ErrNoBaseKey      = errors.New("missing base account key, set with MVCOMPOSE_BASE_KEY")
 	ErrNoAccount      = errors.New("missing account")
 	ErrNoAccountName  = errors.New("emoty account name")
 	ErrNoPipelineName = errors.New("empty pipeline name")

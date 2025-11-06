@@ -10,7 +10,7 @@ import (
 	"io"
 	"time"
 
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/mavryk"
 )
 
 var ErrMonitorClosed = errors.New("monitor closed")
@@ -224,11 +224,11 @@ func (m *BlockHeaderMonitor) Closed() <-chan struct{} {
 	return m.closed
 }
 
-// MempoolMonitor is a monitor for the Tezos mempool. Note that the connection
+// MempoolMonitor is a monitor for the Mavryk mempool. Note that the connection
 // resets every time a new head is attached to the chain. MempoolMonitor is
 // closed with an error in this case and cannot be reused after close.
 //
-// The Tezos mempool re-evaluates all operations and potentially updates their state
+// The Mavryk mempool re-evaluates all operations and potentially updates their state
 // when the head block changes. This applies to operations in lists branch_delayed
 // and branch_refused. After reorg, operations already included in a previous block
 // may enter the mempool again.

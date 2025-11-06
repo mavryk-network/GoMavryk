@@ -1,6 +1,6 @@
 package parse
 
-import "github.com/mavryk-network/mvgo/contract/ast"
+import "github.com/mavryk-network/gomavryk/contract/ast"
 
 type FixupConfig map[string]FixupStruct
 

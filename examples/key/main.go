@@ -29,7 +29,7 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/mavryk-network/mvgo/mavryk"
+	"github.com/mavryk-network/gomavryk/mavryk"
 	"golang.org/x/term"
 )
 
@@ -42,7 +42,7 @@ var (
 func init() {
 	flags.Usage = func() {}
 	flags.BoolVar(&verbose, "v", false, "be verbose")
-	flags.StringVar(&password, "password", "", "password for encrypted keys (may also use env TEZOS_KEY_PASSPHRASE)")
+	flags.StringVar(&password, "password", "", "password for encrypted keys (may also use env MAVRYK_KEY_PASSPHRASE)")
 }
 
 func main() {
@@ -120,8 +120,8 @@ func readPassword() mavryk.PassphraseFunc {
 	pwd := password
 	source := "command line"
 	if pwd == "" {
-		pwd = os.Getenv("TEZOS_KEY_PASSPHRASE")
-		source = "env TEZOS_KEY_PASSPHRASE"
+		pwd = os.Getenv("MAVRYK_KEY_PASSPHRASE")
+		source = "env MAVRYK_KEY_PASSPHRASE"
 	}
 
 	if pwd != "" {
