@@ -30,7 +30,7 @@ func init() {
 	flags.Usage = func() {}
 	flags.BoolVar(&verbose, "v", false, "be verbose")
 	flags.StringVar(&key, "key", "", "private key")
-	flags.StringVar(&node, "node", "https://rpc.tzpro.io", "Tezos node URL")
+	flags.StringVar(&node, "node", "https://mainnet.rpc.mavryk.network", "Tezos node URL")
 }
 
 func main() {

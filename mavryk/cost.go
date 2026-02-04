@@ -3,7 +3,7 @@
 
 package mavryk
 
-// Limits represents all resource limits defined for an operation in Tezos.
+// Limits represents all resource limits defined for an operation in Mavryk.
 type Limits struct {
 	Fee          int64
 	GasLimit     int64
@@ -18,7 +18,7 @@ func (x Limits) Add(y Limits) Limits {
 	return x
 }
 
-// Costs represents all costs paid by an operation in Tezos. Its contents depends on
+// Costs represents all costs paid by an operation in Mavryk. Its contents depends on
 // operation type and activity. Consensus and voting operations have no cost,
 // user operations have variable cost. For transactions with internal results costs
 // are a summary.

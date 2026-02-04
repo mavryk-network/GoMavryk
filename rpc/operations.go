@@ -126,7 +126,7 @@ type OperationResult struct {
 }
 
 // Always use this helper to retrieve Ticket updates. This is because due to
-// lack of quality control Tezos Lima protocol ended up with 2 distinct names
+// lack of quality control Mavryk Lima protocol ended up with 2 distinct names
 // for ticket updates in external call receipts versus internal call receipts.
 func (r OperationResult) TicketUpdates() []TicketUpdate {
 	if len(r.TicketUpdatesCorrect) > 0 {
@@ -430,7 +430,7 @@ func (c *Client) GetBlockOperationListHashes(ctx context.Context, id BlockID, l 
 	return hashes, nil
 }
 
-// GetBlockOperation returns information about a single validated Tezos operation group
+// GetBlockOperation returns information about a single validated Mavryk operation group
 // (i.e. a single operation or a batch of operations) at list l and position n
 // https://protocol.mavryk.org/active/rpc.html#get-block-id-operations-list-offset-operation-offset
 func (c *Client) GetBlockOperation(ctx context.Context, id BlockID, l, n int) (*Operation, error) {
@@ -445,7 +445,7 @@ func (c *Client) GetBlockOperation(ctx context.Context, id BlockID, l, n int) (*
 	return &op, nil
 }
 
-// GetBlockOperationList returns information about all validated Tezos operation group
+// GetBlockOperationList returns information about all validated Mavryk operation group
 // inside operation list l (i.e. validation pass) [0..3].
 // https://protocol.mavryk.org/active/rpc.html#get-block-id-operations-list-offset
 func (c *Client) GetBlockOperationList(ctx context.Context, id BlockID, l int) ([]Operation, error) {
@@ -460,7 +460,7 @@ func (c *Client) GetBlockOperationList(ctx context.Context, id BlockID, l int) (
 	return ops, nil
 }
 
-// GetBlockOperations returns information about all validated Tezos operation groups
+// GetBlockOperations returns information about all validated Mavryk operation groups
 // from all operation lists in block.
 // https://protocol.mavryk.org/active/rpc.html#get-block-id-operations
 func (c *Client) GetBlockOperations(ctx context.Context, id BlockID) ([][]Operation, error) {

@@ -69,7 +69,7 @@ func ecPrivateKeyFromBytes(b []byte, curve elliptic.Curve) (key *ecdsa.PrivateKe
 	k := new(big.Int).SetBytes(b)
 	curveOrder := curve.Params().N
 	if k.Cmp(curveOrder) >= 0 {
-		return nil, fmt.Errorf("tezos: invalid private key for curve %s", curve.Params().Name)
+		return nil, fmt.Errorf("mavryk: invalid private key for curve %s", curve.Params().Name)
 	}
 
 	priv := &ecdsa.PrivateKey{
@@ -88,15 +88,15 @@ func ecPrivateKeyFromBytes(b []byte, curve elliptic.Curve) (key *ecdsa.PrivateKe
 func ecUnmarshalCompressed(curve elliptic.Curve, data []byte) (pk *ecdsa.PublicKey, err error) {
 	byteLen := (curve.Params().BitSize + 7) / 8
 	if len(data) != 1+byteLen {
-		return nil, fmt.Errorf("tezos: (%s) invalid public key length: %d", curve.Params().Name, len(data))
+		return nil, fmt.Errorf("mavryk: (%s) invalid public key length: %d", curve.Params().Name, len(data))
 	}
 	if data[0] != 2 && data[0] != 3 { // compressed form
-		return nil, fmt.Errorf("tezos: (%s) invalid public key compression", curve.Params().Name)
+		return nil, fmt.Errorf("mavryk: (%s) invalid public key compression", curve.Params().Name)
 	}
 	p := curve.Params().P
 	x := new(big.Int).SetBytes(data[1:])
 	if x.Cmp(p) >= 0 {
-		return nil, fmt.Errorf("tezos: (%s) invalid public key", curve.Params().Name)
+		return nil, fmt.Errorf("mavryk: (%s) invalid public key", curve.Params().Name)
 	}
 
 	// secp256k1 polynomial: x³ + b
@@ -113,13 +113,13 @@ func ecUnmarshalCompressed(curve elliptic.Curve, data []byte) (pk *ecdsa.PublicK
 	y.ModSqrt(y, p)
 
 	if y == nil {
-		return nil, fmt.Errorf("tezos: (%s) invalid public key", curve.Params().Name)
+		return nil, fmt.Errorf("mavryk: (%s) invalid public key", curve.Params().Name)
 	}
 	if byte(y.Bit(0)) != data[0]&1 {
 		y.Neg(y).Mod(y, p)
 	}
 	if !curve.IsOnCurve(x, y) {
-		return nil, fmt.Errorf("tezos: (%s) invalid public key", curve.Params().Name)
+		return nil, fmt.Errorf("mavryk: (%s) invalid public key", curve.Params().Name)
 	}
 
 	pk = &ecdsa.PublicKey{
@@ -157,7 +157,7 @@ func decryptPrivateKey(enc []byte, fn PassphraseFunc) ([]byte, error) {
 	copy(tmp[:], secretboxKey)
 	dec, ok := secretbox.Open(nil, box, &nonce, &tmp)
 	if !ok {
-		return nil, fmt.Errorf("tezos: private key decrypt failed")
+		return nil, fmt.Errorf("mavryk: private key decrypt failed")
 	}
 	return dec, nil
 }

@@ -18,7 +18,7 @@ Commands
 Global arguments
   -d  Enable debug mode
   -node string
-      Tezos node url (default "https://rpc.tzpro.io")
+      Tezos node url (default "https://mainnet.rpc.mavryk.network")
   -v  Be verbose
 ```
 

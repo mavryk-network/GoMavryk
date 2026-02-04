@@ -11,11 +11,11 @@ import (
 )
 
 const (
-	// ErrorKindPermanent Tezos RPC error kind.
+	// ErrorKindPermanent Mavryk RPC error kind.
 	ErrorKindPermanent = "permanent"
-	// ErrorKindTemporary Tezos RPC error kind.
+	// ErrorKindTemporary Mavryk RPC error kind.
 	ErrorKindTemporary = "temporary"
-	// ErrorKindBranch Tezos RPC error kind.
+	// ErrorKindBranch Mavryk RPC error kind.
 	ErrorKindBranch = "branch"
 )
 
@@ -28,7 +28,7 @@ func ErrorStatus(err error) int {
 	}
 }
 
-// Error is a Tezos error as documented on http://protocol.mavryk.org/mainnet/api/errors.html.
+// Error is a Mavryk error as documented on http://protocol.mavryk.org/mainnet/api/errors.html.
 type Error interface {
 	error
 	ErrorID() string
@@ -47,15 +47,15 @@ func (e GenericError) Error() string {
 	if e.With.IsValid() {
 		reason = e.With.Dump()
 	}
-	return fmt.Sprintf("tezos: kind=%s, id=%s, reason=%s", e.Kind, e.ID, reason)
+	return fmt.Sprintf("mavryk: kind=%s, id=%s, reason=%s", e.Kind, e.ID, reason)
 }
 
-// ErrorID returns Tezos error id
+// ErrorID returns Mavryk error id
 func (e GenericError) ErrorID() string {
 	return e.ID
 }
 
-// ErrorKind returns Tezos error kind
+// ErrorKind returns Mavryk error kind
 func (e GenericError) ErrorKind() string {
 	return e.Kind
 }
@@ -74,7 +74,7 @@ type HTTPError interface {
 	HTTPStatus
 }
 
-// RPCError is a Tezos RPC error as documented on http://protocol.mavryk.org/mainnet/api/errors.html.
+// RPCError is a Mavryk RPC error as documented on http://protocol.mavryk.org/mainnet/api/errors.html.
 type RPCError interface {
 	Error
 	HTTPStatus
@@ -108,7 +108,7 @@ func (e Errors) Error() string {
 	return e[0].Error()
 }
 
-// ErrorID returns Tezos error id
+// ErrorID returns Mavryk error id
 func (e Errors) ErrorID() string {
 	if len(e) == 0 {
 		return ""
@@ -116,7 +116,7 @@ func (e Errors) ErrorID() string {
 	return e[0].ErrorID()
 }
 
-// ErrorKind returns Tezos error kind
+// ErrorKind returns Mavryk error kind
 func (e Errors) ErrorKind() string {
 	if len(e) == 0 {
 		return ""

@@ -18,7 +18,7 @@ type Delegate struct {
 	Height   int64          `json:"-"`
 	Block    string         `json:"-"`
 
-	// tezos data
+	// mavryk data
 	Deactivated          bool             `json:"deactivated"`
 	Balance              int64            `json:"balance,string"`
 	DelegatedContracts   []mavryk.Address `json:"delegated_contracts"`

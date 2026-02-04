@@ -52,8 +52,8 @@
 * codec: add staking operation codecs
 * codec: fix block encoding
 * codec: support block signing and block hash calculation
-* tzcompose: add oxford staking tasks
-* tzcompose: add double bake task
+* mvcompose: add oxford staking tasks
+* mvcompose: add double bake task
 
 ## v1.17.4
 
@@ -62,7 +62,7 @@
 
 ## v1.17.3
 
-* cmd: add tzcompose alpha release
+* cmd: add mvcompose alpha release
 * rpc: dedicated logger instance per client
 * rpc observer: return full BlockHeaderLogEntry in callback
 * rpc observer: multiple subscriptions for the same op hash
@@ -81,7 +81,7 @@
 * add Micheline path setters
 * skip empty annotations on variadic prims in JSON output
 * extend Micheline typedef with path info
-* add TzGen tech preview (a contract interface code generator for Tezos)
+* add MvGen tech preview (a contract interface code generator for Mavryk)
 * remove Mumbainet hashes, config and references
 
 ## v1.17.1
@@ -181,7 +181,7 @@ Other changes
 * Fix setting amount in TxArgs.Encode
 * Cache head block ops in observer to avoid race conditions
 * improve base58 performance
-* Disable balance_of type check for tz12
+* Disable balance_of type check for mv12
 * Allow setting metadata mode as client config
 * Add token address type
 * Add bigmap event filter

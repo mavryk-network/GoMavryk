@@ -1,6 +1,6 @@
-## Build and sign Tezos operations
+## Build and sign Mavryk operations
 
-Use MvGo to produce any type of Tezos operation. One by one, this example shows all the basic steps to make, encode, simulate, sign, broadacst and wait for operation to be confirmed .
+Use MvGo to produce any type of Mavryk operation. One by one, this example shows all the basic steps to make, encode, simulate, sign, broadacst and wait for operation to be confirmed .
 
 ### Usage
 
@@ -11,7 +11,7 @@ Usage: tx [args] <cmd> [sub-args]
 
 Arguments
   -node string
-      Tezos node URL (default "https://rpc.tzpro.io")
+      Mavryk node URL (default "https://mainnet.rpc.mavryk.network")
   -v  be verbose
 
 Commands
@@ -55,7 +55,7 @@ go run ./examples/tx -v encode reveal '{"source":"mv1GSSYcW7vUGkoXRpbj8nrXYjWyar
 # decode converts a binary encoded transaction back to Go
 go run ./examples/tx -v decode "09af86395fee09cfbede6b11339cd53216aeee93c38b9bf5cee4c791b814df8c6b005c7886828ec2a24f1814484de7dd53e559831c3fe807c197b001e8070100654b5b22880736d33865b4f30367e90feb81b17cc0ceb7ac951a0066142d5847"
 
-# validate, compares locally created result with a version created by a Tezos node
+# validate, compares locally created result with a version created by a Mavryk node
 go run ./examples/tx -v validate reveal '{"source":"mv1GSSYcW7vUGkoXRpbj8nrXYjWyar1pyDpt", "public_key":"edpkuQqN9HB3jY1FvDzt15WQDVSHR4vQGd1wv6iqJ73wkrKecRtnXh","fee": "1000", "counter": "2886593", "gas_limit": "1000", "storage_limit": "0"}'
 
 # simulate, dry-runs a transaction to measure its effects on gas and storage consumption
@@ -65,7 +65,7 @@ go run ./examples/tx -v simulate "5f2a8d51254e06fcbd276228e84d8c9dbd9c8fc89a5986
 # sign produces a local signature from given private key
 go run ./examples/tx sign "edskS3QdzK2YuceeLEaQrejebTy1fzy3VakDXdWMxaYanvu1F8WL6MetyYkJGVCAmSxFjgLt4ZjfwKcqETSNCkuPjrGhap24rS" "5f2a8d51254e06fcbd276228e84d8c9dbd9c8fc89a5986cd28b5d71b66ee57466b005c7886828ec2a24f1814484de7dd53e559831c3fe807c197b001e8070000654b5b22880736d33865b4f30367e90feb81b17cc0ceb7ac951a0066142d5847"
 
-# broadcast takes encoded operation and signature and sends it for inclusion to a tezos node
+# broadcast takes encoded operation and signature and sends it for inclusion to a mavryk node
 go run ./examples/tx -v broadcast "5f2a8d51254e06fcbd276228e84d8c9dbd9c8fc89a5986cd28b5d71b66ee57466b005c7886828ec2a24f1814484de7dd53e559831c3fe807c197b001e8070000654b5b22880736d33865b4f30367e90feb81b17cc0ceb7ac951a0066142d5847" "edsigtrSrvNckjtxciM4iuoZjytrfQzmHyb7nv6ZLerrH5w19aMgmUkz1HDy3KMpF2S3jnZBW8ZTNqAtXYJ1ZKYtcj5NwcLmdfG"
 ```
 ```

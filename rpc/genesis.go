@@ -190,7 +190,7 @@ func (b *bootstrap) DecodeContracts() ([]*X1, error) {
 			continue
 		}
 
-		// patch initial storage (convert strings to bytes) to circumvent tezos
+		// patch initial storage (convert strings to bytes) to circumvent mavryk
 		// origination bug
 		// - replace edpk strings with byte sequences
 		// - replace delegate addesses with binary pkh 00 TT AAAA...

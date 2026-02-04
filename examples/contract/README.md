@@ -24,7 +24,7 @@ Usage: contract [flags] <cmd> [sub-args]
 
 Flags
   -node string
-        Tezos node URL (default "https://rpc.tzpro.io")
+        Tezos node URL (default "https://mainnet.rpc.mavryk.network")
   -v    be verbose
 
 Query Commands

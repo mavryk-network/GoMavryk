@@ -512,7 +512,7 @@ func (n *N) DecodeBuffer(buf *bytes.Buffer) error {
 		}
 		if b[0] < 0x80 {
 			if i > 9 || i == 9 && b[0] > 1 {
-				return fmt.Errorf("tezos: numeric overflow")
+				return fmt.Errorf("mavryk: numeric overflow")
 			}
 			x |= int64(b[0]) << s
 			break

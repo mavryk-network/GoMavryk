@@ -29,7 +29,7 @@ var (
 func init() {
 	flags.Usage = func() {}
 	flags.BoolVar(&verbose, "v", false, "be verbose")
-	flags.StringVar(&node, "node", "https://rpc.tzpro.io", "Tezos node URL")
+	flags.StringVar(&node, "node", "https://mainnet.rpc.mavryk.network", "Tezos node URL")
 	flags.Int64Var(&ttl, "ttl", 120, "Operation TTL")
 }
 

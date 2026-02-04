@@ -24,7 +24,7 @@ var (
 func init() {
 	flags.Usage = func() {}
 	flags.BoolVar(&verbose, "v", false, "be verbose")
-	flags.StringVar(&node, "node", "https://rpc.tzpro.io", "node url")
+	flags.StringVar(&node, "node", "https://mainnet.rpc.mavryk.network", "node url")
 	flags.StringVar(&proto, "proto", "", "simulate with protocol")
 	flags.StringVar(&net, "net", "", "simulate with network")
 }

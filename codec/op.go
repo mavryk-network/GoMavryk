@@ -25,11 +25,11 @@ const (
 )
 
 var (
-	// enc defines the default wire encoding used for Tezos messages
+	// enc defines the default wire encoding used for Mavryk messages
 	enc = binary.BigEndian
 )
 
-// Operation is a generic type used to handle different Tezos operation
+// Operation is a generic type used to handle different Mavryk operation
 // types inside an operation's contents list.
 type Operation interface {
 	Kind() mavryk.OpType
@@ -45,7 +45,7 @@ type Operation interface {
 	DecodeBuffer(buf *bytes.Buffer, p *mavryk.Params) error
 }
 
-// Op is a container used to collect, serialize and sign Tezos operations.
+// Op is a container used to collect, serialize and sign Mavryk operations.
 // It serves as a low level building block for constructing and serializing
 // operations, but is agnostic to the order/lifecycle in which data is added
 // or updated.
@@ -86,13 +86,13 @@ func (o *Op) WithParams(p *mavryk.Params) *Op {
 	return o
 }
 
-// WithContents adds a Tezos operation to the end of the contents list.
+// WithContents adds a Mavryk operation to the end of the contents list.
 func (o *Op) WithContents(op Operation) *Op {
 	o.Contents = append(o.Contents, op)
 	return o
 }
 
-// WithContentsFront adds a Tezos operation to the front of the contents list.
+// WithContentsFront adds a Mavryk operation to the front of the contents list.
 func (o *Op) WithContentsFront(op Operation) *Op {
 	o.Contents = append([]Operation{op}, o.Contents...)
 	return o
@@ -489,10 +489,10 @@ func (o *Op) WithSignature(sig mavryk.Signature) *Op {
 // are empty.
 func (o *Op) Sign(key mavryk.PrivateKey) error {
 	if !o.Branch.IsValid() {
-		return fmt.Errorf("tezos: missing branch")
+		return fmt.Errorf("mavryk: missing branch")
 	}
 	if len(o.Contents) == 0 {
-		return fmt.Errorf("tezos: empty operation contents")
+		return fmt.Errorf("mavryk: empty operation contents")
 	}
 	sig, err := key.Sign(o.Digest())
 	if err != nil {
@@ -644,7 +644,7 @@ func DecodeOp(data []byte) (*Op, error) {
 			if buf.Len() == 64 {
 				break
 			}
-			return nil, fmt.Errorf("tezos: unsupported operation tag %d", tag)
+			return nil, fmt.Errorf("mavryk: unsupported operation tag %d", tag)
 		}
 		if err := op.DecodeBuffer(buf, mavryk.DefaultParams); err != nil {
 			return nil, err

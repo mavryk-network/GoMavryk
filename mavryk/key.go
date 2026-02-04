@@ -23,10 +23,10 @@ import (
 var (
 	// ErrUnknownKeyType describes an error where a type for a
 	// public key is undefined.
-	ErrUnknownKeyType = errors.New("tezos: unknown key type")
+	ErrUnknownKeyType = errors.New("mavryk: unknown key type")
 
 	// ErrPassphrase is returned when a required passphrase is missing
-	ErrPassphrase = errors.New("tezos: passphrase required")
+	ErrPassphrase = errors.New("mavryk: passphrase required")
 
 	InvalidKey = Key{Type: KeyTypeInvalid, Data: nil}
 
@@ -307,7 +307,7 @@ func HasKeyPrefix(s string) bool {
 	return IsPublicKey(s) || IsPrivateKey(s)
 }
 
-// Key represents a public key on the Tezos blockchain.
+// Key represents a public key on the Mavryk blockchain.
 type Key struct {
 	Type KeyType
 	Data []byte
@@ -421,10 +421,10 @@ func (k *Key) UnmarshalBinary(b []byte) error {
 	}
 	// check data size
 	if l < 33 {
-		return fmt.Errorf("tezos: invalid binary key length %d", l)
+		return fmt.Errorf("mavryk: invalid binary key length %d", l)
 	}
 	if typ := ParseKeyTag(b[0]); !typ.IsValid() {
-		return fmt.Errorf("tezos: invalid binary key type %x", b[0])
+		return fmt.Errorf("mavryk: invalid binary key type %x", b[0])
 	} else {
 		k.Type = typ
 	}
@@ -444,11 +444,11 @@ func (k *Key) EncodeBuffer(buf *bytes.Buffer) error {
 
 func (k *Key) DecodeBuffer(buf *bytes.Buffer) error {
 	if l := buf.Len(); l < 33 {
-		return fmt.Errorf("tezos: invalid binary key length %d", l)
+		return fmt.Errorf("mavryk: invalid binary key length %d", l)
 	}
 	tag := buf.Next(1)[0]
 	if typ := ParseKeyTag(tag); !typ.IsValid() {
-		return fmt.Errorf("tezos: invalid binary key type %x", tag)
+		return fmt.Errorf("mavryk: invalid binary key type %x", tag)
 	} else {
 		k.Type = typ
 	}
@@ -456,7 +456,7 @@ func (k *Key) DecodeBuffer(buf *bytes.Buffer) error {
 	k.Data = make([]byte, l)
 	copy(k.Data, buf.Next(l))
 	if !k.IsValid() {
-		return fmt.Errorf("tezos: invalid binary key typ=%s len=%d", k.Type, len(k.Data))
+		return fmt.Errorf("mavryk: invalid binary key typ=%s len=%d", k.Type, len(k.Data))
 	}
 	return nil
 }
@@ -471,7 +471,7 @@ func ParseKey(s string) (Key, error) {
 		if err == base58.ErrChecksum {
 			return k, ErrChecksumMismatch
 		}
-		return k, fmt.Errorf("tezos: unknown format for key %s: %w", s, err)
+		return k, fmt.Errorf("mavryk: unknown format for key %s: %w", s, err)
 	}
 	switch {
 	case bytes.Equal(version, ED25519_PUBLIC_KEY_ID):
@@ -483,10 +483,10 @@ func ParseKey(s string) (Key, error) {
 	case bytes.Equal(version, BLS12_381_PUBLIC_KEY_ID):
 		k.Type = KeyTypeBls12_381
 	default:
-		return k, fmt.Errorf("tezos: unknown version %x for key %s", version, s)
+		return k, fmt.Errorf("mavryk: unknown version %x for key %s", version, s)
 	}
 	if l := len(decoded); l != k.Type.PkHashType().Len {
-		return k, fmt.Errorf("tezos: invalid length %d for %s key data", l, k.Type.PkPrefix())
+		return k, fmt.Errorf("mavryk: invalid length %d for %s key data", l, k.Type.PkPrefix())
 	}
 	k.Data = decoded
 	return k, nil
@@ -643,7 +643,7 @@ func (k PrivateKey) Sign(hash []byte) (Signature, error) {
 }
 
 // ParseEncryptedPrivateKey attempts to parse and optionally decrypt a
-// Tezos private key. When an encrypted key is detected, fn is called
+// Mavryk private key. When an encrypted key is detected, fn is called
 // and expected to return the decoding passphrase.
 func ParseEncryptedPrivateKey(s string, fn PassphraseFunc) (k PrivateKey, err error) {
 	var (
@@ -662,7 +662,7 @@ func ParseEncryptedPrivateKey(s string, fn PassphraseFunc) (k PrivateKey, err er
 			err = ErrChecksumMismatch
 			return
 		}
-		err = fmt.Errorf("tezos: unknown format for private key %s: %w", s, err)
+		err = fmt.Errorf("mavryk: unknown format for private key %s: %w", s, err)
 		return
 	}
 
@@ -688,7 +688,7 @@ func ParseEncryptedPrivateKey(s string, fn PassphraseFunc) (k PrivateKey, err er
 	switch {
 	case bytes.Equal(version, ED25519_SEED_ID):
 		if l := len(decoded); l != ed25519.SeedSize {
-			return k, fmt.Errorf("tezos: invalid ed25519 seed length: %d", l)
+			return k, fmt.Errorf("mavryk: invalid ed25519 seed length: %d", l)
 		}
 		k.Type = KeyTypeEd25519
 		// convert seed to key
@@ -702,11 +702,11 @@ func ParseEncryptedPrivateKey(s string, fn PassphraseFunc) (k PrivateKey, err er
 	case bytes.Equal(version, BLS12_381_SECRET_KEY_ID):
 		k.Type = KeyTypeBls12_381
 	default:
-		err = fmt.Errorf("tezos: unknown version %x for private key %s", version, s)
+		err = fmt.Errorf("mavryk: unknown version %x for private key %s", version, s)
 		return
 	}
 	if l := len(decoded); l != k.Type.SkHashType().Len {
-		return k, fmt.Errorf("tezos: invalid length %d for %s private key data", l, k.Type.SkPrefix())
+		return k, fmt.Errorf("mavryk: invalid length %d for %s private key data", l, k.Type.SkPrefix())
 	}
 	k.Data = decoded
 	return

@@ -13,7 +13,7 @@ import (
 	"github.com/mavryk-network/mvgo/mavryk"
 )
 
-// Block holds information about a Tezos block
+// Block holds information about a Mavryk block
 type Block struct {
 	Protocol   mavryk.ProtocolHash `json:"protocol"`
 	ChainId    mavryk.ChainIdHash  `json:"chain_id"`
@@ -106,7 +106,7 @@ type InvalidBlock struct {
 	Error Errors           `json:"error"`
 }
 
-// BlockHeader is a part of the Tezos block data
+// BlockHeader is a part of the Mavryk block data
 type BlockHeader struct {
 	Level                     int64                 `json:"level"`
 	Proto                     int                   `json:"proto"`
@@ -228,7 +228,7 @@ type VotingPeriodInfo struct {
 	VotingPeriod VotingPeriod `json:"voting_period"`
 }
 
-// BlockMetadata is a part of the Tezos block data
+// BlockMetadata is a part of the Mavryk block data
 type BlockMetadata struct {
 	Protocol               mavryk.ProtocolHash    `json:"protocol"`
 	NextProtocol           mavryk.ProtocolHash    `json:"next_protocol"`
@@ -273,7 +273,7 @@ func (m *BlockMetadata) GetLevel() int64 {
 	return m.Level.Level
 }
 
-// GetBlock returns information about a Tezos block
+// GetBlock returns information about a Mavryk block
 // https://protocol.mavryk.org/mainnet/api/rpc.html#get-block-id
 func (c *Client) GetBlock(ctx context.Context, id BlockID) (*Block, error) {
 	var block Block
@@ -287,7 +287,7 @@ func (c *Client) GetBlock(ctx context.Context, id BlockID) (*Block, error) {
 	return &block, nil
 }
 
-// GetBlockHeight returns information about a Tezos block
+// GetBlockHeight returns information about a Mavryk block
 // https://protocol.mavryk.org/mainnet/api/rpc.html#get-block-id
 func (c *Client) GetBlockHeight(ctx context.Context, height int64) (*Block, error) {
 	return c.GetBlock(ctx, BlockLevel(height))

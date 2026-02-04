@@ -26,7 +26,7 @@ func (t PvmKind) IsValid() bool {
 func (t *PvmKind) UnmarshalText(data []byte) error {
 	v := ParsePvmKind(string(data))
 	if !v.IsValid() {
-		return fmt.Errorf("tezos: invalid PVM kind '%s'", string(data))
+		return fmt.Errorf("mavryk: invalid PVM kind '%s'", string(data))
 	}
 	*t = v
 	return nil

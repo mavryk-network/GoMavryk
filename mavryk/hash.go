@@ -16,7 +16,7 @@ var (
 	// ErrUnknownHashType describes an error where a hash can not
 	// decoded as a specific hash type because the string encoding
 	// starts with an unknown identifier.
-	ErrUnknownHashType = errors.New("tezos: unknown hash type")
+	ErrUnknownHashType = errors.New("mavryk: unknown hash type")
 
 	// Zero hashes
 	ZeroChainIdHash           = NewChainIdHash(nil)
@@ -158,7 +158,7 @@ func (h ChainIdHash) MarshalBinary() ([]byte, error) {
 
 func (h *ChainIdHash) UnmarshalBinary(buf []byte) error {
 	if l := len(buf); l > 0 && l != HashTypeChainId.Len {
-		return fmt.Errorf("tezos: short chain_id hash")
+		return fmt.Errorf("mavryk: short chain_id hash")
 	}
 	copy(h[:], buf)
 	return nil
@@ -230,7 +230,7 @@ func (h BlockHash) MarshalBinary() ([]byte, error) {
 
 func (h *BlockHash) UnmarshalBinary(buf []byte) error {
 	if l := len(buf); l > 0 && l != HashTypeBlock.Len {
-		return fmt.Errorf("tezos: short block hash")
+		return fmt.Errorf("mavryk: short block hash")
 	}
 	copy(h[:], buf)
 	return nil
@@ -303,7 +303,7 @@ func (h ProtocolHash) MarshalBinary() ([]byte, error) {
 
 func (h *ProtocolHash) UnmarshalBinary(buf []byte) error {
 	if l := len(buf); l > 0 && l != HashTypeProtocol.Len {
-		return fmt.Errorf("tezos: short protocol hash")
+		return fmt.Errorf("mavryk: short protocol hash")
 	}
 	copy(h[:], buf)
 	return nil
@@ -371,7 +371,7 @@ func (h OpHash) MarshalBinary() ([]byte, error) {
 
 func (h *OpHash) UnmarshalBinary(buf []byte) error {
 	if l := len(buf); l > 0 && l != HashTypeOperation.Len {
-		return fmt.Errorf("tezos: short operation hash")
+		return fmt.Errorf("mavryk: short operation hash")
 	}
 	copy(h[:], buf)
 	return nil
@@ -439,7 +439,7 @@ func (h OpListListHash) MarshalBinary() ([]byte, error) {
 
 func (h *OpListListHash) UnmarshalBinary(buf []byte) error {
 	if l := len(buf); l > 0 && l != HashTypeOperationListList.Len {
-		return fmt.Errorf("tezos: short operation list list hash")
+		return fmt.Errorf("mavryk: short operation list list hash")
 	}
 	copy(h[:], buf)
 	return nil
@@ -643,7 +643,7 @@ func (h NonceHash) MarshalBinary() ([]byte, error) {
 
 func (h *NonceHash) UnmarshalBinary(buf []byte) error {
 	if l := len(buf); l > 0 && l != HashTypeNonce.Len {
-		return fmt.Errorf("tezos: short nonce")
+		return fmt.Errorf("mavryk: short nonce")
 	}
 	copy(h[:], buf)
 	return nil
@@ -716,7 +716,7 @@ func (h ContextHash) MarshalBinary() ([]byte, error) {
 
 func (h *ContextHash) UnmarshalBinary(buf []byte) error {
 	if l := len(buf); l > 0 && l != HashTypeContext.Len {
-		return fmt.Errorf("tezos: short context hash")
+		return fmt.Errorf("mavryk: short context hash")
 	}
 	copy(h[:], buf)
 	return nil
@@ -784,7 +784,7 @@ func (h SmartRollupCommitHash) MarshalBinary() ([]byte, error) {
 
 func (h *SmartRollupCommitHash) UnmarshalBinary(buf []byte) error {
 	if l := len(buf); l > 0 && l != HashTypeSmartRollupCommitHash.Len {
-		return fmt.Errorf("tezos: short smart rollup commit hash")
+		return fmt.Errorf("mavryk: short smart rollup commit hash")
 	}
 	copy(h[:], buf)
 	return nil
@@ -852,7 +852,7 @@ func (h SmartRollupStateHash) MarshalBinary() ([]byte, error) {
 
 func (h *SmartRollupStateHash) UnmarshalBinary(buf []byte) error {
 	if l := len(buf); l > 0 && l != HashTypeSmartRollupStateHash.Len {
-		return fmt.Errorf("tezos: short smart rollup commit hash")
+		return fmt.Errorf("mavryk: short smart rollup commit hash")
 	}
 	copy(h[:], buf)
 	return nil
@@ -891,11 +891,11 @@ func decodeHashString(src string, typ HashType, dst []byte) error {
 		if err == base58.ErrChecksum {
 			return ErrChecksumMismatch
 		}
-		return fmt.Errorf("tezos: unknown hash format: %w", err)
+		return fmt.Errorf("mavryk: unknown hash format: %w", err)
 	}
 	if !bytes.Equal(ver, typ.Id) {
 		bufPool32.Put(ibuf)
-		return fmt.Errorf("tezos: invalid prefix '%x' for decoded hash type '%s'", ver, typ)
+		return fmt.Errorf("mavryk: invalid prefix '%x' for decoded hash type '%s'", ver, typ)
 	}
 	copy(dst, dec)
 	bufPool32.Put(ibuf)

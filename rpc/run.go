@@ -181,7 +181,7 @@ func (c *Client) Complete(ctx context.Context, o *codec.Op, key mavryk.Key) erro
 }
 
 // Simulate dry-runs the execution of the operation against the current state
-// of a Tezos node in order to estimate execution costs and fees (fee/burn/gas/storage).
+// of a Mavryk node in order to estimate execution costs and fees (fee/burn/gas/storage).
 func (c *Client) Simulate(ctx context.Context, o *codec.Op, opts *CallOptions) (*Receipt, error) {
 	sim := &codec.Op{
 		Branch:    o.Branch,
@@ -248,7 +248,7 @@ func (c *Client) Simulate(ctx context.Context, o *codec.Op, opts *CallOptions) (
 		Op: resp,
 	}
 
-	// fail with Tezos error when simulation failed
+	// fail with Mavryk error when simulation failed
 	if !rcpt.IsSuccess() {
 		return rcpt, rcpt.Error()
 	}
@@ -268,7 +268,7 @@ func (c *Client) Validate(ctx context.Context, o *codec.Op) error {
 		return err
 	}
 	if !bytes.Equal(local, remote.Bytes()) {
-		return fmt.Errorf("tezos: mismatch between local and remote serialized operations:\n local=%s\n remote=%s",
+		return fmt.Errorf("mavryk: mismatch between local and remote serialized operations:\n local=%s\n remote=%s",
 			hex.EncodeToString(local), hex.EncodeToString(remote))
 	}
 	return nil
@@ -332,7 +332,7 @@ func (c *Client) Send(ctx context.Context, op *codec.Op, opts *CallOptions) (*Re
 		return nil, err
 	}
 
-	// fail with Tezos error when simulation failed
+	// fail with Mavryk error when simulation failed
 	if !sim.IsSuccess() {
 		return nil, sim.Error()
 	}

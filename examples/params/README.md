@@ -9,7 +9,7 @@ Params Test
   -net string
       simulate with network
   -node string
-      node url (default "https://rpc.tzpro.io")
+      node url (default "https://mainnet.rpc.mavryk.network")
   -proto string
       simulate with protocol
   -v  be verbose
