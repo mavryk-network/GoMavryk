@@ -1,5 +1,35 @@
 # Changelog
 
+## v1.20.0
+
+Mavryk rebranding and tooling updates
+
+* BREAKING CHANGE: Renamed code generation tool `tzgen` → `mvgen`
+  - Updated installation path: `go install github.com/mavryk-network/mvgo/cmd/mvgen`
+  - Updated all references in documentation and examples
+  - Updated generated code comments from "tzgen" to "mvgen"
+* BREAKING CHANGE: Renamed automation tool `tzcompose` → `mvcompose`
+  - Updated installation path: `go install github.com/mavryk-network/mvgo/cmd/mvcompose`
+  - Changed default config file name: `tzcompose.yaml` → `mvcompose.yaml`
+  - Updated environment variables: `TZCOMPOSE_*` → `MVCOMPOSE_*`
+    - `TZCOMPOSE_BASE_KEY` → `MVCOMPOSE_BASE_KEY`
+    - `TZCOMPOSE_API_KEY` → `MVCOMPOSE_API_KEY`
+  - Updated cache directory: `~/.cache/tzcompose` → `~/.cache/mvcompose`
+* BREAKING CHANGE: Renamed genesis tool `tzgenesis` → `mvgenesis`
+  - Changed default chain name from "TEZOS" to "MAVRYK"
+* Updated blockchain name constant: `mavryk.Name` changed from "Tezos" to "Mavryk"
+* Updated currency symbol: `mavryk.Symbol` changed from "XTZ" to "MVRK"
+* mavryk: replaced all "tezos:" error prefixes with "mavryk:" across all packages
+* mavryk: updated all code comments referencing Tezos to Mavryk
+* rpc: updated all documentation and comments from Tezos to Mavryk
+* rpc: updated default RPC endpoint references to Mavryk network
+* codec: updated operation documentation and error messages
+* micheline: updated comments and documentation
+* docs: updated README.md with Mavryk branding and correct repository links
+* docs: updated all tool documentation (mvgen, mvcompose, mvgenesis)
+* examples: updated all examples to use new tool names and Mavryk references
+* internal: updated code generation templates and compose tool internals
+
 ## v1.19.2
 * Update Parisnet hash
 * Update protocol history of ghostnet
