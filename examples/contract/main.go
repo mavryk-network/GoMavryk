@@ -202,7 +202,7 @@ func loadContract(ctx context.Context, c *rpc.Client, addr string, resolve bool)
 	return con, nil
 }
 
-// go run ./examples/contract/ -node https://mainnet.rpc.mavryk.network run_callback KT1LRboPna9yQY9BrjtQYDS1DVxhKESK4VVd balance_of '[{"prim":"Pair","args":[{"string":"tz1UbRzhYjQKTtWYvGUWcRtVT4fN3NESDVYT"},{"int":"0"}]}]'
+// go run ./examples/contract/ -node https://mainnet.rpc.mavryk.network run_callback KT1LRboPna9yQY9BrjtQYDS1DVxhKESK4VVd balance_of '[{"prim":"Pair","args":[{"string":"mv1UbRzhYjQKTtWYvGUWcRtVT4fN3NESDVYT"},{"int":"0"}]}]'
 func run_tz16(ctx context.Context, c *rpc.Client, addr, name, in string) error {
 	var prim micheline.Prim
 	if err := prim.UnmarshalJSON([]byte(in)); err != nil {
@@ -229,7 +229,7 @@ func run_tz16(ctx context.Context, c *rpc.Client, addr, name, in string) error {
 	return nil
 }
 
-// go run ./examples/contract/ -node https://mainnet.rpc.mavryk.network run_callback KT1LRboPna9yQY9BrjtQYDS1DVxhKESK4VVd balance_of '[{"prim":"Pair","args":[{"string":"tz1UbRzhYjQKTtWYvGUWcRtVT4fN3NESDVYT"},{"int":"0"}]}]'
+// go run ./examples/contract/ -node https://mainnet.rpc.mavryk.network run_callback KT1LRboPna9yQY9BrjtQYDS1DVxhKESK4VVd balance_of '[{"prim":"Pair","args":[{"string":"mv1UbRzhYjQKTtWYvGUWcRtVT4fN3NESDVYT"},{"int":"0"}]}]'
 func run_callback(ctx context.Context, c *rpc.Client, addr, name, in string) error {
 	var prim micheline.Prim
 	if err := prim.UnmarshalJSON([]byte(in)); err != nil {

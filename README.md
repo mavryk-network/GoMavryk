@@ -89,10 +89,10 @@ To parse/decode an address and output its components you can do the following:
 import "github.com/mavryk-network/mvgo/mavryk"
 
 // parse and panic if invalid
-addr := mavryk.MustParseAddress("tz3RDC3Jdn4j15J7bBHZd29EUee9gVB1CxD9")
+addr := mavryk.MustParseAddress("mv3RDC3Jdn4j15J7bBHZd29EUee9gVB1CxD9")
 
 // parse and return error if invalid
-addr, err := mavryk.ParseAddress("tz3RDC3Jdn4j15J7bBHZd29EUee9gVB1CxD9")
+addr, err := mavryk.ParseAddress("mv3RDC3Jdn4j15J7bBHZd29EUee9gVB1CxD9")
 if err != nil {
 	fmt.Printf("Invalid address: %v\n", err)
 }

@@ -163,7 +163,7 @@ var (
 	TX_ROLLUP_MESSAGE_RESULT_HASH_ID      = []byte{18, 7, 206, 87}          // "\018\007\206\087" txmr(54) 32
 	TX_ROLLUP_MESSAGE_RESULT_LIST_HASH_ID = []byte{79, 146, 82}             // "\079\146\082" txM(53) 32
 	TX_ROLLUP_WITHDRAW_LIST_HASH_ID       = []byte{79, 150, 72}             // "\079\150\072" txw(53) 32
-	SMART_ROLLUP_ADDRESS_ID               = []byte{6, 124, 117}             // "\001\118\132\217" sr1(36) 20
+	SMART_ROLLUP_ADDRESS_ID               = []byte{6, 124, 117}             // "\006\124\117" (* sr1(36) *) 20
 	SMART_ROLLUP_STATE_HASH_ID            = []byte{17, 165, 235, 240}       // "\017\165\235\240" srs1(54)
 	SMART_ROLLUP_COMMITMENT_HASH_ID       = []byte{17, 165, 134, 138}       // "\017\165\134\138" (* src1(54) *)
 	SMART_ROLLUP_REVEAL_HASH_ID           = []byte{230, 206, 128, 200, 196} // "\230\206\128\200\196" scrrh1(56)

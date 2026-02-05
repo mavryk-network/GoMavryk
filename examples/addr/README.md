@@ -27,5 +27,5 @@ go run . sppk7aAV5AjmQPcph9SrrKBBeFwj15kMvnByjbvb9mqsTMgUm1ZoHxK
 go run . p2pk68CeMSnZ8MhrW6zCJzGfS2VTsFUKK5GwB7Hem3UUuyQH2kHHeij
 
 // create blinded address from address and secret
-go run . tz1T1rRqmAk4XtGadNJuNpq8dUdWqLv2Gtq4 06da1e038224114366831e47aee7f128f4675311
+go run . mv1T1rRqmAk4XtGadNJuNpq8dUdWqLv2Gtq4 06da1e038224114366831e47aee7f128f4675311
 ```
