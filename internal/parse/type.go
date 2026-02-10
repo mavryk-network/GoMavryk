@@ -104,9 +104,13 @@ func (p *parser) buildTypeStructs(t *m.Typedef) (*ast.Struct, error) {
 // from the type tree include the parent container's path (e.g., list index 0).
 //
 // For example, a list element with three fields might have absolute paths:
-//   [0, 0], [0, 1, 0], [0, 1, 1]
+//
+//	[0, 0], [0, 1, 0], [0, 1, 1]
+//
 // The common prefix [0] represents the list index. After normalization:
-//   [0], [1, 0], [1, 1]
+//
+//	[0], [1, 0], [1, 1]
+//
 // These relative paths are used by MarshalParamsPath to build a tree rooted at
 // the element itself, not at the parent container.
 //
@@ -118,10 +122,7 @@ func pathsRelativeToStruct(paths [][]int) [][]int {
 	}
 	// Find longest common prefix
 	prefixLen := 0
-	for {
-		if prefixLen >= len(paths[0]) {
-			break
-		}
+	for prefixLen < len(paths[0]) {
 		cur := paths[0][prefixLen]
 		same := true
 		for _, p := range paths {

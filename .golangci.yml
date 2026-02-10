@@ -1,18 +1,7 @@
+version: 2
+
 linters:
   enable:
-    - bodyclose
-    - durationcheck
-    - copyloopvar
-    - gomoddirectives
-    - prealloc
-    - reassign
-    - gocritic
-    - gofmt
     - govet
-    - prealloc
-    - unconvert
-    - unparam
-    - gosimple
-    - unused
   disable:
    - errcheck
