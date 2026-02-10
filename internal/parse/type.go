@@ -98,6 +98,20 @@ func (p *parser) buildTypeStructs(t *m.Typedef) (*ast.Struct, error) {
 	return nil, nil
 }
 
+// pathsRelativeToStruct normalizes field paths to be relative to the struct root
+// by stripping the longest common prefix from all paths. This is necessary when
+// generating structs for list/set element types or union branches, where paths
+// from the type tree include the parent container's path (e.g., list index 0).
+//
+// For example, a list element with three fields might have absolute paths:
+//   [0, 0], [0, 1, 0], [0, 1, 1]
+// The common prefix [0] represents the list index. After normalization:
+//   [0], [1, 0], [1, 1]
+// These relative paths are used by MarshalParamsPath to build a tree rooted at
+// the element itself, not at the parent container.
+//
+// If no common prefix exists, paths are returned unchanged.
+// If a path becomes empty after stripping the prefix, it's replaced with [0].
 func pathsRelativeToStruct(paths [][]int) [][]int {
 	if len(paths) == 0 {
 		return paths
