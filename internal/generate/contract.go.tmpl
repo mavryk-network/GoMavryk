@@ -132,7 +132,7 @@ func {{$rc}} StorageFrom(prim micheline.Prim) ({{type .Storage}}, error) {
 	return storage, nil
 }
 
-func {{$contract}}StorageFrom(prim micheline.Prim) (*UsdtTetherStorage, error) {
+func {{$contract}}StorageFrom(prim micheline.Prim) ({{type .Storage}}, error) {
     t := {{$contract}}{}
     err := json.Unmarshal([]byte({{$contract}}Micheline), &t.script)
     if err != nil {

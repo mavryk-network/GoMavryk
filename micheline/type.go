@@ -771,10 +771,34 @@ func (p Prim) CanUnfoldType() bool {
 	return false
 }
 
+// rightCombPath returns the path to the i-th element (0-based) in a right-comb
+// nesting of pairs. In Michelson, pair A B C is stored as pair A (pair B C), so
+// only binary pairs exist at runtime; paths must reflect that tree.
+// - index 0 -> [base..., 0]
+// - index 1 -> [base..., 1, 0]
+// - index 2 -> [base..., 1, 1]
+// - index i (i>=1) -> [base..., 1] + path for (i-1) in right subtree (n-1 elements)
+func rightCombPath(base []int, index, n int) []int {
+	if index == 0 {
+		if n == 1 {
+			return slices.Clone(base) // single element, already at leaf
+		}
+		return append(slices.Clone(base), 0)
+	}
+	// go right (into the nested pair), then path for index-1 in that subtree
+	return rightCombPath(append(slices.Clone(base), 1), index-1, n-1)
+}
+
 func (p Prim) UnfoldTypeRecursive(path []int) []Prim {
 	flat := make([]Prim, 0)
+	n := len(p.Args)
+	useRightComb := p.IsPair() && n > 2
 	for i, v := range p.Args {
-		v.Path = append(slices.Clone(path), i)
+		if useRightComb {
+			v.Path = rightCombPath(path, i, n)
+		} else {
+			v.Path = append(slices.Clone(path), i)
+		}
 		if !v.WasPacked && v.CanUnfoldType() && !v.HasAnno() {
 			flat = append(flat, v.UnfoldTypeRecursive(v.Path)...)
 		} else {

@@ -98,6 +98,43 @@ func (p *parser) buildTypeStructs(t *m.Typedef) (*ast.Struct, error) {
 	return nil, nil
 }
 
+func pathsRelativeToStruct(paths [][]int) [][]int {
+	if len(paths) == 0 {
+		return paths
+	}
+	// Find longest common prefix
+	prefixLen := 0
+	for {
+		if prefixLen >= len(paths[0]) {
+			break
+		}
+		cur := paths[0][prefixLen]
+		same := true
+		for _, p := range paths {
+			if prefixLen >= len(p) || p[prefixLen] != cur {
+				same = false
+				break
+			}
+		}
+		if !same {
+			break
+		}
+		prefixLen++
+	}
+	if prefixLen == 0 {
+		return paths
+	}
+	out := make([][]int, len(paths))
+	for i, p := range paths {
+		rel := p[prefixLen:]
+		if len(rel) == 0 {
+			rel = []int{0}
+		}
+		out[i] = rel
+	}
+	return out
+}
+
 func (p *parser) buildStruct(t *m.Typedef) (*ast.Struct, error) {
 	fieldTypes := make([]*ast.Struct, 0, len(t.Args))
 	path := make([][]int, 0, len(t.Args))
@@ -113,6 +150,9 @@ func (p *parser) buildStruct(t *m.Typedef) (*ast.Struct, error) {
 		fieldTypes = append(fieldTypes, &ast.Struct{Name: name, Type: typ})
 		path = append(path, a.Path)
 	}
+	// Make paths relative to this struct so MarshalParamsPath builds the right tree
+	// (e.g. list item type had paths [0,0],[0,1,0],[0,1,1] -> [0],[1,0],[1,1])
+	path = pathsRelativeToStruct(path)
 	st := &ast.Struct{
 		MichelineType: "struct",
 		Fields:        fieldTypes,
