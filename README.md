@@ -1,8 +1,8 @@
 ## Blockwatch MvGo - Mavryk Go SDK
 
-MvGo is [Blockwatch](https://blockwatch.cc)'s low-level Tezos Go SDK for reliable, high-performance applications. This SDK is free to use in commercial and non-commercial projects with a permissive license. Blockwatch is committed to keeping interfaces stable, providing long-term support, and updating MvGo on a regular basis to stay compliant with the most recent Tezos network protocol.
+MvGo is [Blockwatch](https://blockwatch.cc)'s low-level Mavryk Go SDK for reliable, high-performance applications. This SDK is free to use in commercial and non-commercial projects with a permissive license. Blockwatch is committed to keeping interfaces stable, providing long-term support, and updating MvGo on a regular basis to stay compliant with the most recent Mavryk network protocol.
 
-MvGo's main focus is on **correctness**, **stability**, and **compliance** with Tezos mainnet. It supports binary and JSON encodings for all Tezos types including Micheline smart contract data and all transaction formats. It's an ideal fit for high-performance applications that read from and write to the Tezos blockchain.
+MvGo's main focus is on **correctness**, **stability**, and **compliance** with Mavryk mainnet. It supports binary and JSON encodings for all Mavryk types including Micheline smart contract data and all transaction formats. It's an ideal fit for high-performance applications that read from and write to the Mavryk blockchain.
 
 Current Mavryk protocol support in MvGo
 
@@ -11,17 +11,17 @@ Current Mavryk protocol support in MvGo
 
 ### SDK features
 
-MvGo contains a full set of features to read, monitor, decode, translate, analyze and debug data from the Tezos blockchain, in particular from Tezos smart contracts:
+MvGo contains a full set of features to read, monitor, decode, translate, analyze and debug data from the Mavryk blockchain, in particular from Mavryk smart contracts:
 
 - a low-level **Types library** `mvgo/mavryk` to handle hashes, addresses, keys, signatures other types found on-chain
 - a powerful **Micheline library** `mvgo/micheline` to decode and translate data found in smart contract calls, storage, and bigmaps
-- an **RPC library** `mvgo/rpc` for accessing the Tezos Node RPC
+- an **RPC library** `mvgo/rpc` for accessing the Mavryk Node RPC
 - a **Codec library** `mvgo/codec` to construct and serialize operations
 - a **Contract library** `mvgo/contract` for smart contract calls and tokens
 - a **Signer library** `mvgo/signer` to sign transactions local or remote
 - helpers like an efficient base58 en/decoder, hash maps, etc
-- a **Code generator** [TzGen](https://github.com/blockwatch-cc/mvgo/tree/master/cmd/tzgen) to produce pure Go clients for smart contract interfaces
-- an **Automation Tool** [TzCompose](https://github.com/blockwatch-cc/mvgo/tree/master/cmd/tzcompose) to setup test cases and deploy complex contract ecosystems
+- a **Code generator** [MvGen](https://github.com/mavryk-network/GoMavryk/tree/master/cmd/mvgen) to produce pure Go clients for smart contract interfaces
+- an **Automation Tool** [MvCompose](https://github.com/mavryk-network/GoMavryk/tree/master/cmd/mvcompose) to setup test cases and deploy complex contract ecosystems
 
 ### MvGo Compatibility
 
@@ -49,7 +49,7 @@ import (
 
 ### Micheline Support
 
-Tezos uses [Micheline](https://protocol.mavryk.org/shell/micheline.html) for encoding smart contract data and code. The positive is that Micheline is strongly typed, the downside is that it's complex and has a few ambiguities that make it hard to use. MvGo contains a library that lets you decode, analyze and construct compliant Micheline data structures from Go.
+Mavryk uses [Micheline](https://protocol.mavryk.org/shell/micheline.html) for encoding smart contract data and code. The positive is that Micheline is strongly typed, the downside is that it's complex and has a few ambiguities that make it hard to use. MvGo contains a library that lets you decode, analyze and construct compliant Micheline data structures from Go.
 
 Micheline uses basic **primitives** for encoding types and values. These primitives can be expressed in JSON and binary format and MvGo can translate between them efficiently. Micheline also supports type **annotations** which are used by high-level languages to express complex data types like records and their field names.
 
@@ -79,7 +79,7 @@ Sometimes Micheline values have been packed into byte sequences with the Michels
 
 ### Examples
 
-Below are a few examples showing how to use MvGo to easily access Tezos data in your application.
+Below are a few examples showing how to use MvGo to easily access Mavryk data in your application.
 
 #### Parsing an address
 
@@ -89,10 +89,10 @@ To parse/decode an address and output its components you can do the following:
 import "github.com/mavryk-network/mvgo/mavryk"
 
 // parse and panic if invalid
-addr := mavryk.MustParseAddress("tz3RDC3Jdn4j15J7bBHZd29EUee9gVB1CxD9")
+addr := mavryk.MustParseAddress("mv3RDC3Jdn4j15J7bBHZd29EUee9gVB1CxD9")
 
 // parse and return error if invalid
-addr, err := mavryk.ParseAddress("tz3RDC3Jdn4j15J7bBHZd29EUee9gVB1CxD9")
+addr, err := mavryk.ParseAddress("mv3RDC3Jdn4j15J7bBHZd29EUee9gVB1CxD9")
 if err != nil {
 	fmt.Printf("Invalid address: %v\n", err)
 }
@@ -103,11 +103,11 @@ fmt.Printf("Address bytes = %x\n", addr.Hash)
 
 ```
 
-See [examples/addr.go](https://github.com/blockwatch-cc/mvgo/blob/master/examples/addr/main.go) for more.
+See [examples/addr/main.go](https://github.com/mavryk-network/GoMavryk/blob/master/examples/addr/main.go) for more.
 
 #### Monitoring for new blocks
 
-A Tezos node can notify applications when new blocks are attached to the chain. The Tezos RPC calls this monitor and technically it's a long-poll implementation. Here's how to use this feature in MvGo:
+A Mavryk node can notify applications when new blocks are attached to the chain. The Mavryk RPC calls this monitor and technically it's a long-poll implementation. Here's how to use this feature in MvGo:
 
 ```go
 import "github.com/mavryk-network/mvgo/rpc"
@@ -266,7 +266,7 @@ import (
 addr := mavryk.MustParseAddress("KT1Hkg5qeNhfwpKW4fXvq7HGZB9z2EnmCCA9")
 
 // init RPC client
-c, _ := rpc.NewClient("https://rpc.tzpro.io", nil)
+c, _ := rpc.NewClient("https://mainnet.rpc.mavryk.network", nil)
 ctx := context.TODO()
 
 // fetch the contract's script and most recent storage

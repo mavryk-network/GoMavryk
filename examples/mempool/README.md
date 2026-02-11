@@ -14,7 +14,7 @@ Commands
 
 Arguments
   -node string
-      Tezos node URL (default "https://rpc.tzpro.io")
+      Tezos node URL (default "https://mainnet.rpc.mavryk.network")
   -ttl int
       Operation TTL (default 120)
   -v  be verbose

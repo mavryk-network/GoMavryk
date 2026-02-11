@@ -15,13 +15,13 @@ import (
 var (
 	// ErrChecksumMismatch describes an error where decoding failed due
 	// to a bad checksum.
-	ErrChecksumMismatch = errors.New("tezos: checksum mismatch")
+	ErrChecksumMismatch = errors.New("mavryk: checksum mismatch")
 
 	// ErrUnknownAddressType describes an error where an address can not
 	// decoded as a specific address type due to the string encoding
 	// begining with an identifier byte unknown to any standard or
 	// registered (via Register) network.
-	ErrUnknownAddressType = errors.New("tezos: unknown address type")
+	ErrUnknownAddressType = errors.New("mavryk: unknown address type")
 
 	// InvalidAddress is an empty invalid address
 	InvalidAddress = NewAddress(AddressTypeInvalid, nil)
@@ -36,7 +36,7 @@ var (
 
 const MAX_ADDRESS_LEN = 37 // tx rollup address
 
-// AddressType represents the type of a Tezos signature.
+// AddressType represents the type of a Mavryk address.
 type AddressType byte
 
 // addressTypeData is an internal type used to store address related config
@@ -167,7 +167,7 @@ func DetectAddressType(s string) AddressType {
 	return AddressTypeInvalid
 }
 
-// Address represents a typed tezos address
+// Address represents a typed mavryk address
 type Address [21]byte
 
 func NewAddress(typ AddressType, hash []byte) (a Address) {
@@ -324,13 +324,13 @@ func (a *Address) Decode(b []byte) error {
 			a[0] = AddressTypeSmartRollup.asByte()
 			copy(a[1:], b[1:21])
 		default:
-			return fmt.Errorf("tezos: invalid binary address prefix %x", b[0])
+			return fmt.Errorf("mavryk: invalid binary address prefix %x", b[0])
 		}
 	case len(b) >= 21:
 		a[0] = parseAddressTag(b[0])
 		copy(a[1:], b[1:21])
 	default:
-		return fmt.Errorf("tezos: invalid binary address length %d", len(b))
+		return fmt.Errorf("mavryk: invalid binary address length %d", len(b))
 	}
 	if !a.IsValid() {
 		return ErrUnknownAddressType
@@ -391,12 +391,12 @@ func ParseAddress(addr string) (a Address, err error) {
 		return
 	}
 	if len(addr) > MAX_ADDRESS_LEN {
-		err = fmt.Errorf("tezos: invalid base58 address length")
+		err = fmt.Errorf("mavryk: invalid base58 address length")
 		return
 	}
 	typ := DetectAddressType(addr)
 	if !typ.IsValid() {
-		err = fmt.Errorf("tezos: unknown address type for %q", addr)
+		err = fmt.Errorf("mavryk: unknown address type for %q", addr)
 		return
 	}
 	ht := typ.HashType()
@@ -408,7 +408,7 @@ func ParseAddress(addr string) (a Address, err error) {
 			err = ErrChecksumMismatch
 			return
 		}
-		err = fmt.Errorf("tezos: invalid %s address: %w", typ, err2)
+		err = fmt.Errorf("mavryk: invalid %s address: %w", typ, err2)
 		return
 	}
 	a[0] = typ.asByte()

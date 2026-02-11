@@ -9,10 +9,9 @@ linters:
     - gocritic
     - gofmt
     - govet
-    - prealloc
+    - gosimple
     - unconvert
     - unparam
-    - gosimple
     - unused
   disable:
-   - errcheck
+    - errcheck

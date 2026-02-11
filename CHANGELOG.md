@@ -1,5 +1,52 @@
 # Changelog
 
+## v1.20.0
+
+Mavryk rebranding and tooling updates
+
+### Bug Fixes
+
+* **mvgen**: Fixed code generation for n-ary pairs (triples, quads, etc.)
+  - Added `rightCombPath` function to generate correct paths for right-comb pair nesting
+  - Fixes panic "index out of range [2]" when marshalling triples like `pair nat nat address`
+  - Fields in n-ary pairs now get correct tree paths: `[0], [1,0], [1,1]` instead of `[0], [1], [2]`
+* **mvgen**: Fixed paths for list/set element types and union branches
+  - Added `pathsRelativeToStruct` to normalize field paths relative to struct root
+  - Strips common prefix from paths so marshalling produces correct tree structure
+  - Fixes `invalid_expression_kind` error when calling entrypoints with list parameters
+* **mvgen**: Fixed storage type in generated contract code
+  - Template now uses `{{type .Storage}}` instead of hardcoded type
+  - Each contract gets correct storage type (e.g., `*RwaTokenStorage` instead of `*UsdtTetherStorage`)
+* **tests**: Added unit tests for `rightCombPath` and `pathsRelativeToStruct`
+
+### Breaking Changes
+
+* BREAKING CHANGE: Renamed code generation tool `tzgen` → `mvgen`
+  - Updated installation path: `go install github.com/mavryk-network/mvgo/cmd/mvgen`
+  - Updated all references in documentation and examples
+  - Updated generated code comments from "tzgen" to "mvgen"
+* BREAKING CHANGE: Renamed automation tool `tzcompose` → `mvcompose`
+  - Updated installation path: `go install github.com/mavryk-network/mvgo/cmd/mvcompose`
+  - Changed default config file name: `tzcompose.yaml` → `mvcompose.yaml`
+  - Updated environment variables: `TZCOMPOSE_*` → `MVCOMPOSE_*`
+    - `TZCOMPOSE_BASE_KEY` → `MVCOMPOSE_BASE_KEY`
+    - `TZCOMPOSE_API_KEY` → `MVCOMPOSE_API_KEY`
+  - Updated cache directory: `~/.cache/tzcompose` → `~/.cache/mvcompose`
+* BREAKING CHANGE: Renamed genesis tool `tzgenesis` → `mvgenesis`
+  - Changed default chain name from "TEZOS" to "MAVRYK"
+* Updated blockchain name constant: `mavryk.Name` changed from "Tezos" to "Mavryk"
+* Updated currency symbol: `mavryk.Symbol` changed from "XTZ" to "MVRK"
+* mavryk: replaced all "tezos:" error prefixes with "mavryk:" across all packages
+* mavryk: updated all code comments referencing Tezos to Mavryk
+* rpc: updated all documentation and comments from Tezos to Mavryk
+* rpc: updated default RPC endpoint references to Mavryk network
+* codec: updated operation documentation and error messages
+* micheline: updated comments and documentation
+* docs: updated README.md with Mavryk branding and correct repository links
+* docs: updated all tool documentation (mvgen, mvcompose, mvgenesis)
+* examples: updated all examples to use new tool names and Mavryk references
+* internal: updated code generation templates and compose tool internals
+
 ## v1.19.2
 * Update Parisnet hash
 * Update protocol history of ghostnet
@@ -52,8 +99,8 @@
 * codec: add staking operation codecs
 * codec: fix block encoding
 * codec: support block signing and block hash calculation
-* tzcompose: add oxford staking tasks
-* tzcompose: add double bake task
+* mvcompose: add oxford staking tasks
+* mvcompose: add double bake task
 
 ## v1.17.4
 
@@ -62,7 +109,7 @@
 
 ## v1.17.3
 
-* cmd: add tzcompose alpha release
+* cmd: add mvcompose alpha release
 * rpc: dedicated logger instance per client
 * rpc observer: return full BlockHeaderLogEntry in callback
 * rpc observer: multiple subscriptions for the same op hash
@@ -81,7 +128,7 @@
 * add Micheline path setters
 * skip empty annotations on variadic prims in JSON output
 * extend Micheline typedef with path info
-* add TzGen tech preview (a contract interface code generator for Tezos)
+* add MvGen tech preview (a contract interface code generator for Mavryk)
 * remove Mumbainet hashes, config and references
 
 ## v1.17.1
@@ -181,7 +228,7 @@ Other changes
 * Fix setting amount in TxArgs.Encode
 * Cache head block ops in observer to avoid race conditions
 * improve base58 performance
-* Disable balance_of type check for tz12
+* Disable balance_of type check for mv12
 * Allow setting metadata mode as client config
 * Add token address type
 * Add bigmap event filter

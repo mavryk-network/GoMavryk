@@ -27,7 +27,7 @@ var (
 	ZeroSignature = MustParseSignature("sigMzJ4GVAvXEd2RjsKGfG2H9QvqTSKCZsuB2KiHbZRGFz72XgF6KaKADznh674fQgBatxw3xdHqTtMHUZAGRprxy64wg1aq")
 )
 
-// SignatureType represents the type of a Tezos signature.
+// SignatureType represents the type of a Mavryk signature.
 type SignatureType byte
 
 const (
@@ -178,7 +178,7 @@ func IsSignature(s string) bool {
 	return false
 }
 
-// Signature represents a typed Tezos signature.
+// Signature represents a typed Mavryk signature.
 type Signature struct {
 	Type SignatureType
 	Data []byte
@@ -208,7 +208,7 @@ func (s Signature) Clone() Signature {
 	}
 }
 
-// Signature converts a typed Tezos signature into a generic signature string.
+// Signature converts a typed Mavryk signature into a generic signature string.
 func (s Signature) Generic() string {
 	if !s.IsValid() {
 		return ""
@@ -247,7 +247,7 @@ func (s Signature) Bytes() []byte {
 func (s *Signature) DecodeBuffer(buf *bytes.Buffer) error {
 	l := buf.Len()
 	if l < 64 {
-		return fmt.Errorf("tezos: invalid binary signature length %d", l)
+		return fmt.Errorf("mavryk: invalid binary signature length %d", l)
 	}
 	// default to generic without tag
 	s.Type = SignatureTypeGeneric
@@ -255,7 +255,7 @@ func (s *Signature) DecodeBuffer(buf *bytes.Buffer) error {
 	if l == 65 || l == 97 {
 		tag := buf.Next(1)[0]
 		if typ := ParseSignatureTag(tag); !typ.IsValid() {
-			return fmt.Errorf("tezos: invalid binary signature type %x", tag)
+			return fmt.Errorf("mavryk: invalid binary signature type %x", tag)
 		} else {
 			s.Type = typ
 		}
@@ -264,7 +264,7 @@ func (s *Signature) DecodeBuffer(buf *bytes.Buffer) error {
 	s.Data = make([]byte, l)
 	copy(s.Data, buf.Next(l))
 	if !s.IsValid() {
-		return fmt.Errorf("tezos: invalid %s signature length %d", s.Type, l)
+		return fmt.Errorf("mavryk: invalid %s signature length %d", s.Type, l)
 	}
 	return nil
 }
@@ -284,13 +284,13 @@ func (s *Signature) UnmarshalBinary(b []byte) error {
 		s.Type = SignatureTypeGenericAggregate
 	case 65, 97:
 		if typ := ParseSignatureTag(b[0]); !typ.IsValid() {
-			return fmt.Errorf("tezos: invalid binary signature type %x", b[0])
+			return fmt.Errorf("mavryk: invalid binary signature type %x", b[0])
 		} else {
 			s.Type = typ
 		}
 		b = b[1:]
 	default:
-		return fmt.Errorf("tezos: invalid binary signature length %d", len(b))
+		return fmt.Errorf("mavryk: invalid binary signature length %d", len(b))
 	}
 	if cap(s.Data) < s.Type.Len() {
 		s.Data = make([]byte, s.Type.Len())
@@ -332,7 +332,7 @@ func ParseSignature(s string) (sig Signature, err error) {
 		typ = SignatureTypeGenericAggregate
 
 	default:
-		err = fmt.Errorf("tezos: unknown signature prefix %s", s)
+		err = fmt.Errorf("mavryk: unknown signature prefix %s", s)
 		return
 	}
 
@@ -341,17 +341,17 @@ func ParseSignature(s string) (sig Signature, err error) {
 			err = ErrChecksumMismatch
 			return
 		}
-		err = fmt.Errorf("tezos: unknown signature format: %w", err)
+		err = fmt.Errorf("mavryk: unknown signature format: %w", err)
 		return
 	}
 
 	if !bytes.Equal(ver, typ.PrefixBytes()) {
-		err = fmt.Errorf("tezos: invalid signature type %x for %s", ver, typ.Prefix())
+		err = fmt.Errorf("mavryk: invalid signature type %x for %s", ver, typ.Prefix())
 		return
 	}
 
 	if l := len(dec); l < typ.Len() {
-		err = fmt.Errorf("tezos: invalid length %d for %s signature data", l, typ.Prefix())
+		err = fmt.Errorf("mavryk: invalid length %d for %s signature data", l, typ.Prefix())
 		return
 	}
 

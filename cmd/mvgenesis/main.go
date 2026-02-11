@@ -15,7 +15,7 @@ var (
 	proto = mavryk.MustParseProtocolHash("ProtoGenesisGenesisGenesisGenesisGenesisGenesk612im")
 	key   = mavryk.MustParseKey("edpkuSLWfVU1Vq7Jg9FucPyKmma6otcMHac9zG4oU1KMHSTBpJuGQ2")
 	block mavryk.BlockHash
-	name  = "TEZOS"
+	name  = "MAVRYK"
 	tm    string
 )
 
@@ -32,7 +32,7 @@ func run() error {
 	flag.Var(&proto, "proto", "Genesis protocol hash")
 	flag.Var(&key, "key", "Genesis pubkey")
 	flag.Var(&block, "block", "Genesis block")
-	flag.StringVar(&name, "name", "TEZOS", "Chain name")
+	flag.StringVar(&name, "name", "MAVRYK", "Chain name")
 	flag.StringVar(&tm, "time", time.Now().UTC().Format(time.RFC3339), "Genesis timestamp")
 	flag.Parse()
 

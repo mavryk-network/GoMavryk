@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	appName           = "tzcompose"
+	appName           = "mvcompose"
 	appVersion string = "v0.1"
 )
 

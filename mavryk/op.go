@@ -28,7 +28,7 @@ func (t OpStatus) IsSuccess() bool {
 func (t *OpStatus) UnmarshalText(data []byte) error {
 	v := ParseOpStatus(string(data))
 	if !v.IsValid() {
-		return fmt.Errorf("tezos: invalid operation status '%s'", string(data))
+		return fmt.Errorf("mavryk: invalid operation status '%s'", string(data))
 	}
 	*t = v
 	return nil
@@ -185,7 +185,7 @@ func (t OpType) IsValid() bool {
 func (t *OpType) UnmarshalText(data []byte) error {
 	v := ParseOpType(string(data))
 	if !v.IsValid() {
-		return fmt.Errorf("tezos: invalid operation type '%s'", string(data))
+		return fmt.Errorf("mavryk: invalid operation type '%s'", string(data))
 	}
 	*t = v
 	return nil

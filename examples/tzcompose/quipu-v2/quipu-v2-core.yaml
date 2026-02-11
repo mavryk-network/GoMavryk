@@ -412,7 +412,7 @@ pipelines:
         file: flash_swaps_proxy.json#michelson
       storage:
         args:
-          "": tz1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU
+          "": mv1Ke2h7sDdakHJQh8WX4Z372du1KChsksyU
 
 
   - task: call

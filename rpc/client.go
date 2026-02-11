@@ -22,15 +22,15 @@ import (
 )
 
 const (
-	libraryVersion = "1.17.0"
+	libraryVersion = "1.20.0"
 	userAgent      = "mvgo/v" + libraryVersion
 	mediaType      = "application/json"
 	ipfsUrl        = "https://ipfs.io"
 )
 
-// Client manages communication with a Tezos RPC server.
+// Client manages communication with a Mavryk RPC server.
 type Client struct {
-	// HTTP client used to communicate with the Tezos node API.
+	// HTTP client used to communicate with the Mavryk node API.
 	client *http.Client
 	// Base URL for API requests.
 	BaseURL *url.URL
@@ -55,13 +55,13 @@ type Client struct {
 	// metadata (i.e. you see metadata too large in certain operations)
 	MetadataMode MetadataMode
 	// Close connections. This may help with EOF errors from unexpected
-	// connection close by Tezos RPC.
+	// connection close by Mavryk RPC.
 	CloseConns bool
 	// Log is the logger implementation used by this client
 	Log log.Logger
 }
 
-// NewClient returns a new Tezos RPC client.
+// NewClient returns a new Mavryk RPC client.
 func NewClient(baseURL string, httpClient *http.Client) (*Client, error) {
 	if httpClient == nil {
 		httpClient = http.DefaultClient
@@ -170,7 +170,7 @@ func (c *Client) Post(ctx context.Context, urlpath string, body, result interfac
 	return c.Do(req, result)
 }
 
-// NewRequest creates a Tezos RPC request.
+// NewRequest creates a Mavryk RPC request.
 func (c *Client) NewRequest(ctx context.Context, method, urlStr string, body interface{}) (*http.Request, error) {
 	rel, err := url.Parse(urlStr)
 	if err != nil {

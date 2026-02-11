@@ -15,7 +15,7 @@ import (
 // def genesis_commitments(wallets, blind):
 //     commitments = []
 //     for pkh_b58, amount in wallets.iteritems():
-//         # Public key hash corresponding to this Tezos address.
+//         # Public key hash corresponding to this Mavryk address.
 //         pkh = bitcoin.b58check_to_bin(pkh_b58)[2:]
 //         # The redemption code is unique to the public key hash and deterministically
 //         # constructed using a secret blinding value.
@@ -60,15 +60,15 @@ func DecodeBlindedAddress(addr string) (a Address, err error) {
 			err = ErrChecksumMismatch
 			return
 		}
-		err = fmt.Errorf("tezos: decoded address is of unknown format: %w", err2)
+		err = fmt.Errorf("mavryk: decoded address is of unknown format: %w", err2)
 		return
 	}
 	if len(dec) != 20 {
-		err = fmt.Errorf("tezos: decoded address hash has invalid length %d", len(dec))
+		err = fmt.Errorf("mavryk: decoded address hash has invalid length %d", len(dec))
 		return
 	}
 	if !bytes.Equal(ver, BLINDED_PUBLIC_KEY_HASH_ID) {
-		err = fmt.Errorf("tezos: decoded address %s is of unknown type %x", addr, ver)
+		err = fmt.Errorf("mavryk: decoded address %s is of unknown type %x", addr, ver)
 		return
 	}
 	a[0] = byte(AddressTypeBlinded)

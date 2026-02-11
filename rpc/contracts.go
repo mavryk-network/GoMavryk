@@ -35,7 +35,7 @@ func (m UnparsingMode) String() string {
 // Contracts holds a list of addresses
 type Contracts []mavryk.Address
 
-// Contracts holds info about a Tezos account
+// Contracts holds info about a Mavryk account
 type ContractInfo struct {
 	Balance        int64          `json:"balance,string"`
 	Delegate       mavryk.Address `json:"delegate"`

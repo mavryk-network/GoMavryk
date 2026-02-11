@@ -14,7 +14,7 @@ import (
 	"github.com/mavryk-network/mvgo/mavryk"
 )
 
-// BakingRight holds information about the right to bake a specific Tezos block.
+// BakingRight holds information about the right to bake a specific Mavryk block.
 type BakingRight struct {
 	Delegate      mavryk.Address `json:"delegate"`
 	Level         int64          `json:"level"`
@@ -27,7 +27,7 @@ func (r BakingRight) Address() mavryk.Address {
 	return r.Delegate
 }
 
-// EndorsingRight holds information about the right to endorse a specific Tezos block.
+// EndorsingRight holds information about the right to endorse a specific Mavryk block.
 type EndorsingRight struct {
 	Delegate         mavryk.Address `json:"delegate"`
 	Level            int64          `json:"level"`

@@ -3,7 +3,7 @@
 
 // see
 // https://gitlab.com/nomadic-labs/mi-cho-coq/merge_requests/29/diffs
-// https://gitlab.com/tezos/tezos/blob/510ae152082334b79d3364079cd466e07172dc3a/specs/migration_004_to_005.md#origination-script-transformation
+// Historical reference: https://gitlab.com/tezos/tezos/blob/510ae152082334b79d3364079cd466e07172dc3a/specs/migration_004_to_005.md#origination-script-transformation
 
 package micheline
 

@@ -19,7 +19,7 @@ func init() {
 	if err != nil {
 		panic(fmt.Errorf("cannot read $HOME: %v", err))
 	}
-	cacheFullPath = filepath.Join(home, ".cache/tzcompose")
+	cacheFullPath = filepath.Join(home, ".cache/mvcompose")
 }
 
 type PipelineCache struct {

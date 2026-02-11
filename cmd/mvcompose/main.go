@@ -53,19 +53,19 @@ func init() {
 	flags.BoolVar(&vtrace, "vvv", false, "trace mode")
 
 	runflags.Usage = func() {}
-	runflags.StringVar(&fpath, "f", "tzcompose.yaml", "configuration `file` or path")
-	runflags.StringVar(&fpath, "file", "tzcompose.yaml", "configuration `file` or path")
+	runflags.StringVar(&fpath, "f", "mvcompose.yaml", "configuration `file` or path")
+	runflags.StringVar(&fpath, "file", "mvcompose.yaml", "configuration `file` or path")
 	runflags.BoolVar(&resume, "resume", false, "continue pipeline execution")
-	runflags.StringVar(&rpcUrl, "rpc", "https://rpc.tzpro.io", "Tezos node RPC url")
+	runflags.StringVar(&rpcUrl, "rpc", "https://mainnet.rpc.mavryk.network", "Mavryk node RPC url")
 
 	cloneflags.Usage = func() {}
-	cloneflags.StringVar(&indexUrl, "index", "https://api.tzpro.io", "Tezos indexer url")
-	cloneflags.StringVar(&rpcUrl, "rpc", "https://rpc.tzpro.io", "Tezos node RPC url")
+	cloneflags.StringVar(&indexUrl, "index", "https://api.mavryk.network", "Mavryk indexer url")
+	cloneflags.StringVar(&rpcUrl, "rpc", "https://mainnet.rpc.mavryk.network", "Mavryk node RPC url")
 	cloneflags.StringVar(&version, "version", "alpha", "compose engine version")
 	cloneflags.Var(&addr, "contract", "address of the contract to clone")
 	cloneflags.Var(&mode, "mode", "output mode for cloned micheline data (file, json, bin, url)")
 	cloneflags.StringVar(&name, "name", "contract", "project name")
-	cloneflags.StringVar(&outputPath, "out", "tzcompose.yaml", "output path for generated files")
+	cloneflags.StringVar(&outputPath, "out", "mvcompose.yaml", "output path for generated files")
 	cloneflags.UintVar(&numOpsAfterOrigination, "n", 0, "number of operations after origination")
 }
 
@@ -90,8 +90,8 @@ func run() error {
 	ectx := compose.NewContext(ctx)
 	ectx.WithLogger(taskLog).
 		WithUrl(rpcUrl).
-		WithApiKey(os.Getenv("TZCOMPOSE_API_KEY")).
-		WithBase(os.Getenv("TZCOMPOSE_BASE_KEY")).
+		WithApiKey(os.Getenv("MVCOMPOSE_API_KEY")).
+		WithBase(os.Getenv("MVCOMPOSE_BASE_KEY")).
 		WithResume(resume)
 
 	var err error
@@ -190,16 +190,16 @@ func printHelp() {
 	switch cmd {
 	case "validate", "simulate", "run":
 		fmt.Printf("\nEnv\n")
-		fmt.Println("  TZCOMPOSE_BASE_KEY  private key for base account")
-		fmt.Println("  TZCOMPOSE_API_KEY   API key for RPC and index calls (optional)")
+		fmt.Println("  MVCOMPOSE_BASE_KEY  private key for base account")
+		fmt.Println("  MVCOMPOSE_API_KEY   API key for RPC and index calls (optional)")
 		fmt.Println("\nFlags")
 		runflags.PrintDefaults()
 		fmt.Println("  -h	print help and exit")
 		flags.PrintDefaults()
 	case "clone":
 		fmt.Printf("\nEnv\n")
-		fmt.Println("  TZCOMPOSE_BASE_KEY  private key for base account")
-		fmt.Println("  TZCOMPOSE_API_KEY   API key for RPC and index calls (optional)")
+		fmt.Println("  MVCOMPOSE_BASE_KEY  private key for base account")
+		fmt.Println("  MVCOMPOSE_API_KEY   API key for RPC and index calls (optional)")
 		fmt.Println("\nFlags")
 		cloneflags.PrintDefaults()
 		fmt.Println("  -h	print help and exit")

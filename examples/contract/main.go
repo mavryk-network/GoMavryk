@@ -40,7 +40,7 @@ var (
 func init() {
 	flags.Usage = func() {}
 	flags.BoolVar(&verbose, "v", false, "be verbose")
-	flags.StringVar(&node, "node", "https://rpc.tzpro.io", "Tezos node URL")
+	flags.StringVar(&node, "node", "https://mainnet.rpc.mavryk.network", "Tezos node URL")
 }
 
 func main() {
@@ -202,7 +202,7 @@ func loadContract(ctx context.Context, c *rpc.Client, addr string, resolve bool)
 	return con, nil
 }
 
-// go run ./examples/contract/ -node https://rpc.tzpro.io run_callback KT1LRboPna9yQY9BrjtQYDS1DVxhKESK4VVd balance_of '[{"prim":"Pair","args":[{"string":"tz1UbRzhYjQKTtWYvGUWcRtVT4fN3NESDVYT"},{"int":"0"}]}]'
+// go run ./examples/contract/ -node https://mainnet.rpc.mavryk.network run_callback KT1LRboPna9yQY9BrjtQYDS1DVxhKESK4VVd balance_of '[{"prim":"Pair","args":[{"string":"mv1UbRzhYjQKTtWYvGUWcRtVT4fN3NESDVYT"},{"int":"0"}]}]'
 func run_tz16(ctx context.Context, c *rpc.Client, addr, name, in string) error {
 	var prim micheline.Prim
 	if err := prim.UnmarshalJSON([]byte(in)); err != nil {
@@ -229,7 +229,7 @@ func run_tz16(ctx context.Context, c *rpc.Client, addr, name, in string) error {
 	return nil
 }
 
-// go run ./examples/contract/ -node https://rpc.tzpro.io run_callback KT1LRboPna9yQY9BrjtQYDS1DVxhKESK4VVd balance_of '[{"prim":"Pair","args":[{"string":"tz1UbRzhYjQKTtWYvGUWcRtVT4fN3NESDVYT"},{"int":"0"}]}]'
+// go run ./examples/contract/ -node https://mainnet.rpc.mavryk.network run_callback KT1LRboPna9yQY9BrjtQYDS1DVxhKESK4VVd balance_of '[{"prim":"Pair","args":[{"string":"mv1UbRzhYjQKTtWYvGUWcRtVT4fN3NESDVYT"},{"int":"0"}]}]'
 func run_callback(ctx context.Context, c *rpc.Client, addr, name, in string) error {
 	var prim micheline.Prim
 	if err := prim.UnmarshalJSON([]byte(in)); err != nil {
@@ -255,7 +255,7 @@ func run_callback(ctx context.Context, c *rpc.Client, addr, name, in string) err
 	return nil
 }
 
-// go run ./examples/contract/ -node https://rpc.tzpro.io run_view KT1LjmAdYQCLBjwv4S2oFkEzyHVkomAf5MrW royalty '{"int":"31212"}'
+// go run ./examples/contract/ -node https://mainnet.rpc.mavryk.network run_view KT1LjmAdYQCLBjwv4S2oFkEzyHVkomAf5MrW royalty '{"int":"31212"}'
 func run_view(ctx context.Context, c *rpc.Client, addr, name, in string) error {
 	var prim micheline.Prim
 	if err := prim.UnmarshalJSON([]byte(in)); err != nil {

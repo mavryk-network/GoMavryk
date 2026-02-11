@@ -23,7 +23,7 @@ Flags
   -key string
       private key
   -node string
-      Tezos node URL (default "https://rpc.tzpro.io")
+      Tezos node URL (default "https://mainnet.rpc.mavryk.network")
   -v  be verbose
 
 Transaction Commands

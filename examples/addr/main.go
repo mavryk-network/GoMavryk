@@ -3,8 +3,8 @@
 
 // Address examples
 //
-// tz1KzpjBnunNJVABHBnzfG4iuLmphitExW2p
-// tz3gN8NTLNLJg5KRsUU47NHNVHbdhcFXjjaB
+// mv1KzpjBnunNJVABHBnzfG4iuLmphitExW2p
+// mv3gN8NTLNLJg5KRsUU47NHNVHbdhcFXjjaB
 // KT1GyeRktoGPEKsWpchWguyy8FAf3aNHkw2T
 package main
 
@@ -91,7 +91,7 @@ func run() error {
 
 func blinded() error {
 	// Example
-	// "pkh": "tz1T1rRqmAk4XtGadNJuNpq8dUdWqLv2Gtq4",
+	// "pkh": "mv1T1rRqmAk4XtGadNJuNpq8dUdWqLv2Gtq4",
 	// "secret": "06da1e038224114366831e47aee7f128f4675311",
 
 	// try decoding an address
