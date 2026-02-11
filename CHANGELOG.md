@@ -4,6 +4,23 @@
 
 Mavryk rebranding and tooling updates
 
+### Bug Fixes
+
+* **mvgen**: Fixed code generation for n-ary pairs (triples, quads, etc.)
+  - Added `rightCombPath` function to generate correct paths for right-comb pair nesting
+  - Fixes panic "index out of range [2]" when marshalling triples like `pair nat nat address`
+  - Fields in n-ary pairs now get correct tree paths: `[0], [1,0], [1,1]` instead of `[0], [1], [2]`
+* **mvgen**: Fixed paths for list/set element types and union branches
+  - Added `pathsRelativeToStruct` to normalize field paths relative to struct root
+  - Strips common prefix from paths so marshalling produces correct tree structure
+  - Fixes `invalid_expression_kind` error when calling entrypoints with list parameters
+* **mvgen**: Fixed storage type in generated contract code
+  - Template now uses `{{type .Storage}}` instead of hardcoded type
+  - Each contract gets correct storage type (e.g., `*RwaTokenStorage` instead of `*UsdtTetherStorage`)
+* **tests**: Added unit tests for `rightCombPath` and `pathsRelativeToStruct`
+
+### Breaking Changes
+
 * BREAKING CHANGE: Renamed code generation tool `tzgen` → `mvgen`
   - Updated installation path: `go install github.com/mavryk-network/mvgo/cmd/mvgen`
   - Updated all references in documentation and examples
