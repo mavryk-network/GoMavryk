@@ -6,7 +6,7 @@ import (
 )
 
 func (p *parser) buildTypeStructs(t *m.Typedef) (*ast.Struct, error) {
-	// Preserve option so generated code uses bind.Option[T] (e.g. for storage newSuperAdmin)
+	// Preserve option so generated code uses bind.Option[T]
 	if t.Optional {
 		inner, err := p.buildTypeStructs(&m.Typedef{Name: "", Type: t.Type, Args: t.Args})
 		if err != nil {
