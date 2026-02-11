@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.20.1
+
+Patch release.
+
+### Bug Fixes
+
+* **mvgen**: Fixed code generation for `option` types in storage and parameters
+  - Parser now preserves option as `ast.Struct{ MichelineType: "option", Type: inner }` instead of unwrapping to inner type
+  - Generated storage structs get `bind.Option[T]` for optional fields (e.g. `NewSuperAdmin bind.Option[mavryk.Address]`)
+  - Enables correct origination with optional fields set to `None` (e.g. `bind.None[mavryk.Address]()`)
+
 ## v1.20.0
 
 Mavryk rebranding and tooling updates

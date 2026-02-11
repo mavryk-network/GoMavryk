@@ -6,13 +6,17 @@ import (
 )
 
 func (p *parser) buildTypeStructs(t *m.Typedef) (*ast.Struct, error) {
-	// Unwrap optional
+	// Preserve option so generated code uses bind.Option[T] (e.g. for storage newSuperAdmin)
 	if t.Optional {
-		typ, err := p.buildTypeStructs(&m.Typedef{Name: t.Name, Type: t.Type, Args: t.Args})
+		inner, err := p.buildTypeStructs(&m.Typedef{Name: "", Type: t.Type, Args: t.Args})
 		if err != nil {
 			return nil, err
 		}
-		return typ, nil
+		return &ast.Struct{
+			Name:          t.Name,
+			MichelineType: "option",
+			Type:          inner,
+		}, nil
 	}
 	// Builtin types
 	if op, err := m.ParseOpCode(t.Type); err == nil {

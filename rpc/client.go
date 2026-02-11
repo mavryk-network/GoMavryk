@@ -22,7 +22,7 @@ import (
 )
 
 const (
-	libraryVersion = "1.20.0"
+	libraryVersion = "1.20.1"
 	userAgent      = "mvgo/v" + libraryVersion
 	mediaType      = "application/json"
 	ipfsUrl        = "https://ipfs.io"
