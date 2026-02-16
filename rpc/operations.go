@@ -101,7 +101,7 @@ func (m OperationMetadata) Address() mavryk.Address {
 type OperationResult struct {
 	Status               mavryk.OpStatus  `json:"status"`
 	BalanceUpdates       BalanceUpdates   `json:"balance_updates"`
-	ConsumedGas          int64            `json:"consumed_gas,string"`      // deprecated in v000
+	ConsumedGas          int64            `json:"consumed_gas,string"` // deprecated in v000
 	ConsumedMilliGas     int64            `json:"consumed_milligas,string"`
 	Errors               []OperationError `json:"errors,omitempty"`
 	Allocated            bool             `json:"allocated_destination_contract"` // tx only
@@ -113,7 +113,7 @@ type OperationResult struct {
 	LazyStorageDiff      json.RawMessage  `json:"lazy_storage_diff,omitempty"`    // tx, orig
 	GlobalAddress        mavryk.ExprHash  `json:"global_address"`                 // const
 	TicketUpdatesCorrect []TicketUpdate   `json:"ticket_updates"`
-	TicketReceipts       []TicketUpdate   `json:"ticket_receipt"`                 // name on internal
+	TicketReceipts       []TicketUpdate   `json:"ticket_receipt"` // name on internal
 
 	// v001 tx rollup
 	TxRollupResult

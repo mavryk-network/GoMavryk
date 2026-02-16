@@ -246,12 +246,12 @@ type BlockMetadata struct {
 	VotingPeriodKind *mavryk.VotingPeriodKind `json:"voting_period_kind"`
 
 	// v001+
-	LevelInfo        *LevelInfo        `json:"level_info"`
-	VotingPeriodInfo *VotingPeriodInfo `json:"voting_period_info"`
-	ImplicitOperationsResults []ImplicitResult `json:"implicit_operations_results"`
-	LiquidityBakingEscapeEma  int64            `json:"liquidity_baking_escape_ema"`
-	ProposerConsensusKey mavryk.Address `json:"proposer_consensus_key"`
-	BakerConsensusKey    mavryk.Address `json:"baker_consensus_key"`
+	LevelInfo                 *LevelInfo        `json:"level_info"`
+	VotingPeriodInfo          *VotingPeriodInfo `json:"voting_period_info"`
+	ImplicitOperationsResults []ImplicitResult  `json:"implicit_operations_results"`
+	LiquidityBakingEscapeEma  int64             `json:"liquidity_baking_escape_ema"`
+	ProposerConsensusKey      mavryk.Address    `json:"proposer_consensus_key"`
+	BakerConsensusKey         mavryk.Address    `json:"baker_consensus_key"`
 
 	// v002+
 	DalAttestation mavryk.Z `json:"dal_attestation"`
