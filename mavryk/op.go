@@ -280,7 +280,6 @@ func (t OpType) TagVersion(ver int) byte {
 	return tag
 }
 
-
 func (t OpType) Tag() byte {
 	tag, ok := opTagV2[t]
 	if !ok {
