@@ -23,8 +23,8 @@ GoMavryk contains a full set of features to read, monitor, decode, translate, an
 - a **Contract library** `gomavryk/contract` for smart contract calls and tokens
 - a **Signer library** `gomavryk/signer` to sign transactions local or remote
 - helpers like an efficient base58 en/decoder, hash maps, etc
-- a **Code generator** [MvGen](https://github.com/mavryk-network/GoMavryk/tree/master/cmd/mvgen) to produce pure Go clients for smart contract interfaces
-- an **Automation Tool** [MvCompose](https://github.com/mavryk-network/GoMavryk/tree/master/cmd/mvcompose) to setup test cases and deploy complex contract ecosystems
+- a **Code generator** [TzGen](https://github.com/blockwatch-cc/gomavryk/tree/master/cmd/tzgen) to produce pure Go clients for smart contract interfaces
+- an **Automation Tool** [MvCompose](https://github.com/blockwatch-cc/gomavryk/tree/master/cmd/mvcompose) to setup test cases and deploy complex contract ecosystems
 
 ### GoMavryk Compatibility
 
