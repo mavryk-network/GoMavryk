@@ -37,7 +37,7 @@ import (
 
 {{with .Contract -}}
 
-// {{$contract}} is a generated binding to a Tezos smart contract.
+// {{$contract}} is a generated binding to a Mavryk smart contract.
 type {{$contract}} struct {
 	bind.Contract
 	builder {{$contract}}Builder
@@ -45,7 +45,7 @@ type {{$contract}} struct {
 	script *micheline.Script
 }
 
-// {{$contract}}Session is a generated binding to a Tezos smart contract, that will
+// {{$contract}}Session is a generated binding to a Mavryk smart contract, that will
 // use Opts for every call.
 type {{$contract}}Session struct {
 	*{{$contract}}

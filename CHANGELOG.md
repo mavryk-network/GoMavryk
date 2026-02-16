@@ -73,10 +73,10 @@ Mavryk rebranding, tooling updates, and mvgen fixes.
 
 * BREAKING CHANGE: The cannonical import part has been changed from `blockwatch.cc` to `github.com/trilitech`
 * Paris protocol support
-* tezos: replaced `PreservedCycles` with `ConsensusRightsDelay` in params
-* tezos: added attestation-style versions of op types
-* tezos: default to attestation-style versions, using new op tags v3
-* tezos: add new PVM version tags
+* mavryk: replaced `PreservedCycles` with `ConsensusRightsDelay` in params
+* mavryk: added attestation-style versions of op types
+* mavryk: default to attestation-style versions, using new op tags v3
+* mavryk: add new PVM version tags
 * micheline: added D_TICKET opcode
 * rpc: decode endorsement-style and attestation-style ops into Endorsement
 * rpc: fetch attestation rights for proto v19+
@@ -110,7 +110,7 @@ Mavryk rebranding, tooling updates, and mvgen fixes.
 * rpc: add adaptive issuance vote to block models
 * rpc: extend balance updates with staker info
 * rpc: add issuance rpc
-* tezos: add oxfordnet hashes and setup
+* mavryk: add oxfordnet hashes and setup
 * codec: add staking operation codecs
 * codec: fix block encoding
 * codec: support block signing and block hash calculation
@@ -132,7 +132,7 @@ Mavryk rebranding, tooling updates, and mvgen fixes.
 * micheline: new prim marshaler (type + Go map[string]any -> prim tree)
 * micheline: new builder helpers for key hash, union, sorted map elements
 * micheline: new prim compare, unpack ascii strings, yaml marshaler
-* tezos: fix for sandbox deployments
+* mavryk: fix for sandbox deployments
 
 ## v1.17.2
 
@@ -143,7 +143,7 @@ Mavryk rebranding, tooling updates, and mvgen fixes.
 * add Micheline path setters
 * skip empty annotations on variadic prims in JSON output
 * extend Micheline typedef with path info
-* add TzGen tech preview (a contract interface code generator for Tezos)
+* add TzGen tech preview (a contract interface code generator for Mavryk)
 * remove Mumbainet hashes, config and references
 
 ## v1.17.1
@@ -198,12 +198,12 @@ Refactoring and Mumbai support
 
 BREAKING: Note that due to a new internal address encoding data written by binary marshalers from earlier versions of TzGo is incompatible.
 
-* Changed memory layout and interface for all hash types and `tezos.Address` to save 24 bytes per address/hash that was previously required for a byte slice header
+* Changed memory layout and interface for all hash types and `mavryk.Address` to save 24 bytes per address/hash that was previously required for a byte slice header
   - hashes and addresses directly comparable now and can thus be used as Golang Map keys
   - renamed `Address.Bytes()` to `Encode()`
   - renamed `Address.Bytes22()` to `EncodePadded()`
   - use `Address.Decode(buf []byte)` instead of `UnmarshalBinary()` for reading binary encoded addresses
-* Simplified `tezos.Params` removing unused fields and protocol deployment handling
+* Simplified `mavryk.Params` removing unused fields and protocol deployment handling
 * Added smart rollup support to rpc and codec packages
 * Added binary encoders for new operations since Lima
   - `drain_delegate`
@@ -411,7 +411,7 @@ Other changes
 
 This is the first release of TzGo that allows sending transactions. All types and interfaces are engineered to be easily composable. We start with essential low level types/functions for public and private key handling, operation encoding/signing/broadcast and mempool/block monitoring. This feature set is already fully sufficient to build end-user applications including the possibility to send smart contract calls, but may at times be less convenient. To simplify complex use cases we will introduce higher order functionality in the next release candidate.
 
-**Package `tezos`**
+**Package `mavryk`**
 
 - New: parse, generate, sign, verify operations Ed25519, Secp256k1 and P256 private and public keys
 - New: reading and writing of encrypted keys
@@ -428,7 +428,7 @@ This is the first release of TzGo that allows sending transactions. All types an
 - New: calls accept interface type `BlockID` which can be
     - `BlockAlias` (genesis or head)
     - `BlockLevel` an int64
-    - `tezos.BlockHash` for named blocks
+    - `mavryk.BlockHash` for named blocks
     - `BlockOffset` for offsets from a BlockID
 - New: `MempoolMonitor` to monitor new mempool transactions
 - Refactored `Mempool` type to return the same Operation type like block calls
