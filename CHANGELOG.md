@@ -4,6 +4,58 @@ Fork notice: This repository is a maintained fork of Blockwatch's TzGo SDK. The
 historical changelog below is preserved from upstream for context. New changes in this
 fork will be tracked starting with the section below.
 
+## v1.20.0-gomavryk
+
+Mavryk rebranding, tooling updates, and mvgen fixes.
+
+### Bug Fixes
+
+* **mvgen**: Fixed code generation for `option` types in storage and parameters
+  - Parser now preserves option as `ast.Struct{ MichelineType: "option", Type: inner }` instead of unwrapping to inner type
+  - Generated storage structs get `bind.Option[T]` for optional fields (e.g. `SomeProp bind.Option[mavryk.Address]`)
+  - Enables correct origination with optional fields set to `None` (e.g. `bind.None[mavryk.Address]()`)
+* **mvgen**: Fixed code generation for n-ary pairs (triples, quads, etc.)
+  - Added `rightCombPath` function to generate correct paths for right-comb pair nesting
+  - Fixes panic "index out of range [2]" when marshalling triples like `pair nat nat address`
+  - Fields in n-ary pairs now get correct tree paths: `[0], [1,0], [1,1]` instead of `[0], [1], [2]`
+* **mvgen**: Fixed paths for list/set element types and union branches
+  - Added `pathsRelativeToStruct` to normalize field paths relative to struct root
+  - Strips common prefix from paths so marshalling produces correct tree structure
+  - Fixes `invalid_expression_kind` error when calling entrypoints with list parameters
+* **mvgen**: Fixed storage type in generated contract code
+  - Template now uses `{{type .Storage}}` instead of hardcoded type
+  - Each contract gets correct storage type (e.g., `*RwaTokenStorage` instead of `*UsdtTetherStorage`)
+* **tests**: Added unit tests for `rightCombPath` and `pathsRelativeToStruct`
+
+### Breaking Changes
+
+* BREAKING CHANGE: Renamed code generation tool `tzgen` → `mvgen`
+  - Updated installation path: `go install github.com/mavryk-network/gomavryk/cmd/mvgen`
+  - Updated all references in documentation and examples
+  - Updated generated code comments from "tzgen" to "mvgen"
+* BREAKING CHANGE: Renamed automation tool `tzcompose` → `mvcompose`
+  - Updated installation path: `go install github.com/mavryk-network/gomavryk/cmd/mvcompose`
+  - Changed default config file name: `tzcompose.yaml` → `mvcompose.yaml`
+  - Updated environment variables: `TZCOMPOSE_*` → `MVCOMPOSE_*`
+    - `TZCOMPOSE_BASE_KEY` → `MVCOMPOSE_BASE_KEY`
+    - `TZCOMPOSE_API_KEY` → `MVCOMPOSE_API_KEY`
+  - Updated cache directory: `~/.cache/tzcompose` → `~/.cache/mvcompose`
+* BREAKING CHANGE: Renamed genesis tool `tzgenesis` → `mvgenesis`
+  - Changed default chain name from "TEZOS" to "MAVRYK"
+* Updated blockchain name constant: `mavryk.Name` changed from "Tezos" to "Mavryk"
+* Updated currency symbol: `mavryk.Symbol` changed from "XTZ" to "MVRK"
+* mavryk: replaced all "tezos:" error prefixes with "mavryk:" across all packages
+* mavryk: updated all code comments referencing Tezos to Mavryk
+* rpc: updated all documentation and comments from Tezos to Mavryk
+* rpc: updated default RPC endpoint references to Mavryk network
+* rpc: API key environment variable `TZGO_API_KEY` → `MVGO_API_KEY`
+* codec: updated operation documentation and error messages
+* micheline: updated comments and documentation
+* docs: updated README.md with Mavryk branding and correct repository links
+* docs: updated all tool documentation (mvgen, mvcompose, mvgenesis)
+* examples: updated all examples to use new tool names and Mavryk references
+* internal: updated code generation templates and compose tool internals
+
 ## v1.19.2-gomavryk
 - Rebrand and housekeeping for fork (module/docs naming)
 - License compliance: add NOTICE with upstream attribution

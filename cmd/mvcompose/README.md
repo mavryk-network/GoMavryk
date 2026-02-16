@@ -28,7 +28,7 @@ Flags
   -resume
       continue pipeline execution
   -rpc string
-      Mavryk node RPC url (default "https://rpc.tzpro.io")
+      Mavryk node RPC url (default "https://mainnet.rpc.mavryk.network")
   -h  print help and exit
   -v  be verbose (default true)
   -vv
@@ -47,7 +47,7 @@ MvCompose can execute configurations from a single file `-f file.yaml`, a single
 - `run`: execute compose file(s) sending signed transactions to a blockchain node
 - `version`: print version and exit
 
-MvCompose relies on the Mavryk Node RPC and (for clone) on the TzIndex API. Both are publicly available via https://tzpro.io with a free subscription. Export your API key as
+MvCompose relies on the Mavryk Node RPC and (for clone) on the MvKT Indexer API. Both are publicly available via https://api.mavryk.network with a free subscription. Export your API key as
 
 ```sh
 export MVCOMPOSE_API_KEY=<your-api-key>
@@ -112,10 +112,10 @@ MvCompose also stores pipeline state and can resume execution from where it stop
 
 MvCompose requires a single funded `base` account to sign and send transactions. Configure the base account by exporting its private key as `MVCOMPOSE_BASE_KEY` environment variable.
 
-On MavBox extract the private key with
+On Flextes sandbox extract the private key with
 
 ```sh
-export MVCOMPOSE_BASE_KEY=`docker exec mavryk_sandbox mavbox key-of-name alice | cut -f4 -d, | cut -f2 -d:`
+export MVCOMPOSE_BASE_KEY=`docker exec tezos_sandbox flextesa key-of-name alice | cut -f4 -d, | cut -f2 -d:`
 ```
 
 All other wallet keys are deterministically derived from this `base` key using BIP32. Child keys are identified by their numeric id. You can assign alias names to them in the `accounts` section of a compose file. All child accounts use Ed25519 keys (mv1 addresses).
@@ -140,7 +140,7 @@ In some cases it is desirable to clone existing contracts and their setup proced
 MvCompose offers different clone modes which define how and where script, storage and params are stored:
 
 * `file` stores Micheline data as JSON data in separate files and references them inside the config file
-* `url` stores a Mavryk RPC URL in inside the config file and fetches data on demand
+* `url` stores a Tezos RPC URL in inside the config file and fetches data on demand
 * `bin` embeds Micheline data as hex string into the config file
 * `json` embeds Micheline data as JSON string into the config file
 
@@ -388,7 +388,7 @@ params:
 
 ### Delegate
 
-Delegate delegates `source`'s full spendable balance to the selected `destination` baker. On Mavryk this balance remains liquid.
+Delegate delegates `source`'s full spendable balance to the selected `destination` baker. On Tezos this balance remains liquid.
 
 ```yaml
 # Spec
@@ -438,7 +438,7 @@ script:
 
 Produces a fake double-endorsement which slashes the baker in `destination` and awards denunciation rewards to the baker who includes this operation. The destination must be registered as baker and a private key must be available for signing. The slashed baker must have endorsements rights and this task waits until a block with such rights is baked.
 
-To successfully execute this task you need to sufficiently fund and register the baker and then wait a few cycles for rights to activate. Note that on sandboxes the $alice key is not the sandbox baker. To lookup the actual baker key, docker exec into the sandbox and search for the `secret_keys` file in the Mavryk client dir.
+To successfully execute this task you need to sufficiently fund and register the baker and then wait a few cycles for rights to activate. Note that on sandboxes the $alice key is not the sandbox baker. To lookup the actual baker key, docker exec into the sandbox and search for the `secret_keys` file in the Tezos client dir.
 
 ```yaml
 # Spec
@@ -450,7 +450,7 @@ destination: $var # <- this baker is slashed
 
 Produces a fake double-bake which slashes the baker in `destination` and awards denunciation rewards to the baker who includes this operation. The destination must be registered as baker and a private key must be available for signing. The slashed baker must have at least one round zero baking rights. The task waits until a block with such right is baked and then sends a double baking evidence with two fake (random) payload hashes.
 
-To successfully execute this task you need to sufficiently fund and register the baker and then wait a few cycles for rights to activate. Note that on sandboxes the $alice key is not the sandbox baker. To lookup the actual baker key, docker exec into the sandbox and search for the `secret_keys` file in the Mavryk client dir.
+To successfully execute this task you need to sufficiently fund and register the baker and then wait a few cycles for rights to activate. Note that on sandboxes the $alice key is not the sandbox baker. To lookup the actual baker key, docker exec into the sandbox and search for the `secret_keys` file in the Tezos client dir.
 
 ```yaml
 # Spec

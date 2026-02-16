@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	appName        = "tzgen"
+	appName        = "mvgen"
 	version string = "v0.1"
 	commit  string = "dev"
 )

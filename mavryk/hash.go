@@ -507,7 +507,7 @@ func (h PayloadHash) MarshalBinary() ([]byte, error) {
 
 func (h *PayloadHash) UnmarshalBinary(buf []byte) error {
 	if l := len(buf); l > 0 && l != HashTypeBlockPayload.Len {
-		return fmt.Errorf("teshortd for payload hash")
+		return fmt.Errorf("mavryk: short payload hash")
 	}
 	copy(h[:], buf)
 	return nil

@@ -56,11 +56,11 @@ func init() {
 	runflags.StringVar(&fpath, "f", "mvcompose.yaml", "configuration `file` or path")
 	runflags.StringVar(&fpath, "file", "mvcompose.yaml", "configuration `file` or path")
 	runflags.BoolVar(&resume, "resume", false, "continue pipeline execution")
-	runflags.StringVar(&rpcUrl, "rpc", "https://rpc.tzpro.io", "Mavryk node RPC url")
+	runflags.StringVar(&rpcUrl, "rpc", "https://mainnet.rpc.mavryk.network", "Mavryk node RPC url")
 
 	cloneflags.Usage = func() {}
-	cloneflags.StringVar(&indexUrl, "index", "https://api.tzpro.io", "Mavryk indexer url")
-	cloneflags.StringVar(&rpcUrl, "rpc", "https://rpc.tzpro.io", "Mavryk node RPC url")
+	cloneflags.StringVar(&indexUrl, "index", "https://api.mavryk.network", "Mavryk indexer url")
+	cloneflags.StringVar(&rpcUrl, "rpc", "https://mainnet.rpc.mavryk.network", "Mavryk node RPC url")
 	cloneflags.StringVar(&version, "version", "alpha", "compose engine version")
 	cloneflags.Var(&addr, "contract", "address of the contract to clone")
 	cloneflags.Var(&mode, "mode", "output mode for cloned micheline data (file, json, bin, url)")
