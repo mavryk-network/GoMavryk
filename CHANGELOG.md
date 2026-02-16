@@ -48,7 +48,7 @@ Mavryk rebranding, tooling updates, and mvgen fixes.
 * mavryk: updated all code comments referencing Tezos to Mavryk
 * rpc: updated all documentation and comments from Tezos to Mavryk
 * rpc: updated default RPC endpoint references to Mavryk network
-* rpc: API key environment variable `TZGO_API_KEY` → `MVGO_API_KEY`
+* rpc: API key environment variable `TZGO_API_KEY` → `GOMAVRYK_API_KEY`
 * codec: updated operation documentation and error messages
 * micheline: updated comments and documentation
 * docs: updated README.md with Mavryk branding and correct repository links
