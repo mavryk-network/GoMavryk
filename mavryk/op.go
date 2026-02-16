@@ -267,6 +267,10 @@ func (t OpType) TagVersion(ver int) byte {
 		ok  bool
 	)
 	switch ver {
+	case 2:
+		tag, ok = opTagV2[t]
+	case 3:
+		tag, ok = opTagV3[t]
 	default:
 		tag, ok = opTagV2[t]
 	}
@@ -275,6 +279,7 @@ func (t OpType) TagVersion(ver int) byte {
 	}
 	return tag
 }
+
 
 func (t OpType) Tag() byte {
 	tag, ok := opTagV2[t]
