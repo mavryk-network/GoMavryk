@@ -266,6 +266,7 @@ func (t OpType) TagVersion(ver int) byte {
 		tag byte
 		ok  bool
 	)
+	//nolint:gocritic // intentional: single default uses opTagV2 for ver 2 and 3
 	switch ver {
 	default:
 		tag, ok = opTagV2[t]
@@ -361,8 +362,10 @@ func (t OpType) MinSizeVersion(ver int) int {
 	switch ver {
 	case 2:
 		return opMinSizeV2[t.TagVersion(ver)]
-	default:
+	case 3:
 		return opMinSizeV3[t.TagVersion(ver)]
+	default:
+		return opMinSizeV2[t.TagVersion(ver)]
 	}
 }
 

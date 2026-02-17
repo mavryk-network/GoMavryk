@@ -19,21 +19,21 @@ type Delegate struct {
 	Block    string         `json:"-"`
 
 	// mavryk data
-	Deactivated          bool             `json:"deactivated"`
-	Balance              int64            `json:"balance,string"`
-	DelegatedContracts   []mavryk.Address `json:"delegated_contracts"`
-	FrozenBalance        int64            `json:"frozen_balance,string"`
-	FrozenBalanceByCycle []CycleBalance   `json:"frozen_balance_by_cycle"`
-	GracePeriod          int64            `json:"grace_period"`
-	StakingBalance       int64            `json:"staking_balance,string"`
-	DelegatedBalance     int64            `json:"delegated_balance,string"`
-	VotingPower          Int64orString    `json:"voting_power"`
-	FullBalance           int64 `json:"full_balance,string"`
-	FrozenDeposits        int64 `json:"frozen_deposits,string"`
-	CurrentFrozenDeposits int64 `json:"current_frozen_deposits,string"`
-	FrozenDepositsLimit   int64 `json:"frozen_deposits_limit,string"`
-	ActiveConsensusKey   mavryk.Address `json:"active_consensus_key"`
-	PendingConsensusKeys []CycleKey     `json:"pending_consensus_keys"`
+	Deactivated           bool             `json:"deactivated"`
+	Balance               int64            `json:"balance,string"`
+	DelegatedContracts    []mavryk.Address `json:"delegated_contracts"`
+	FrozenBalance         int64            `json:"frozen_balance,string"`
+	FrozenBalanceByCycle  []CycleBalance   `json:"frozen_balance_by_cycle"`
+	GracePeriod           int64            `json:"grace_period"`
+	StakingBalance        int64            `json:"staking_balance,string"`
+	DelegatedBalance      int64            `json:"delegated_balance,string"`
+	VotingPower           Int64orString    `json:"voting_power"`
+	FullBalance           int64            `json:"full_balance,string"`
+	FrozenDeposits        int64            `json:"frozen_deposits,string"`
+	CurrentFrozenDeposits int64            `json:"current_frozen_deposits,string"`
+	FrozenDepositsLimit   int64            `json:"frozen_deposits_limit,string"`
+	ActiveConsensusKey    mavryk.Address   `json:"active_consensus_key"`
+	PendingConsensusKeys  []CycleKey       `json:"pending_consensus_keys"`
 
 	// v002+
 	MinDelegated struct {

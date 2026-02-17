@@ -28,7 +28,7 @@ Flags
   -resume
       continue pipeline execution
   -rpc string
-      Mavryk node RPC url (default "https://rpc.tzpro.io")
+      Mavryk node RPC url (default "https://mainnet.rpc.mavryk.network")
   -h  print help and exit
   -v  be verbose (default true)
   -vv
@@ -47,7 +47,7 @@ MvCompose can execute configurations from a single file `-f file.yaml`, a single
 - `run`: execute compose file(s) sending signed transactions to a blockchain node
 - `version`: print version and exit
 
-MvCompose relies on the Mavryk Node RPC and (for clone) on the TzIndex API. Both are publicly available via https://tzpro.io with a free subscription. Export your API key as
+MvCompose relies on the Mavryk Node RPC and (for clone) on the MvKT Indexer API. Both are publicly available via https://api.mavryk.network with a free subscription. Export your API key as
 
 ```sh
 export MVCOMPOSE_API_KEY=<your-api-key>

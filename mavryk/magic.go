@@ -5,7 +5,7 @@ package mavryk
 
 const (
 	Name   = "Mavryk"
-	Symbol = "XTZ"
+	Symbol = "MVRK"
 
 	// base58 prefixes for 4 byte hash magics
 	CHAIN_ID_PREFIX = "Net"
