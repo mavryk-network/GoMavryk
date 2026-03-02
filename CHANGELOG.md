@@ -4,6 +4,17 @@ Fork notice: This repository is a maintained fork of Blockwatch's TzGo SDK. The
 historical changelog below is preserved from upstream for context. New changes in this
 fork will be tracked starting with the section below.
 
+## v1.20.1-gomavryk
+
+Adds full alignment with the Michelson V1 primitive encoding.
+
+### Added
+
+* **micheline**: Support for protocol-correct Michelson V1 opcode byte encoding
+  - Added reserved slots for deprecated primitives at 0x84 (`_T_SAPLING_TRANSACTION`) and 0x88 (`_I_TICKET`) so that binary serialization of scripts matches the protocol specification
+  - All primitives (e.g. `ticket`, `VIEW`) now use the canonical byte codes expected by the node, enabling contract origination on Atlas/Boreas and compatibility with Paris
+* **micheline**: Updated testdata (storage and params) to the protocol-correct encoding for round-trip tests
+
 ## v1.20.0-gomavryk
 
 Mavryk rebranding, tooling updates, and mvgen fixes.
