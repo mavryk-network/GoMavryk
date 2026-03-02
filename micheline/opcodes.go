@@ -154,9 +154,11 @@ const (
 	T_BLS12_381_G2          // 81
 	T_BLS12_381_FR          // 82
 	T_SAPLING_STATE         // 83
+	_T_SAPLING_TRANSACTION  // 84, deprecated in v013
 	I_SAPLING_EMPTY_STATE   // 85
 	I_SAPLING_VERIFY_UPDATE // 86
 	T_TICKET                // 87
+	_I_TICKET               // 88, deprecated in v015
 	I_READ_TICKET           // 89
 	I_SPLIT_TICKET          // 8A
 	I_JOIN_TICKETS          // 8B
@@ -320,9 +322,11 @@ var (
 		T_BLS12_381_G2:          "bls12_381_g2",
 		T_BLS12_381_FR:          "bls12_381_fr",
 		T_SAPLING_STATE:         "sapling_state",
+		_T_SAPLING_TRANSACTION:  "sapling_transaction_deprecated",
 		I_SAPLING_EMPTY_STATE:   "SAPLING_EMPTY_STATE",
 		I_SAPLING_VERIFY_UPDATE: "SAPLING_VERIFY_UPDATE",
 		T_TICKET:                "ticket",
+		_I_TICKET:               "TICKET_DEPRECATED",
 		I_READ_TICKET:           "READ_TICKET",
 		I_SPLIT_TICKET:          "SPLIT_TICKET",
 		I_JOIN_TICKETS:          "JOIN_TICKETS",
